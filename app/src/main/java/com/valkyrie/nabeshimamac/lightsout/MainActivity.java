@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button [] btn;
     Button btnReset,btnReturn;
     TextView textView;
+    private BoardManegerClass bm;
+
 
 
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bm = new BoardManegerClass();
 
         textView = (TextView)findViewById(R.id.textView);
         btn = new Button[36];
@@ -72,14 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
-        if (v == btnReset){
-            for (int i = 0; i < btn.length; i++) {
-                btn[i].setBackgroundColor(Color.BLUE);
-            }
-        }else if(v ==btnReturn){
-
-        }
-
 
     }
 }
