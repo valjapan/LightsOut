@@ -8,73 +8,245 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button [] btn;
+    Button[][] btn;
     Button btnReset,btnReturn;
     TextView textView;
-    private BoardManegerClass bm;
-
-
+    boolean[][] flag;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bm = new BoardManegerClass();
 
-        textView = (TextView)findViewById(R.id.textView);
-        btn = new Button[36];
+        textView = (TextView)findViewById(R.id.timer);
+        btn = new Button[6][6];
+        flag = new boolean[6][6];
 
-        btn[0] = (Button)findViewById(R.id.button);
-        btn[1] = (Button)findViewById(R.id.button2);
-        btn[2] = (Button)findViewById(R.id.button3);
-        btn[3] = (Button)findViewById(R.id.button4);
-        btn[4] = (Button)findViewById(R.id.button5);
-        btn[5] = (Button)findViewById(R.id.button6);
-        btn[6] = (Button)findViewById(R.id.button7);
-        btn[7] = (Button)findViewById(R.id.button8);
-        btn[8] = (Button)findViewById(R.id.button9);
-        btn[9] = (Button)findViewById(R.id.button10);
-        btn[10] = (Button)findViewById(R.id.button11);
-        btn[11] = (Button)findViewById(R.id.button12);
-        btn[12] = (Button)findViewById(R.id.button13);
-        btn[13] = (Button)findViewById(R.id.button14);
-        btn[14] = (Button)findViewById(R.id.button15);
-        btn[15] = (Button)findViewById(R.id.button16);
-        btn[16] = (Button)findViewById(R.id.button17);
-        btn[17] = (Button)findViewById(R.id.button18);
-        btn[18] = (Button)findViewById(R.id.button19);
-        btn[19] = (Button)findViewById(R.id.button20);
-        btn[20] = (Button)findViewById(R.id.button21);
-        btn[21] = (Button)findViewById(R.id.button22);
-        btn[22] = (Button)findViewById(R.id.button23);
-        btn[23] = (Button)findViewById(R.id.button24);
-        btn[24] = (Button)findViewById(R.id.button25);
-        btn[25] = (Button)findViewById(R.id.button26);
-        btn[26] = (Button)findViewById(R.id.button27);
-        btn[27] = (Button)findViewById(R.id.button28);
-        btn[28] = (Button)findViewById(R.id.button29);
-        btn[29] = (Button)findViewById(R.id.button30);
-        btn[30] = (Button)findViewById(R.id.button31);
-        btn[31] = (Button)findViewById(R.id.button32);
-        btn[32] = (Button)findViewById(R.id.button33);
-        btn[33] = (Button)findViewById(R.id.button34);
-        btn[34] = (Button)findViewById(R.id.button35);
-        btn[35] = (Button)findViewById(R.id.button36);
+        btn[0][0] = (Button)findViewById(R.id.button);
+        btn[0][1] = (Button)findViewById(R.id.button2);
+        btn[0][2] = (Button)findViewById(R.id.button3);
+        btn[0][3] = (Button)findViewById(R.id.button4);
+        btn[0][4] = (Button)findViewById(R.id.button5);
+        btn[0][5] = (Button)findViewById(R.id.button6);
+        btn[1][0] = (Button)findViewById(R.id.button7);
+        btn[1][1] = (Button)findViewById(R.id.button8);
+        btn[1][2] = (Button)findViewById(R.id.button9);
+        btn[1][3] = (Button)findViewById(R.id.button10);
+        btn[1][4] = (Button)findViewById(R.id.button11);
+        btn[1][5] = (Button)findViewById(R.id.button12);
+        btn[2][0] = (Button)findViewById(R.id.button13);
+        btn[2][1] = (Button)findViewById(R.id.button14);
+        btn[2][2] = (Button)findViewById(R.id.button15);
+        btn[2][3] = (Button)findViewById(R.id.button16);
+        btn[2][4] = (Button)findViewById(R.id.button17);
+        btn[2][5] = (Button)findViewById(R.id.button18);
+        btn[3][0] = (Button)findViewById(R.id.button19);
+        btn[3][1] = (Button)findViewById(R.id.button20);
+        btn[3][2] = (Button)findViewById(R.id.button21);
+        btn[3][3] = (Button)findViewById(R.id.button22);
+        btn[3][4] = (Button)findViewById(R.id.button23);
+        btn[3][5] = (Button)findViewById(R.id.button24);
+        btn[4][0] = (Button)findViewById(R.id.button25);
+        btn[4][1] = (Button)findViewById(R.id.button26);
+        btn[4][2] = (Button)findViewById(R.id.button27);
+        btn[4][3] = (Button)findViewById(R.id.button28);
+        btn[4][4] = (Button)findViewById(R.id.button29);
+        btn[4][5] = (Button)findViewById(R.id.button30);
+        btn[5][0] = (Button)findViewById(R.id.button31);
+        btn[5][1] = (Button)findViewById(R.id.button32);
+        btn[5][2] = (Button)findViewById(R.id.button33);
+        btn[5][3] = (Button)findViewById(R.id.button34);
+        btn[5][4] = (Button)findViewById(R.id.button35);
+        btn[5][5] = (Button)findViewById(R.id.button36);
 
-        btnReset = (Button)findViewById(R.id.button37);
-        btnReturn =(Button)findViewById(R.id.button38);
+
+
+        btnReset = (Button)findViewById(R.id.button37);//TODO 実装完了btnReturn =(Button)findViewById(R.id.);//TODO とりあえずここは置いておく後々実装させること
 
         btnReset.setOnClickListener(this);
-        btnReturn.setOnClickListener(this);
-        for (int i = 0; i < btn.length; i++){
-            btn[i].setOnClickListener(this);
-            btn[i].setBackgroundColor(Color.BLUE);
+        for (int i = 0; i < 6; i++){
+            for (int j = 0;j < 6; j++){
+                btn[i][j].setOnClickListener(this);
+                btn[i][j].setBackgroundColor(Color.BLUE);
+                flag[i][j] = false;
+            }
         }
     }
 
     @Override
     public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.button:
+                check (0,0);
+                break;
+            case R.id.button2:
+                check(0,1);
+                break;
+            case R.id.button3:
+                check(0,2);
+                break;
+            case R.id.button4:
+                check(0,3);
+                break;
+            case R.id.button5:
+                check(0,4);
+                break;
+            case R.id.button6:
+                check(0,5);
+                break;
+            case R.id.button7:
+                check(1,0);
+                break;
+            case R.id.button8:
+                check(1,1);
+                break;
+            case R.id.button9:
+                check(1,2);
+                break;
+            case R.id.button10:
+                check(1,3);
+                break;
+            case R.id.button11:
+                check(1,4);
+                break;
+            case R.id.button12:
+                check(1,5);
+                break;
+            case R.id.button13:
+                check(2,0);
+                break;
+            case R.id.button14:
+                check(2,1);
+                break;
+            case R.id.button15:
+                check(2,2);
+                break;
+            case R.id.button16:
+                check(2,3);
+                break;
+            case R.id.button17:
+                check(2,4);
+                break;
+            case R.id.button18:
+                check(2,5);
+                break;
+            case R.id.button19:
+                check(3,0);
+                break;
+            case R.id.button20:
+                check(3,1);
+                break;
+            case R.id.button21:
+                check(3,2);
+                break;
+            case R.id.button22:
+                check(3,3);
+                break;
+            case R.id.button23:
+                check(3,4);
+                break;
+            case R.id.button24:
+                check(3,5);
+                break;
+            case R.id.button25:
+                check(4,0);
+                break;
+            case R.id.button26:
+                check(4,1);
+                break;
+            case R.id.button27:
+                check(4,2);
+                break;
+            case R.id.button28:
+                check(4,3);
+                break;
+            case R.id.button29:
+                check(4,4);
+                break;
+            case R.id.button30:
+                check(4,5);
+                break;
+            case R.id.button31:
+                check(5,0);
+                break;
+            case R.id.button32:
+                check(5,1);
+                break;
+            case R.id.button33:
+                check(5,2);
+                break;
+            case R.id.button34:
+                check(5,3);
+                break;
+            case R.id.button35:
+                check(5,4);
+                break;
+            case R.id.button36:
+                check(5,5);
+                break;
+            case R.id.button37:
+                Reset(0,0);
+                break;
+        }
+
+    }
+
+    public void check(int line, int row){
+
+        if(line>0){
+            checkColor(line-1, row);
+        }
+        if(line < 5){
+            checkColor(line+1, row);
+        }
+        if(row>0){
+            checkColor(line, row-1);
+        }
+        if(row < 5){
+            checkColor(line, row+1);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (flag[i][j]){
+                    btn[i][j].setBackground(getDrawable(R.drawable.red_off_view));
+//
+                }else {
+                    btn[i][j].setBackground(getDrawable(R.drawable.blue_off_view));
+                }
+
+            }
+        }
+        setJustColor(line,row);
+    }
+
+
+    public void checkColor(int line, int row){
+        flag[line][row] = !flag[line][row];
+    }
+
+    public void setJustColor(int line, int row){
+        if (flag[line][row]){
+            btn[line][row].setBackground(getDrawable(R.drawable.blue_on_view));
+            flag[line][row] = false;
+        }else {
+            btn[line][row].setBackground(getDrawable(R.drawable.red_on_view));
+            flag[line][row] = true;
+        }
+    }
+
+
+
+    public void Reset(int line , int row){//TODO Resetの内容
+        for (line = 0; line < 6; line++){
+            for (row  = 0;row < 6; row++){
+                btn[line][row].setOnClickListener(this);
+                btn[line][row].setBackgroundColor(Color.BLUE);
+                flag[line][row] = false;
+            }
+        }
 
     }
 }
+
