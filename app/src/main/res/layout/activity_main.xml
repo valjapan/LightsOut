@@ -33,6 +33,13 @@
                     android:text="Small Text"
                     android:id="@+id/timer"
                     android:textSize="45dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/textView" />
             </LinearLayout>
 
             <LinearLayout
