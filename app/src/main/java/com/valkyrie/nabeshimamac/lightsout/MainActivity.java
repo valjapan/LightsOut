@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button[][] btn;
-    Button btnReset,btnReturn;
-    TextView textView;
+    Button btnReset;
+    TextView textView1,textView2;
     boolean[][] flag;
+    int count;
 
 
     @Override
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = (TextView)findViewById(R.id.timer);
+        textView1 = (TextView)findViewById(R.id.timer);
+        textView2 = (TextView)findViewById(R.id.counter);
         btn = new Button[6][6];
         flag = new boolean[6][6];
 
@@ -61,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn[5][5] = (Button)findViewById(R.id.button36);
 
 
+        count = 0;
+        textView2.setText(count + "手");
+        textView2.setTextColor(Color.BLACK);
+
+
 
         btnReset = (Button)findViewById(R.id.button37);//TODO 実装完了btnReturn =(Button)findViewById(R.id.);//TODO とりあえずここは置いておく後々実装させること
 
@@ -76,6 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
+        count = count + 1;
+        textView2.setText(count + "手");
+        if (count > 28){
+            textView2.setTextColor(Color.RED);
+        }
+
         switch (v.getId()) {
             case R.id.button:
                 check (0,0);
@@ -189,18 +202,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Reset(0,0);
                 break;
         }
-
     }
 
     public void check(int line, int row){
 
-        if(line>0){
+        if(line > 0){
             checkColor(line-1, row);
         }
         if(line < 5){
             checkColor(line+1, row);
         }
-        if(row>0){
+        if(row > 0){
             checkColor(line, row-1);
         }
         if(row < 5){
@@ -211,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (int j = 0; j < 6; j++) {
                 if (flag[i][j]){
                     btn[i][j].setBackground(getDrawable(R.drawable.red_off_view));
-//
+
                 }else {
                     btn[i][j].setBackground(getDrawable(R.drawable.blue_off_view));
                 }
@@ -219,11 +231,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         setJustColor(line,row);
+
+
     }
 
 
     public void checkColor(int line, int row){
         flag[line][row] = !flag[line][row];
+
+        //TODO 全てが反転色になったらクリアを実装させること
     }
 
     public void setJustColor(int line, int row){
@@ -244,6 +260,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btn[line][row].setOnClickListener(this);
                 btn[line][row].setBackgroundColor(Color.BLUE);
                 flag[line][row] = false;
+                count = 0;
+                textView2.setText(count + "手");
+                textView2.setTextColor(Color.BLACK);
             }
         }
 

@@ -27,19 +27,23 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Small Text"
                     android:id="@+id/timer"
-                    android:textSize="45dp" />
+                    android:textSize="45dp"
+                    android:layout_weight="1"
+                    android:textColor="#000000" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
-                    android:id="@+id/textView" />
+                    android:id="@+id/counter"
+                    android:layout_weight="1"
+                    android:textSize="45dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -53,7 +57,8 @@
                     android:layout_height="fill_parent"
                     android:text="RESET"
                     android:id="@+id/button37"
-                    android:onClick="reset" />
+                    android:onClick="reset"
+                    android:textSize="17dp" />
 
             </LinearLayout>
         </LinearLayout>
