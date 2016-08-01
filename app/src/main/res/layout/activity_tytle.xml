@@ -24,18 +24,33 @@
             android:layout_gravity="center_horizontal"
             android:textSize="30dp" />
 
-        <Button
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ルール説明"
-            android:id="@+id/button39"
-            android:onClick="help" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ゲーム開始"
-            android:id="@+id/button40"
-            android:onClick="goGame" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textView"
+                android:layout_gravity="center" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ルール説明"
+                android:id="@+id/button39"
+                android:onClick="help" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ゲーム開始"
+                android:id="@+id/button40"
+                android:onClick="goGame" />
+
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

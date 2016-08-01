@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textView1,textView2;
     boolean[][] flag;
     int count;
+//    int timerCount;
+//    Timer timer;
 
 
     @Override
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView2.setText(count + "手");
         textView2.setTextColor(Color.BLACK);
 
+        startTimer();
 
 
         btnReset = (Button)findViewById(R.id.button37);//TODO 実装完了btnReturn =(Button)findViewById(R.id.);//TODO とりあえずここは置いておく後々実装させること
@@ -79,6 +82,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 flag[i][j] = false;
             }
         }
+    }
+
+    public void startTimer(){
+        //TODO タイマーの実装をさせること
+
+
+
+
     }
 
     @Override
