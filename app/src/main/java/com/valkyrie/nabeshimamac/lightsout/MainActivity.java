@@ -13,9 +13,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textView1,textView2;
     boolean[][] flag;
     int count;
+    private MediaPlayer mp;
+    Tap tapInstance;
 //    int timerCount;
 //    Timer timer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textView1 = (TextView)findViewById(R.id.timer);
         textView2 = (TextView)findViewById(R.id.counter);
+
         btn = new Button[6][6];
         flag = new boolean[6][6];
 
@@ -64,16 +66,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn[5][4] = (Button)findViewById(R.id.button35);
         btn[5][5] = (Button)findViewById(R.id.button36);
 
-
         count = 0;
         textView2.setText(count + "手");
         textView2.setTextColor(Color.BLACK);
 
         startTimer();
 
-
-        btnReset = (Button)findViewById(R.id.button37);//TODO 実装完了btnReturn =(Button)findViewById(R.id.);//TODO とりあえずここは置いておく後々実装させること
-
+        btnReset = (Button)findViewById(R.id.button37);
         btnReset.setOnClickListener(this);
         for (int i = 0; i < 6; i++){
             for (int j = 0;j < 6; j++){
@@ -82,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 flag[i][j] = false;
             }
         }
+        tapInstance = new Tap(this.getApplicationContext());
+        this.mp = new MediaPlayer(this);
     }
 
     public void startTimer(){
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             textView2.setTextColor(Color.RED);
         }
 
+        tapInstance.play();
         switch (v.getId()) {
             case R.id.button:
                 check (0,0);
@@ -238,20 +240,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else {
                     btn[i][j].setBackground(getDrawable(R.drawable.blue_off_view));
                 }
-
             }
         }
         setJustColor(line,row);
-
-
     }
 
 
     public void checkColor(int line, int row){
         flag[line][row] = !flag[line][row];
-
         //TODO 全てが反転色になったらクリアを実装させること
     }
+
 
     public void setJustColor(int line, int row){
         if (flag[line][row]){
@@ -262,8 +261,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             flag[line][row] = true;
         }
     }
-
-
 
     public void Reset(int line , int row){//TODO Resetの内容
         for (line = 0; line < 6; line++){
