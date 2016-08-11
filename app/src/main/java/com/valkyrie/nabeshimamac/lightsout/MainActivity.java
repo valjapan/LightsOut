@@ -1,11 +1,16 @@
 package com.valkyrie.nabeshimamac.lightsout;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button[][] btn;
@@ -13,10 +18,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textView1,textView2;
     boolean[][] flag;
     int count;
-    private MediaPlayer mp;
+    private android.media.MediaPlayer mp;
     Tap tapInstance;
-//    int timerCount;
-//    Timer timer;
+    int timerCount;
+    Timer timer;
+//    Handler h = new Handler();//TODO エラーの理由が不明
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         textView1 = (TextView)findViewById(R.id.timer);
         textView2 = (TextView)findViewById(R.id.counter);
+
 
         btn = new Button[6][6];
         flag = new boolean[6][6];
@@ -70,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView2.setText(count + "手");
         textView2.setTextColor(Color.BLACK);
 
-        startTimer();
 
         btnReset = (Button)findViewById(R.id.button37);
         btnReset.setOnClickListener(this);
@@ -82,134 +89,201 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         tapInstance = new Tap(this.getApplicationContext());
-        this.mp = new MediaPlayer(this);
+
+
+        mp = android.media.MediaPlayer.create(this, R.raw.bgm01);
+        //TODO リピート機能を導入させること
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("さぁ始めよう！");
+        builder.setMessage("全て赤いパネルにしてください。Startでゲーム開始です。(BGMが流れます)");
+        builder.setPositiveButton("Start",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                mp.start();
+                startTimer();
+                //TODO タイマーの実装をさせること
+
+            }
+        });
+
+        builder.show();
+
+
     }
 
     public void startTimer(){
-        //TODO タイマーの実装をさせること
+        if (timer != null){
+            timer.cancel();
+        }
 
+//        timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                timerCount = timerCount + 1;
+//
+//            }
+//        });
 
+    }//TODO Timerの実装部分
 
-
-    }
 
     @Override
     public void onClick(View v){
+
         count = count + 1;
         textView2.setText(count + "手");
         if (count > 28){
             textView2.setTextColor(Color.RED);
         }
 
-        tapInstance.play();
+
         switch (v.getId()) {
             case R.id.button:
                 check (0,0);
+                tapInstance.play();
                 break;
             case R.id.button2:
                 check(0,1);
+                tapInstance.play();
                 break;
             case R.id.button3:
                 check(0,2);
+                tapInstance.play();
                 break;
             case R.id.button4:
                 check(0,3);
+                tapInstance.play();
                 break;
             case R.id.button5:
                 check(0,4);
+                tapInstance.play();
                 break;
             case R.id.button6:
                 check(0,5);
+                tapInstance.play();
                 break;
             case R.id.button7:
                 check(1,0);
+                tapInstance.play();
                 break;
             case R.id.button8:
                 check(1,1);
+                tapInstance.play();
                 break;
             case R.id.button9:
                 check(1,2);
+                tapInstance.play();
                 break;
             case R.id.button10:
                 check(1,3);
+                tapInstance.play();
                 break;
             case R.id.button11:
                 check(1,4);
+                tapInstance.play();
                 break;
             case R.id.button12:
                 check(1,5);
+                tapInstance.play();
                 break;
             case R.id.button13:
                 check(2,0);
+                tapInstance.play();
                 break;
             case R.id.button14:
                 check(2,1);
+                tapInstance.play();
                 break;
             case R.id.button15:
                 check(2,2);
+                tapInstance.play();
                 break;
             case R.id.button16:
                 check(2,3);
+                tapInstance.play();
                 break;
             case R.id.button17:
                 check(2,4);
+                tapInstance.play();
                 break;
             case R.id.button18:
                 check(2,5);
+                tapInstance.play();
                 break;
             case R.id.button19:
                 check(3,0);
+                tapInstance.play();
                 break;
             case R.id.button20:
                 check(3,1);
+                tapInstance.play();
                 break;
             case R.id.button21:
                 check(3,2);
+                tapInstance.play();
                 break;
             case R.id.button22:
                 check(3,3);
+                tapInstance.play();
                 break;
             case R.id.button23:
                 check(3,4);
+                tapInstance.play();
                 break;
             case R.id.button24:
                 check(3,5);
+                tapInstance.play();
                 break;
             case R.id.button25:
                 check(4,0);
+                tapInstance.play();
                 break;
             case R.id.button26:
                 check(4,1);
+                tapInstance.play();
                 break;
             case R.id.button27:
                 check(4,2);
+                tapInstance.play();
                 break;
             case R.id.button28:
                 check(4,3);
+                tapInstance.play();
                 break;
             case R.id.button29:
                 check(4,4);
+                tapInstance.play();
                 break;
             case R.id.button30:
                 check(4,5);
+                tapInstance.play();
                 break;
             case R.id.button31:
                 check(5,0);
+                tapInstance.play();
                 break;
             case R.id.button32:
                 check(5,1);
+                tapInstance.play();
                 break;
             case R.id.button33:
                 check(5,2);
+                tapInstance.play();
                 break;
             case R.id.button34:
                 check(5,3);
+                tapInstance.play();
                 break;
             case R.id.button35:
                 check(5,4);
+                tapInstance.play();
                 break;
             case R.id.button36:
                 check(5,5);
+                tapInstance.play();
                 break;
             case R.id.button37:
                 Reset(0,0);
@@ -262,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void Reset(int line , int row){//TODO Resetの内容
+    public void Reset(int line , int row){ //Resetの内容
         for (line = 0; line < 6; line++){
             for (row  = 0;row < 6; row++){
                 btn[line][row].setOnClickListener(this);
@@ -275,5 +349,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.v("LifeCycle","onDestroy");
+        mp.stop();
+    }
+
+    public void onPause(){
+        super.onPause();
+        mp.stop();
+    }
+
+    //TODO  Pauseから戻ってきた時にBGMを流れさせること
+
 }
 

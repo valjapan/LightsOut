@@ -23,7 +23,8 @@
         <activity
             android:name=".HelpActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".LevelActivity"></activity>
+        <activity android:name=".LevelActivity" />
+        <activity android:name=".ClearActivity"></activity>
     </application>
 
 </manifest>
