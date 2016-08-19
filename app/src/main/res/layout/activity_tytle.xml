@@ -41,14 +41,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ルール説明"
-                android:id="@+id/button39"
+                android:id="@+id/Help"
                 android:onClick="help" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ゲーム開始"
-                android:id="@+id/button40"
+                android:id="@+id/Play"
                 android:onClick="goGame" />
 
         </LinearLayout>

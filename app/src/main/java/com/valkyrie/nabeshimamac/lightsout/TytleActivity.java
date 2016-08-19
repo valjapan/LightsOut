@@ -21,11 +21,12 @@ public class TytleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tytle);
-        button1 = (Button)findViewById(R.id.button39);
-        button2 = (Button)findViewById(R.id.button40);
+        button1 = (Button)findViewById(R.id.Help);
+        button2 = (Button)findViewById(R.id.Play);
         button1.setVisibility(View.VISIBLE);
         button2.setVisibility(View.VISIBLE);
         textView = (TextView)findViewById(R.id.textView);
+        textView.setText("Lights Out");
 
     }
 

@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,8 +22,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button[][] btn;
-    Button btnReset;
-    TextView textView1, textView2;
+    TextView timerTextView, counterTextView;
     boolean[][] flag;
     int count;
     private android.media.MediaPlayer mp;
@@ -28,13 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Handler h = new Handler();//TODO エラーの理由が不明
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView1 = (TextView) findViewById(R.id.timer);
-        textView2 = (TextView) findViewById(R.id.counter);
+        timerTextView = (TextView) findViewById(R.id.timer);
+        counterTextView = (TextView) findViewById(R.id.counter);
 
 
         btn = new Button[6][6];
@@ -78,16 +83,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn[5][5] = (Button) findViewById(R.id.button36);
 
         count = 0;
-        textView2.setText(String.format("%1$02d手", count));
-        textView2.setTextColor(Color.BLACK);
+        counterTextView.setText(String.format("%1$02d", count));
+        timerTextView.setTextColor(Color.BLACK);
 
 
-        btnReset = (Button) findViewById(R.id.button37);
-        btnReset.setOnClickListener(this);
+        @ColorInt int blue = ContextCompat.getColor(this, R.color.colorBlueOriginal);
+
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 btn[i][j].setOnClickListener(this);
-                btn[i][j].setBackgroundColor(Color.BLUE);
+                btn[i][j].setBackgroundColor(blue);
                 flag[i][j] = false;
             }
         }
@@ -113,8 +118,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         builder.show();
 
-        textView1.setText("00:00:00");
+        timerTextView.setText("00:00:00");
 
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater mi = getMenuInflater();
+        mi.inflate(R.menu.menu_main,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_reset:
+                reset(0,0);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 
@@ -134,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         long minute = (nowTime - startedAt) / 1000 / 60;
                         long second = (nowTime - startedAt) / 1000 % 60;
                         long mili = (nowTime - startedAt) % 1000 / 10;
-                        textView1.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
+                        timerTextView.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
                     }
                 });
             }
@@ -146,10 +169,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        @ColorInt int pink = ContextCompat.getColor(this, R.color.colorPinkOriginal);
         count = count + 1;
-        textView2.setText(String.format("%1$02d手", count));
+        counterTextView.setText(String.format("%1$02d", count));
         if (count > 28) {
-            textView2.setTextColor(Color.RED);
+            counterTextView.setTextColor(pink);
         }
 
 
@@ -298,9 +322,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 check(5, 5);
                 tapInstance.play();
                 break;
-            case R.id.button37:
-                Reset(0, 0);
-                break;
+
         }
     }
 
@@ -368,15 +390,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void Reset(int line, int row) { //Resetの内容
+    public void reset(int line, int row) { //Resetの内容
+        @ColorInt int blue = ContextCompat.getColor(this, R.color.colorBlueOriginal);
+
         for (line = 0; line < 6; line++) {
             for (row = 0; row < 6; row++) {
                 btn[line][row].setOnClickListener(this);
-                btn[line][row].setBackgroundColor(Color.BLUE);
+                btn[line][row].setBackgroundColor(blue);
                 flag[line][row] = false;
                 count = 0;
-                textView2.setText(count + "手");
-                textView2.setTextColor(Color.BLACK);
+                counterTextView.setText(count + "0");
+                counterTextView.setTextColor(Color.BLACK);
             }
         }
 
@@ -402,6 +426,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //TODO  Pauseから戻ってきた時にBGMを流れさせること
-
 }
 
