@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class TytleActivity extends AppCompatActivity {
-    Button button1,button2;
+    Button button1,button2,button3,button4,button6;
     TextView textView;
 
 //TODO ここにタイトル点滅を実装させる
@@ -22,12 +22,13 @@ public class TytleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tytle);
         button1 = (Button)findViewById(R.id.Help);
-        button2 = (Button)findViewById(R.id.Play);
-        button1.setVisibility(View.VISIBLE);
-        button2.setVisibility(View.VISIBLE);
+        button2 = (Button)findViewById(R.id.PlayEazy);
+        button3 = (Button)findViewById(R.id.PlayNomal);
+        button4 = (Button)findViewById(R.id.PlayHard);
+        button6 = (Button)findViewById(R.id.GoRank);
+
         textView = (TextView)findViewById(R.id.textView);
         textView.setText("Lights Out");
-
     }
 
 
@@ -36,67 +37,29 @@ public class TytleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goGame(View v){
+    public void goEazy(View v){
         Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("mode",0);
         startActivity(intent);
     }
-//TODO ここにタイトル点滅を実装させる
-//    private void startMeasure() {
-//
-//
-//
-//
-//        /**
-//         * 点滅させたいView
-//         * TextViewじゃなくてもよい。
-//         */
-//        mLblMeasuring = (TextView) findViewById(R.id.textView);
-//
-//        /**
-//         * 第一引数: 繰り返し実行したい処理
-//         * 第二引数: 指定時間後に第一引数の処理を開始
-//         * 第三引数: 第一引数の処理完了後、指定時間後に再実行
-//         * 第四引数: 第二、第三引数の単位
-//         *
-//         * new Runnable（無名オブジェクト）をすぐに（0秒後に）実行し、完了後1700ミリ秒ごとに繰り返す。
-//         * （ただしアニメーションの完了からではない。Handler#postが即時実行だから？？）
-//         */
-//        mScheduledExecutor = Executors.newScheduledThreadPool(2);
-//
-//        mScheduledExecutor.scheduleWithFixedDelay(new Runnable() {
-//            @Override
-//            public void run() {
-//                textView.post(animateAlpha());
-//            }
-//
-//
-//            @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-//            private void animateAlpha() {
-//
-//                // 実行するAnimatorのリスト
-//                List<Animator> animatorList = new ArrayList<Animator>();
-//
-//                // alpha値を0から1へ1000ミリ秒かけて変化させる。
-//                ObjectAnimator animeFadeIn = ObjectAnimator.ofFloat(mLblMeasuring, "alpha", 0f, 1f);
-//                animeFadeIn.setDuration(1000);
-//                // alpha値を1から0へ600ミリ秒かけて変化させる。
-//                ObjectAnimator animeFadeOut = ObjectAnimator.ofFloat(mLblMeasuring, "alpha", 1f, 0f);
-//                animeFadeOut.setDuration(600);
-//
-//                // 実行対象Animatorリストに追加。
-//                animatorList.add(animeFadeIn);
-//                animatorList.add(animeFadeOut);
-//
-//                final AnimatorSet animatorSet = new AnimatorSet();
-//
-//                // リストの順番に実行
-//                animatorSet.playSequentially(animatorList);
-//
-//                animatorSet.start();
-//            }
-//        }, 0, 1700, TimeUnit.MILLISECONDS);
-//
-//    }
+
+    public void goNomal(View v){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("mode",1);
+        startActivity(intent);
+    }
+
+    public void goHard(View v){
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("mode",2);
+        startActivity(intent);
+    }
+
+    public void goRank(View v){
+//        Intent intent = new Intent(this,)
+//        startActivity(intent);
+//        TODO ランクようのランキングレイアウトを作成させること
+    }
 
 
 }

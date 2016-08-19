@@ -16,40 +16,66 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ライツアウト"
-            android:id="@+id/textView2"
-            android:layout_gravity="center_horizontal"
-            android:textSize="30dp" />
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
                 android:id="@+id/textView"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:layout_marginBottom="50dp"
+                android:textSize="40dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ルール説明"
                 android:id="@+id/Help"
-                android:onClick="help" />
+                android:onClick="help"
+                android:layout_marginBottom="50dp"
+                android:textSize="25dp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="初級"
+                android:id="@+id/PlayEazy"
+                android:onClick="goEazy"
+                android:layout_marginBottom="8dp"
+                android:textSize="25dp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ゲーム開始"
-                android:id="@+id/Play"
-                android:onClick="goGame" />
+                android:text="中級"
+                android:id="@+id/PlayNomal"
+                android:layout_gravity="center_horizontal"
+                android:onClick="goNomal"
+                android:layout_marginBottom="8dp"
+                android:textSize="25dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="上級"
+                android:id="@+id/PlayHard"
+                android:layout_gravity="center_horizontal"
+                android:onClick="goHard"
+                android:layout_marginBottom="50dp"
+                android:textSize="25dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ランキング"
+                android:id="@+id/GoRank"
+                android:layout_gravity="center_horizontal"
+                android:onClick="goRank"
+                android:textSize="20dp" />
 
         </LinearLayout>
     </LinearLayout>
