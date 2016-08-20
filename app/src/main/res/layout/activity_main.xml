@@ -65,7 +65,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -104,12 +104,12 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/modalLayout"
+        android:id="@+id/startLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#8000"
         android:padding="24dp"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/title"
@@ -118,7 +118,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
             android:text="title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:textSize="40dp"
+            android:textIsSelectable="false" />
 
         <TextView
             android:id="@+id/messege"
@@ -128,7 +130,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="メッセージ"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/modalButton"
@@ -138,6 +141,94 @@
             android:layout_centerHorizontal="true"
             android:text="START" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/claarLayout"
+        android:visibility="invisible"
+        android:background="#8000">
+
+        <TextView
+            android:id="@+id/titleClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:textSize="40dp"
+            android:textIsSelectable="false" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="ランキング"
+            android:id="@+id/rankButton"
+            android:onClick="goRank"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="49dp" />
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RETRY"
+            android:onClick="goRetly"
+            android:layout_marginBottom="38dp"
+            android:visibility="visible"
+            android:layout_above="@+id/rankButton"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:text="Total"
+            android:id="@+id/total"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="40dp"
+            android:layout_below="@+id/titleClear" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="15dp"
+            android:background="#ffffff"
+            android:layout_below="@+id/total"
+            android:layout_alignParentStart="true"
+            android:id="@+id/view"
+            android:layout_weight="2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:text="timeResult"
+            android:id="@+id/timeResult"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/view"
+            android:textSize="30dp"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:text="countResult"
+            android:id="@+id/countResult"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/timeResult"
+            android:layout_below="@+id/timeResult"
+            android:textSize="30dp"
+            android:gravity="center_vertical"
+            android:visibility="visible" />
     </RelativeLayout>
 
 </RelativeLayout>

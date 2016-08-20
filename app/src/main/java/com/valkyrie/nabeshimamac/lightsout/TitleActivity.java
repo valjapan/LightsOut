@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TytleActivity extends AppCompatActivity {
+public class TitleActivity extends AppCompatActivity {
     Button button1,button2,button3,button4,button6;
     TextView textView;
+    ImageView googlePlay;
 
 //TODO ここにタイトル点滅を実装させる
 //    private Handler mHandler = new Handler();
@@ -27,10 +29,11 @@ public class TytleActivity extends AppCompatActivity {
         button4 = (Button)findViewById(R.id.PlayHard);
         button6 = (Button)findViewById(R.id.GoRank);
 
+        googlePlay = (ImageView)findViewById(R.id.googleGame);
+
         textView = (TextView)findViewById(R.id.textView);
         textView.setText("Lights Out");
     }
-
 
     public void help (View v){
         Intent intent = new Intent(this,HelpActivity.class);
@@ -60,6 +63,11 @@ public class TytleActivity extends AppCompatActivity {
 //        startActivity(intent);
 //        TODO ランクようのランキングレイアウトを作成させること
     }
+
+    public void googleGame(View v){
+
+    }
+
 
 
 }
