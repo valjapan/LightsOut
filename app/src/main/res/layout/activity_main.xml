@@ -109,7 +109,7 @@
         android:layout_height="match_parent"
         android:background="#8000"
         android:padding="24dp"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/title"
@@ -131,7 +131,7 @@
             android:layout_marginTop="16dp"
             android:text="メッセージ"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <Button
             android:id="@+id/modalButton"
@@ -154,14 +154,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#8000"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/titleClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
             android:text="title"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:textSize="40dp" />
@@ -172,9 +172,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="49dp"
             android:height="75dp"
             android:onClick="goRank"
+            android:layout_marginTop="40dp"
+            android:textSize="35dp"
+            android:background="@drawable/button_design_light_blue"
+            android:textColor="#FFFFFF"
             android:text="ランキング" />
 
         <Button
@@ -185,7 +188,12 @@
             android:layout_alignParentStart="true"
             android:onClick="goRetly"
             android:text="RETRY"
-            android:visibility="visible" />
+            android:height="75dp"
+            android:textSize="35dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_design_pink"
+            android:visibility="visible"
+            android:layout_marginTop="25dp" />
 
         <TextView
             android:id="@+id/total"
@@ -193,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleClear"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:text="Total"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
             android:textSize="40sp" />
@@ -206,7 +214,9 @@
             android:layout_below="@+id/total"
             android:layout_marginTop="15dp"
             android:layout_weight="2"
-            android:background="#ffffff" />
+            android:background="#ffffff"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp" />
 
         <TextView
             android:id="@+id/timeResult"
@@ -215,7 +225,7 @@
             android:layout_below="@+id/view"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:text="timeResult"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
@@ -228,12 +238,12 @@
             android:layout_alignStart="@+id/timeResult"
             android:layout_below="@+id/timeResult"
             android:layout_centerVertical="true"
-            android:layout_marginTop="12dp"
             android:gravity="center_vertical"
             android:text="countResult"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
             android:textSize="30sp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:layout_marginTop="25dp" />
     </RelativeLayout>
 
 </RelativeLayout>

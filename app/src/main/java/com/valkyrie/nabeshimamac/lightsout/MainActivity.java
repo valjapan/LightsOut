@@ -32,11 +32,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements LightsOutView.LightsOutListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
-    private static final String EASY_RANKING_ID = "CgkIxf6K1KAMEAIQAQ";
-    private static final String NOMAL_RANKING_ID = "CgkIxf6K1KAMEAIQAw";
-    private static final String HARD_RANKING_ID = "CgkIxf6K1KAMEAIQBA";
-
-
     private LightsOutView lightsOutView;
     private TextView timerTextView, counterTextView;
     TextView title, messege, total, timeResult, countResult, titleClear;
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     boolean isPlaying = false;
     int mode;
     Random random = new Random();
-    private String rankingId;
+    private GameClientManager.Ranking ranking;
     private List<Point> prePoints;
 
     private GoogleApiClient apiClient;
@@ -111,25 +106,33 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         prePoints = new ArrayList<>();
         if (mode == 0) {
             // 初級
-            rankingId = EASY_RANKING_ID;
+            ranking = GameClientManager.Ranking.Easy;
         } else if (mode == 1) {
             // 中級
             for (int i = 0; i < 5; i++) {
                 prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
-                rankingId = NOMAL_RANKING_ID;
             }
+            ranking = GameClientManager.Ranking.Normal;
         } else if (mode == 2) {
             // 上級
             for (int i = 0; i < 10; i++) {
                 prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
-                rankingId = HARD_RANKING_ID;
             }
+            ranking = GameClientManager.Ranking.Hard;
         }
         loadPrePoints();
 
         // 初期設定
         // 各種リスナー登録とGoogleAPIで利用するAPIやスコープの設定
         apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
+
+        if (!PreferencesManager.getInstance(this).isTutorialEnd()) {
+            Intent intent = new Intent(this,TutorialActivity.class);
+            startActivity(intent);
+            // チュートリアルが終わってない場合
+            // Tutorial画面に移動
+            GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
+        }
     }
 
     private void loadPrePoints() {
@@ -151,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             case R.id.menu_reset:
                 reset();
                 break;
+            case R.id.menu_info:
+                Intent intent = new Intent(this,TutorialActivity.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -160,12 +167,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     }
 
     public void goRank(View v) {
-        if (apiClient.isConnected()) {
-            startActivityForResult(
-                    Games.Leaderboards.getLeaderboardIntent(apiClient, rankingId/* 見たいリーダーボードのID */),
-                    200/*REQUEST_CODE*/
-            );
-        }
+        GameClientManager.intentRanking(this, apiClient, ranking);
     }
 
     public void reset() { //Resetの内容
@@ -197,8 +199,34 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     @Override
     public void onClearListener() {
         isPlaying = false;
+        final int clearCount = PreferencesManager.getInstance(this).addClearCount(ranking);
+        GameClientManager.Medal medal = null;
+        if (clearCount == 1) {
+            // いずれかの難易度の初回クリア
+            if (ranking == GameClientManager.Ranking.Easy) {
+                medal = GameClientManager.Medal.FirstEazy;
+            }else if(ranking == GameClientManager.Ranking.Normal){
+                medal = GameClientManager.Medal.FirstNomal;
+            }else if (ranking == GameClientManager.Ranking.Hard){
+                medal = GameClientManager.Medal.FirstHard;
+            }
+        } else if (clearCount == 10) {
+            // いずれかの難易度の10回クリア
+            if (ranking == GameClientManager.Ranking.Easy) {
+                medal = GameClientManager.Medal.ProEazy;
+            }else if(ranking == GameClientManager.Ranking.Normal){
+                medal = GameClientManager.Medal.ProNomal;
+            }else if (ranking == GameClientManager.Ranking.Hard){
+                medal = GameClientManager.Medal.ProHard;
+            }
+        }
+        if (medal != null) {
+            GameClientManager.unlockMedal(apiClient, medal);
+        }
+
         stopTimer();
         showClearModal();
+
 //        mp.stop();
     }
 
@@ -217,9 +245,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     }
 
     private void showClearModal() {
-        if (apiClient.isConnected()) {
-            Games.Leaderboards.submitScore(apiClient, rankingId/* リーダーボードのID */, lightsOutView.getTapCount()/* 送信する値 */);
-        }
+
         startLayout.setVisibility(View.INVISIBLE);
         clearLayout.setVisibility(View.VISIBLE);
         titleClear.setText("Congratulations");
@@ -228,9 +254,21 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         long minute = (nowTime - startedAt) / 1000 / 60;
         long second = (nowTime - startedAt) / 1000 % 60;
         long mili = (nowTime - startedAt) % 1000 / 10;
+
+        long totalMinute = minute * 60;
+        long totalSecond = second;
+
+        long lightsOutViewTotal = lightsOutView.getTapCount();
+
+        int total = (int) (totalMinute +totalSecond +lightsOutViewTotal);
+
         timeResult.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
         countResult.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
+        this.total.setText("Total:  "+ total);
+
+        GameClientManager.submitScore(apiClient, ranking, total);
     }
+
 
     private void playGame() {
         startLayout.setVisibility(View.INVISIBLE);
@@ -280,9 +318,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         apiClient.registerConnectionCallbacks(this);
         apiClient.registerConnectionFailedListener(this);
         // 今回は画面が表示されるたびに必ず接続させる
-        if (apiClient.hasConnectedApi(Games.API)) {
-            return;
-        } else if (!apiClient.isConnected()) {
+        if (!apiClient.isConnected() || !apiClient.hasConnectedApi(Games.API)) {
             apiClient.connect();
             Log.d(TitleActivity.class.getSimpleName(), "Connecting Google play");
         }
@@ -298,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (requestCode == GameClientManager.CODE_CONNECT) {
             mIntentInProgress = false;
             if (resultCode != RESULT_OK) {
                 // エラーの場合、resultCodeにGamesActivityResultCodes内の値が入っている
@@ -318,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 && !mIntentInProgress && connectionResult.hasResolution()) {
             try {
                 mIntentInProgress = true;
-                connectionResult.startResolutionForResult(this, 100);
+                connectionResult.startResolutionForResult(this, GameClientManager.CODE_CONNECT);
             } catch (IntentSender.SendIntentException e) {
                 mIntentInProgress = false;
                 apiClient.connect();
