@@ -14,12 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:visibility="invisible">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,4 +88,53 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#8000"
+        android:id="@+id/rankLayout"
+        android:visibility="visible"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="初級ランキング"
+            android:id="@+id/rankEazy"
+            android:layout_marginTop="220dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:onClick="goEazyRank" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginTop="24dp"
+            android:layout_height="wrap_content"
+            android:text="中級ランキング"
+            android:id="@+id/rankNomal"
+            android:layout_below="@+id/rankEazy"
+            android:layout_alignParentStart="true"
+            android:onClick="goNomalRank" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="上級ランキング"
+            android:id="@+id/rankHard"
+            android:layout_below="@+id/rankNomal"
+            android:layout_alignParentStart="true"
+            android:onClick="goHardRank" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="戻る"
+            android:id="@+id/returnTytle"
+            android:layout_below="@+id/rankHard"
+            android:layout_alignParentStart="true"
+            android:onClick="goTytle" />
+    </RelativeLayout>
 </RelativeLayout>
