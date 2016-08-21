@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03A9F4</color>
+    <color name="colorPrimary">#03a9f4</color>
     <color name="colorPrimaryDark">#039BE5</color>
     <color name="colorAccent">#FF4081</color>
     
+    <color name="colorYellowOriginal">#FFEB3B</color>
+    <color name="colorOrangeNAme">#FF9800</color>
     <color name="colorPinkOriginal">#EC407A</color>
     <color name="colorBlueOriginal">#29B6F6</color>
+    <color name="colorDeepOrangeOriginal">#f5a623</color>
+    <!-- title上級-->
+    <color name="colorCyanOridinal">#00BCD4</color>
+    <color name="colorLightBlueOridinal">#00B9E6</color>
+    <!-- title初級 -->
+    <color name="colorPinkOriginalRank">#f55b6e</color>
+    <!-- titleランキング -->
+    <color name="colorRedOridinal">#F44336</color>
+    <color name="colorPeapleOridinal">#9C27B0</color>
+    <color name="colorLimeGreenOridinal">#7ED321</color>
+    <!--title中級-->
+    <color name="colorGreenOriginal">#689F38</color>
 </resources>
