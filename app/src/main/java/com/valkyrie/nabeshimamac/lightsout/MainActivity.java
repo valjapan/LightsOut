@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             }
         });
 
-        clearLayout = (RelativeLayout) findViewById(R.id.claarLayout);
+        clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         clearLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -156,8 +156,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     }
 
     public void goRetly(View v){
-        Intent intent = new Intent(this,TitleActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void goRank(View v) {

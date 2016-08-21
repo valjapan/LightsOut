@@ -6,13 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class TitleActivity extends AppCompatActivity {
-    Button button1,button2,button3,button4,button6;
+
+    Button button1,button2,button3,button4,button6,eazyRank,nomalRank,hardRank;
     TextView textView;
     ImageView googlePlay;
 
+    LinearLayout modeLayout;
+    RelativeLayout rankLayout;
 //TODO ここにタイトル点滅を実装させる
 //    private Handler mHandler = new Handler();
 //    private ScheduledExecutorService mScheduledExecutor;
@@ -22,17 +27,25 @@ public class TitleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tytle);
-        button1 = (Button)findViewById(R.id.Help);
+        setContentView(R.layout.activity_title);
         button2 = (Button)findViewById(R.id.PlayEazy);
         button3 = (Button)findViewById(R.id.PlayNomal);
         button4 = (Button)findViewById(R.id.PlayHard);
-        button6 = (Button)findViewById(R.id.GoRank);
+        eazyRank = (Button)findViewById(R.id.rankEazy);
+        nomalRank = (Button)findViewById(R.id.rankNomal);
+        hardRank = (Button)findViewById(R.id.rankHard);
+
+        modeLayout = (LinearLayout)findViewById(R.id.modeLayout);
+        rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
 
         googlePlay = (ImageView)findViewById(R.id.googleGame);
 
         textView = (TextView)findViewById(R.id.textView);
         textView.setText("Lights Out");
+
+        modeLayout.setVisibility(View.VISIBLE);
+        rankLayout.setVisibility(View.INVISIBLE);
+
     }
 
     public void help (View v){
@@ -58,16 +71,26 @@ public class TitleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goRank(View v){
-//        Intent intent = new Intent(this,)
-//        startActivity(intent);
-//        TODO ランクようのランキングレイアウトを作成させること
-    }
-
     public void googleGame(View v){
+        modeLayout.setVisibility(View.INVISIBLE);
+        rankLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void goEazyRank(View v){
 
     }
 
+    public void goNomalRank (View v){
 
+    }
+
+    public void goHardRank(View v){
+
+    }
+
+    public void goTitle(View v){
+        modeLayout.setVisibility(View.VISIBLE);
+        rankLayout.setVisibility(View.INVISIBLE);
+    }
 
 }
