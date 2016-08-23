@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,9 +19,8 @@ import com.google.android.gms.games.Player;
 
 public class TitleActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    Button button1, button2, button3, button4, button6, eazyRank, nomalRank, hardRank;
     TextView textView;
-    ImageView googlePlay;
+    ImageView googlePlay ,editButton;
 
     LinearLayout modeLayout;
     RelativeLayout rankLayout;
@@ -38,17 +36,12 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
-        button2 = (Button) findViewById(R.id.PlayEazy);
-        button3 = (Button) findViewById(R.id.PlayNomal);
-        button4 = (Button) findViewById(R.id.PlayHard);
-        eazyRank = (Button) findViewById(R.id.rankEazy);
-        nomalRank = (Button) findViewById(R.id.rankNomal);
-        hardRank = (Button) findViewById(R.id.rankHard);
 
         modeLayout = (LinearLayout) findViewById(R.id.modeLayout);
         rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
 
         googlePlay = (ImageView) findViewById(R.id.googleGame);
+        editButton = (ImageView) findViewById(R.id.EditButton);
 
         textView = (TextView) findViewById(R.id.textView);
         textView.setText("Lights Out");
@@ -141,6 +134,11 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     public void googleGame(View v) {
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void goEdit(View v){
+        Intent intent = new Intent(this, MakeListActivity.class);
+        startActivity(intent);
     }
 
     public void goEazyRank(View v) {

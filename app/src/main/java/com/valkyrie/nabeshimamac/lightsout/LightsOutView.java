@@ -10,12 +10,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class LightsOutView extends LinearLayout implements View.OnClickListener {
+    public static final int MODE_GAME = 0;
+    public static final int MODE_MAKE = 1;
+    private static final int BOARD_SIZE =  6;
 
     private Button[][] btns;
 
     private boolean[][] flag;
     private Tap tapInstance;
     private int tapCount;
+
+    // 0 -> Game, 1 -> Make
+    private int mode = MODE_GAME;
 
     private @ColorInt int blue;
     private @ColorInt int pink;
@@ -62,10 +68,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     public void resetGame() {
         tapCount = 0;
-        flag = new boolean[6][6];
+        flag = new boolean[BOARD_SIZE][BOARD_SIZE];
 
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 btns[i][j].setBackgroundColor(blue);
                 flag[i][j] = false;
             }
@@ -74,25 +80,27 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     public void check(int line, int row) {
         checkFlag(line, row);
-        // 左
-        if (line > 0) {
-            checkFlag(line - 1, row);
-        }
-        // 右
-        if (line < 5) {
-            checkFlag(line + 1, row);
-        }
-        // 上
-        if (row > 0) {
-            checkFlag(line, row - 1);
-        }
-        // 下
-        if (row < 5) {
-            checkFlag(line, row + 1);
+        if (mode == MODE_GAME) {
+            if (line > 0) {
+                // 左
+                checkFlag(line - 1, row);
+            }
+            if (line < 5) {
+                // 右
+                checkFlag(line + 1, row);
+            }
+            if (row > 0) {
+                // 上
+                checkFlag(line, row - 1);
+            }
+            if (row < 5) {
+                // 下
+                checkFlag(line, row + 1);
+            }
         }
         updateFlags();
         setTapColor(line, row);
-        if (judgeClear()) {
+        if (mode == MODE_GAME && judgeClear()) {
             // TODO クリアしたことをActivityに伝える
             if (listener != null) {
                 listener.onClearListener();
@@ -110,6 +118,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     private void loadButtons() {
+        //BOARD_SIZEは↓はまだ？
         btns = new Button[6][6];
         btns[0][0] = (Button) findViewById(R.id.button);
         btns[0][1] = (Button) findViewById(R.id.button2);
@@ -156,9 +165,39 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         }
     }
 
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public boolean[][] getFlags() {
+        return flag;
+    }
+
+    public String getFlagsToString() {
+        String data = "";
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (flag[i][j]) {
+                    data = data + "0";
+                } else {
+                    data = data + "1";
+                }
+            }
+        }
+        return data;
+    }
+
+    public int getBoardSize() {
+        return BOARD_SIZE;
+    }
+
     public void updateFlags() {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 if (flag[i][j]) {
                     btns[i][j].setBackgroundColor(pink);
                 } else {
@@ -177,8 +216,8 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     private boolean judgeClear() {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 if (!flag[i][j]) {
                     return false;
                 }
