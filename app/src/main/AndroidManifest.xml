@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"/>
 
         <meta-data
             android:name="AA_DB_NAME"
@@ -43,9 +43,14 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".TutorialActivity" />
-        <activity android:name=".MakeActivity" />
-        <activity android:name=".MakeListActivity"></activity>
-    </application>
+        <activity
+            android:name=".TutorialActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MakeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MakeListActivity"
+            android:screenOrientation="portrait"></activity>
 
 </manifest>
