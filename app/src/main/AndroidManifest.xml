@@ -2,14 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.valkyrie.nabeshimamac.lightsout">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"/>
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="data.db"/>
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1"/>
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.valkyrie.nabeshimamac.lightsout.Question" />
+
         <activity
-            android:name=".TytleActivity"
+            android:name=".TitleActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,11 +35,22 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
-            android:name=".HelpActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".LevelActivity" />
-        <activity android:name=".ClearActivity"></activity>
-    </application>
+            android:name=".TutorialActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MakeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MakeListActivity"
+            android:screenOrientation="portrait"></activity>
 
 </manifest>

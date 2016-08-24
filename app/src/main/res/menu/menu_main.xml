@@ -7,4 +7,10 @@
         android:icon="@drawable/ic_refresh_white_24dp"
         android:title="@string/menu_reset"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_info"
+        android:icon="@drawable/ic_info_white_24dp"
+        android:title="@string/menu_info"
+        app:showAsAction="always"/>
 </menu>
