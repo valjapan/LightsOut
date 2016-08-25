@@ -14,6 +14,7 @@ public class Tap {
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
         soundId = soundPool.load(context,R.raw.tap01,1);
     }
+
     public void play() {
         soundPool.play(soundId,1.0f,1.0f,0,0,1.0f);
     }

@@ -166,7 +166,7 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
-        if (keyCode == KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             new AlertDialog.Builder(this)
                     .setTitle("アプリケーションの終了")
                     .setMessage("アプリケーションを終了してよろしいですか？")
@@ -183,14 +183,11 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //自動生成されたメソッド・スタブ
-
                         }
                     })
                     .show();
-
             return true;
         }
         return false;
     }
-
 }

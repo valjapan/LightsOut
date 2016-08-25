@@ -97,19 +97,6 @@ public class MakeActivity extends AppCompatActivity {
             lightsOutEachView.updateFlags();
         }
         updateDetailsText();
-
-//        スピナー部分
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        // アイテムを追加します
-//        adapter.add("red");
-//        adapter.add("green");
-//        adapter.add("blue");
-//        Spinner spinner = (Spinner) findViewById(id.spinner);
-//        // アダプターを設定します
-//        spinner.setAdapter(adapter);
-//        // スピナーのアイテムが選択された時に呼び出されるコールバックリスナーを登録します
-
     }
 
     @Override

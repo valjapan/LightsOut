@@ -45,7 +45,6 @@ public class GameClientManager {
             this.name = name;
             this.id = id;
         }
-
     }
 
     public static void submitScore(GoogleApiClient apiClient, Ranking ranking, int score) {

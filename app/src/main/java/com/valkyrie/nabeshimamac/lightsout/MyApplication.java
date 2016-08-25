@@ -10,7 +10,6 @@ import com.google.android.gms.games.Games;
  * Created by NabeshimaMAC on 16/08/20.
  */
 public class MyApplication extends Application {
-
     @NonNull
     private GoogleApiClient mGoogleApiClient;
 
@@ -23,10 +22,7 @@ public class MyApplication extends Application {
                 .addScope(Games.SCOPE_GAMES)
                 .build();
     }
-
     public GoogleApiClient getGoogleApiClient() {
         return mGoogleApiClient;
     }
-
-
 }

@@ -289,8 +289,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
 
     private void playGame() {
         startLayout.setVisibility(View.INVISIBLE);
-
-//                mp.start();
         startedAt = System.currentTimeMillis();
         startTimer();
         isPlaying = true;
@@ -301,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             timer.cancel();
             timer = null;
         }
-
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -318,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 });
             }
         }, 0, 10);
-
     }//Timerの処理部分
 
     private void stopTimer() {
