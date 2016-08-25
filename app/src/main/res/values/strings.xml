@@ -2,9 +2,18 @@
     <string name="app_name">LightsOut</string>
     <string name="menu_reset">リセット</string>
     <string name="menu_info">チュートリアル</string>
+    <string name="menu_save">保存する</string>
+    <string name="menu_delete">削除する</string>
+    <string name="menu_edit">編集する</string>
+    <string name="menu_back">戻る</string>
 
     <string name="tutorial_title_1"><u>Step1</u></string>
     <string name="tutorial_title_2"><u>Step2</u></string>
     <string name="tutorial_title_3"><u>Step3</u></string>
+
+    <string-array name="size_spinner">
+        <item>5×5</item>
+        <item>6×6</item>
+    </string-array>
 
 </resources>

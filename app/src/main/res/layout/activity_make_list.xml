@@ -26,92 +26,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:clipToPadding="false"
-                android:padding="24dp" />
+                android:clipToPadding="false" />
 
             <Button
                 android:id="@+id/newMake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_design_light_blue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
                 android:onClick="make"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="新規作成" />
+                android:text="新規作成"
+                android:layout_margin="16dp" />
+
         </LinearLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/NoUSE"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#8000"
-        android:visibility="invisible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-
-            <android.support.v4.widget.Space
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="CancelNewMake" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/background_floating_material_light"
-                android:orientation="vertical"
-                android:padding="24dp">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="タイトルを入れてください"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="30dp" />
-
-                <Button
-                    android:id="@+id/button37"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|right"
-                    android:nestedScrollingEnabled="true"
-                    android:onClick="goNewEdit"
-                    android:text="OK"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <android.support.v4.widget.Space
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="CancelNewMake" />
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>

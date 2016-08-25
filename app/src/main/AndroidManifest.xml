@@ -11,18 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"/>
-
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="data.db"/>
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="1"/>
-        <meta-data
-            android:name="AA_MODELS"
-            android:value="com.valkyrie.nabeshimamac.lightsout.Question" />
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".TitleActivity"
             android:screenOrientation="portrait">
@@ -35,6 +24,15 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".TutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MakeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MakeListActivity"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
@@ -42,15 +40,14 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".TutorialActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".MakeActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".MakeListActivity"
-            android:screenOrientation="portrait"></activity>
-
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="data.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.valkyrie.nabeshimamac.lightsout.Question" />
+    </application>
 </manifest>

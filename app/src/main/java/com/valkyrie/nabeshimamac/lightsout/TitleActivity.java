@@ -1,11 +1,14 @@
 package com.valkyrie.nabeshimamac.lightsout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -160,6 +163,35 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void goMedal(View v) {
         GameClientManager.intentMedal(this, apiClient);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            new AlertDialog.Builder(this)
+                    .setTitle("アプリケーションの終了")
+                    .setMessage("アプリケーションを終了してよろしいですか？")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //自動生成されたメソッド・スタブ
+                            TitleActivity.this.finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //自動生成されたメソッド・スタブ
+
+                        }
+                    })
+                    .show();
+
+            return true;
+        }
+        return false;
     }
 
 }

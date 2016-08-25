@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.lightsout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
@@ -7,9 +8,11 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.activeandroid.query.Select;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -43,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     Timer timer;
     Handler h = new Handler();//TODO エラーの理由が不明
     boolean isPlaying = false;
-    int mode;
     Random random = new Random();
     private GameClientManager.Ranking ranking;
     private List<Point> prePoints;
@@ -97,28 +100,42 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 return true;
             }
         });
-//        mp = android.media.MediaPlayer.create(this, R.raw.bgm01);
-        //TODO リピート機能を導入させること
 
         showStartModal();
 
-        mode = getIntent().getIntExtra("mode", 0);
         prePoints = new ArrayList<>();
-        if (mode == 0) {
-            // 初級
-            ranking = GameClientManager.Ranking.Easy;
-        } else if (mode == 1) {
-            // 中級
-            for (int i = 0; i < 5; i++) {
-                prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
+        long questionId = getIntent().getLongExtra("question_id", -1);
+        if (questionId != -1) {
+            ranking = GameClientManager.Ranking.Original;
+            Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
+            String data = "";
+            for (int i = 0; i < question.size; i++) {
+                for (int j = 0; j < question.size; j++) {
+                    if (question.board.charAt(i * question.size + j) == '1') {
+                        prePoints.add(new Point(i, j));
+                    }
+                }
             }
-            ranking = GameClientManager.Ranking.Normal;
-        } else if (mode == 2) {
-            // 上級
-            for (int i = 0; i < 10; i++) {
-                prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
+            lightsOutView.setBoardSize(question.size);
+        } else {
+            int mode = getIntent().getIntExtra("mode", 0);
+            if (mode == 0) {
+                // 初級
+                ranking = GameClientManager.Ranking.Easy;
+                lightsOutView.setBoardSize(5);
+            } else if (mode == 1) {
+                // 中級
+                for (int i = 0; i < 8; i++) {
+                    prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
+                }
+                ranking = GameClientManager.Ranking.Normal;
+            } else if (mode == 2) {
+                // 上級
+                for (int i = 0; i < 15; i++) {
+                    prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
+                }
+                ranking = GameClientManager.Ranking.Hard;
             }
-            ranking = GameClientManager.Ranking.Hard;
         }
         loadPrePoints();
 
@@ -127,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
 
         if (!PreferencesManager.getInstance(this).isTutorialEnd()) {
-            Intent intent = new Intent(this,TutorialActivity.class);
+            Intent intent = new Intent(this, TutorialActivity.class);
             startActivity(intent);
             // チュートリアルが終わってない場合
             // Tutorial画面に移動
@@ -155,14 +172,14 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 reset();
                 break;
             case R.id.menu_info:
-                Intent intent = new Intent(this,TutorialActivity.class);
+                Intent intent = new Intent(this, TutorialActivity.class);
                 startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void goRetly(View v){
+    public void goRetly(View v) {
         finish();
     }
 
@@ -205,18 +222,20 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             // いずれかの難易度の初回クリア
             if (ranking == GameClientManager.Ranking.Easy) {
                 medal = GameClientManager.Medal.FirstEazy;
-            }else if(ranking == GameClientManager.Ranking.Normal){
+            } else if (ranking == GameClientManager.Ranking.Normal) {
                 medal = GameClientManager.Medal.FirstNomal;
-            }else if (ranking == GameClientManager.Ranking.Hard){
+            } else if (ranking == GameClientManager.Ranking.Hard) {
                 medal = GameClientManager.Medal.FirstHard;
+            } else if (ranking == GameClientManager.Ranking.Original){
+                medal = GameClientManager.Medal.FirstMakePuzzlePlay;
             }
         } else if (clearCount == 10) {
             // いずれかの難易度の10回クリア
             if (ranking == GameClientManager.Ranking.Easy) {
                 medal = GameClientManager.Medal.ProEazy;
-            }else if(ranking == GameClientManager.Ranking.Normal){
+            } else if (ranking == GameClientManager.Ranking.Normal) {
                 medal = GameClientManager.Medal.ProNomal;
-            }else if (ranking == GameClientManager.Ranking.Hard){
+            } else if (ranking == GameClientManager.Ranking.Hard) {
                 medal = GameClientManager.Medal.ProHard;
             }
         }
@@ -226,8 +245,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
 
         stopTimer();
         showClearModal();
-
-//        mp.stop();
     }
 
     private void showStartModal() {
@@ -260,11 +277,11 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
 
         long lightsOutViewTotal = lightsOutView.getTapCount();
 
-        int total = (int) (totalMinute +totalSecond +lightsOutViewTotal);
+        int total = (int) (totalMinute + totalSecond + lightsOutViewTotal);
 
         timeResult.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
         countResult.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
-        this.total.setText("Total:  "+ total);
+        this.total.setText("Total:  " + total);
 
         GameClientManager.submitScore(apiClient, ranking, total);
     }
@@ -277,7 +294,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         startedAt = System.currentTimeMillis();
         startTimer();
         isPlaying = true;
-        //TODO タイマーの実装をさせること
     }
 
     public void startTimer() {
@@ -287,8 +303,8 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         }
 
         timer = new Timer();
-           timer.schedule(new TimerTask() {
-                @Override
+        timer.schedule(new TimerTask() {
+            @Override
             public void run() {
                 final long nowTime = System.currentTimeMillis();
                 h.post(new Runnable() {
@@ -374,6 +390,34 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         apiClient.connect();
     }
 
-    //TODO  Pauseから戻ってきた時にBGMを流れさせること
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            new AlertDialog.Builder(this)
+                    .setTitle("プレイ中の記録は戻ってきません！")
+                    .setMessage("よろしいですか？")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //自動生成されたメソッド・スタブ
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //自動生成されたメソッド・スタブ
+
+                        }
+                    })
+                    .show();
+
+            return true;
+        }
+        return false;
+    }
+
 }
 
