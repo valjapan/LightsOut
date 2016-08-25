@@ -107,7 +107,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         updateFlags();
         setTapColor(line, row);
         if (mode == MODE_GAME && judgeClear()) {
-            // TODO クリアしたことをActivityに伝える
+            //クリアしたことをActivityに伝える
             if (listener != null) {
                 listener.onClearListener();
             }
@@ -116,7 +116,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     public void checkFlag(int line, int row) {
         flag[line][row] = !flag[line][row];
-        //TODO 全てが反転色になったらクリアを実装させること
+        //全てが反転色になったらクリアを実装させる
     }
 
     public int getTapCount() {

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     //    private android.media.MediaPlayer mp;
     long startedAt;
     Timer timer;
-    Handler h = new Handler();//TODO エラーの理由が不明
+    Handler h = new Handler();
     boolean isPlaying = false;
     Random random = new Random();
     private GameClientManager.Ranking ranking;
@@ -319,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             }
         }, 0, 10);
 
-    }//TODO Timerの実装部分
+    }//Timerの処理部分
 
     private void stopTimer() {
         if (timer != null) {

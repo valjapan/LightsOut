@@ -161,7 +161,7 @@ public class MakeActivity extends AppCompatActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // TODO 自動生成されたメソッド・スタブ
+                            // 自動生成されたメソッド・スタブ
                             MakeActivity.this.finish();
                         }
                     })
@@ -169,7 +169,7 @@ public class MakeActivity extends AppCompatActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // TODO 自動生成されたメソッド・スタブ
+                            //  自動生成されたメソッド・スタブ
 
                         }
                     })

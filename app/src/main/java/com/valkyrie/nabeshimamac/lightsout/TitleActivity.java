@@ -27,7 +27,6 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     LinearLayout modeLayout;
     RelativeLayout rankLayout;
-//TODO ここにタイトル点滅を実装させる
 //    private Handler mHandler = new Handler();
 //    private ScheduledExecutorService mScheduledExecutor;
 //    private TextView mLblMeasuring;

@@ -38,7 +38,6 @@ public class GameClientManager {
         ProEazy("初級パズルのプロ", "CgkIxf6K1KAMEAIQCQ"),
         ProNomal("中級パズルのプロ", "CgkIxf6K1KAMEAIQCg"),
         ProHard("上級パズルのプロ", "CgkIxf6K1KAMEAIQCw");
-        //TODO 自作Lights Outを作ろうを追加
         public String name;
         public String id;
 
