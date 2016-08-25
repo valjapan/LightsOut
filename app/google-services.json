@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "421083135813",
+    "firebase_url": "https://lightsout-63772043.firebaseio.com",
+    "project_id": "lightsout-63772043",
+    "storage_bucket": "lightsout-63772043.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421083135813:android:ddf81f511febfea7",
+        "android_client_info": {
+          "package_name": "com.valkyrie.nabeshimamac.lightsout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421083135813-n9u9pqsed19vfj5isq1o65vfk2moh4lg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valkyrie.nabeshimamac.lightsout",
+            "certificate_hash": "D83388932C0B827EC6AB11D09B99E86F0D680F9A"
+          }
+        },
+        {
+          "client_id": "421083135813-c0ofng8ka6ogle6qnhkkqvkb4t4hud1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valkyrie.nabeshimamac.lightsout",
+            "certificate_hash": "76CB1D98319103AEEA85EBDFD99AFA47CFA03D1F"
+          }
+        },
+        {
+          "client_id": "421083135813-8ediu08t93olgqfe7qd77ghio08tgsas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDasP9l5p7ALrzX-cnLEyOCKspkBBMTNrk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421083135813-8ediu08t93olgqfe7qd77ghio08tgsas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

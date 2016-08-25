@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_BACK){
             new AlertDialog.Builder(this)
-                    .setTitle("プレイ中の記録は戻ってきません！")
+                    .setTitle("プレイ中の記録は戻りません！")
                     .setMessage("よろしいですか？")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
