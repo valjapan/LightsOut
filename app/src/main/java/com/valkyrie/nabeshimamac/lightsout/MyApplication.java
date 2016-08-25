@@ -1,6 +1,8 @@
 package com.valkyrie.nabeshimamac.lightsout;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
 
 import com.activeandroid.app.Application;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,6 +27,12 @@ public class MyApplication extends Application {
                 .build();
 
         analytics = FirebaseAnalytics.getInstance(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public GoogleApiClient getGoogleApiClient() {
