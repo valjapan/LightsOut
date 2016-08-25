@@ -22,7 +22,7 @@ import com.google.android.gms.games.Player;
 
 public class TitleActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView textView;
+    TextView textView ,versiontextView;
     ImageView googlePlay ,editButton;
 
     LinearLayout modeLayout;
@@ -46,11 +46,15 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
         editButton = (ImageView) findViewById(R.id.EditButton);
 
         textView = (TextView) findViewById(R.id.textView);
+        versiontextView = (TextView)findViewById(R.id.versionName);
         textView.setText("Lights Out");
 
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
         apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
+
+
+        versiontextView.setText("v" + BuildConfig.VERSION_NAME);
     }
 
     @Override

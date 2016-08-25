@@ -185,4 +185,13 @@
             android:textSize="35dp" />
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Version"
+        android:id="@+id/versionName"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp" />
+
 </RelativeLayout>
