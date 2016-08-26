@@ -31,42 +31,31 @@ public class PreferencesManager {
     }
 
     public int getClearCount(GameClientManager.Ranking ranking) {
-        String key;
-        switch (ranking) {
-            case Easy:
-                key = "easy_count";
-                break;
-            case Normal:
-                key = "normal_count";
-                break;
-            case Hard:
-                key = "hard_count";
-                break;
-            default:
-                return 0;
-        }
+        String key = getRankingKey(ranking);
         return sharedPreferences.getInt(key, 0);
     }
 
     public int addClearCount(GameClientManager.Ranking ranking) {
         int clearCount = getClearCount(ranking);
         clearCount++;
-        String key;
-        switch (ranking) {
-            case Easy:
-                key = "easy_count";
-                break;
-            case Normal:
-                key = "normal_count";
-                break;
-            case Hard:
-                key = "hard_count";
-                break;
-            default:
-                return 0;
-        }
+        String key = getRankingKey(ranking);
         sharedPreferences.edit().putInt(key, clearCount).apply();
         return clearCount;
     }
 
+    private String getRankingKey(GameClientManager.Ranking ranking) {
+        switch (ranking) {
+            case Easy:
+                return  "easy_count";
+            case Normal:
+                return "normal_count";
+            case Hard:
+                return  "hard_count";
+            case Original:
+                return "original_count";
+            default:
+                return null;
+        }
+
+    }
 }
