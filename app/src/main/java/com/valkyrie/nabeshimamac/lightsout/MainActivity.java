@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     TextView title, messege, total, timeResult, countResult, titleClear;
     Button modalButton;
     RelativeLayout startLayout, clearLayout;
-
-    //    private android.media.MediaPlayer mp;
     long startedAt;
     Timer timer;
     Handler h = new Handler();
@@ -50,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     Random random = new Random();
     private GameClientManager.Ranking ranking;
     private List<Point> prePoints;
-
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 finish();
             }
         });
+        //アクションバーの左側（閉じる）部分
 
         lightsOutView = (LightsOutView) findViewById(R.id.lightsOutView);
         timerTextView = (TextView) findViewById(R.id.timer);
@@ -76,11 +75,13 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         timeResult = (TextView) findViewById(R.id.timeResult);
         countResult = (TextView) findViewById(R.id.countResult);
         titleClear = (TextView) findViewById(R.id.titleClear);
+        //IDの関連付け
 
         lightsOutView.setOnLigitsOutListener(this);
         counterTextView.setText(String.format("%1$02d", 0));
         timerTextView.setText("00:00:00");
         timerTextView.setTextColor(Color.BLACK);
+        //TextViewにsetTextしているとこ
 
         title = (TextView) findViewById(R.id.title);
         messege = (TextView) findViewById(R.id.messege);
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 return true;
             }
         });
+
 
         clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         clearLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -262,7 +264,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     }
 
     private void showClearModal() {
-
         startLayout.setVisibility(View.INVISIBLE);
         clearLayout.setVisibility(View.VISIBLE);
         titleClear.setText("Congratulations");
@@ -388,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
-        if (keyCode == KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK && isPlaying) {
             new AlertDialog.Builder(this)
                     .setTitle("プレイ中の記録は戻りません！")
                     .setMessage("よろしいですか？")
@@ -405,15 +406,11 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //自動生成されたメソッド・スタブ
-
                         }
                     })
                     .show();
-
             return true;
         }
-        return false;
+        return super.onKeyDown(keyCode, event);
     }
-
 }
-

@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 public class TutorialActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     Button button;
+
 
 
     @Override
@@ -17,6 +20,9 @@ public class TutorialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tutorial);
         viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
         button = (Button)findViewById(R.id.buttonTutorial);
+
+        Bundle bundle = new Bundle();
+        ((MyApplication) getApplication()).analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, bundle);
     }
 
     public void next(View v) {

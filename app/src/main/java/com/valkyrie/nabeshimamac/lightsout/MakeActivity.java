@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -97,6 +98,7 @@ public class MakeActivity extends AppCompatActivity {
             lightsOutEachView.updateFlags();
         }
         updateDetailsText();
+
     }
 
     @Override
@@ -117,8 +119,12 @@ public class MakeActivity extends AppCompatActivity {
 
     private void save() {
         Question question = new Question();
+        if (TextUtils.isEmpty(editText.getText())){
+            question.title = "無題";
+        }else {
+            question.title = editText.getText().toString();
+        }
         // 現在日時の取得
-        question.title = editText.getText().toString();
         question.board = lightsOutEachView.getFlagsToString();
         question.size = lightsOutEachView.getBoardSize();
         question.createdAt = new Date();

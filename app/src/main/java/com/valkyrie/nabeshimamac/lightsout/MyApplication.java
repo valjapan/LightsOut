@@ -15,7 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 public class MyApplication extends Application {
     @NonNull
     private GoogleApiClient googleApiClient;
-    private FirebaseAnalytics analytics;
+    public FirebaseAnalytics analytics;
 
     @Override
     public void onCreate() {

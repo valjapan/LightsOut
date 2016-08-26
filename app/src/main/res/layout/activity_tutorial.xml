@@ -171,6 +171,6 @@
             android:textColor="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="35dp"
-            android:height="60dp" />
+            android:gravity="center" />
     </LinearLayout>
 </RelativeLayout>
