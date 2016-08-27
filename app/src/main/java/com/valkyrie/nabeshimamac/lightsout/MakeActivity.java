@@ -124,8 +124,8 @@ public class MakeActivity extends AppCompatActivity {
     private void save() {
         Question question = new Question();
         if (TextUtils.isEmpty(editText.getText())){
-            question.title = "無題";
-            //もしtitleに何も入力しないでセーブしたら『無題』と入る
+            question.title = "No Name";
+            //もしtitleに何も入力しないでセーブしたら『No Name』と入る
         }else {
             question.title = editText.getText().toString();
             //titleに何か入っていたらString型で配置

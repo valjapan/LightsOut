@@ -3,8 +3,10 @@ package com.valkyrie.nabeshimamac.lightsout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     private List<Point> prePoints;
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
+
+    public final int TWITTER_ID = 0;
+    private final String[] sharePackages = {"com.twitter.android"};
+
 
 
     @Override
@@ -110,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         showStartModal();
         //showStartModelを起動
 
+        final int mode = getIntent().getIntExtra("mode", 0);
+
+
         prePoints = new ArrayList<>();
         long questionId = getIntent().getLongExtra("question_id", -1);
         if (questionId != -1) {
@@ -126,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             }
             lightsOutView.setBoardSize(question.size);
         } else {
-            int mode = getIntent().getIntExtra("mode", 0);
             if (mode == 0) {
                 // 初級
                 ranking = GameClientManager.Ranking.Easy;
@@ -158,6 +166,9 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             // Tutorial画面に移動
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
+
+
+
     }
 
     private void loadPrePoints() {
@@ -295,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
 
         long lightsOutViewTotal = lightsOutView.getTapCount();
 
-        int total = (int) (totalMinute + totalSecond + lightsOutViewTotal);
+        final int total = (int) (totalMinute + totalSecond + lightsOutViewTotal);
 
         timeResult.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
         countResult.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
@@ -304,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         GameClientManager.submitScore(apiClient, ranking, total);
         //Play開始後の画面
     }
-
 
     private void playGame() {
         startLayout.setVisibility(View.INVISIBLE);
@@ -435,5 +445,23 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    // アプリがインストールされているかチェック
+    private Boolean isShareAppInstall(int shareId){
+        try {
+            PackageManager pm = getPackageManager();
+            pm.getApplicationInfo(sharePackages[shareId], PackageManager.GET_META_DATA);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    // アプリが無かったのでGooglePlayに飛ばす
+    private void shareAppDl(int shareId){
+        Uri uri = Uri.parse("market://details?id="+sharePackages[shareId]);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }
