@@ -13,12 +13,14 @@ public class GameClientManager {
     public static final int CODE_CONNECT = 100;
     public static final int CODE_RANKING = 200;
     public static final int CODE_MEDAL = 300;
+    //どこの画面に遷移しましたよっていう値
 
     public enum Ranking {
         Easy("初級ランキング", "CgkIxf6K1KAMEAIQAQ"),
         Normal("中級ランキング", "CgkIxf6K1KAMEAIQAw"),
         Hard("上級ランキング", "CgkIxf6K1KAMEAIQBA"),
         Original("オリジナルランキング", "CgkIxf6K1KAMEAIQDQ");
+        //GooglePlayのリーダーボード名,ID
 
         public String name;
         public String id;
@@ -30,6 +32,8 @@ public class GameClientManager {
     }
 
     public enum Medal {
+        //enum=列挙子
+        //大量にデータを宣言使うときに使う
         FirstTutorial("初めてのLightsOut", "CgkIxf6K1KAMEAIQCA"),
         FirstMakePuzzlePlay("自作Lights Outをプレイしよう", "CgkIxf6K1KAMEAIQDA"),
         FirstEazy("初級初クリア", "CgkIxf6K1KAMEAIQBQ"),
@@ -38,6 +42,7 @@ public class GameClientManager {
         ProEazy("初級パズルのプロ", "CgkIxf6K1KAMEAIQCQ"),
         ProNomal("中級パズルのプロ", "CgkIxf6K1KAMEAIQCg"),
         ProHard("上級パズルのプロ", "CgkIxf6K1KAMEAIQCw");
+        //(実績名,実績コード(ディベロッパーコンソールにあり))
         public String name;
         public String id;
 
@@ -50,12 +55,14 @@ public class GameClientManager {
     public static void submitScore(GoogleApiClient apiClient, Ranking ranking, int score) {
         if (apiClient.isConnected()) {
             Games.Leaderboards.submitScore(apiClient, ranking.id, score);
+            //ランキングに送るデータ
         }
     }
 
     public static void unlockMedal(GoogleApiClient apiClient, Medal medal) {
         if (apiClient.isConnected()) {
             Games.Achievements.unlock(apiClient, medal.id);
+            //実績解除のためのコード
         }
     }
 
@@ -64,6 +71,8 @@ public class GameClientManager {
             activity.startActivityForResult(
                     Games.Leaderboards.getLeaderboardIntent(apiClient, ranking.id),
                     CODE_RANKING
+                    //ランキングに送るデータ
+
             );
         }
     }
@@ -71,6 +80,7 @@ public class GameClientManager {
     public static void intentMedal(Activity activity, GoogleApiClient apiClient) {
         if (apiClient.isConnected()) {
             activity.startActivityForResult(Games.Achievements.getAchievementsIntent(apiClient), CODE_MEDAL);
+            //実績解除のためのコード
         }
     }
 

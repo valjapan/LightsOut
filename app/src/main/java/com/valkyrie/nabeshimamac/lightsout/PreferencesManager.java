@@ -8,8 +8,9 @@ import android.content.SharedPreferences;
  */
 public class PreferencesManager {
     private static PreferencesManager instance;
-
     private SharedPreferences sharedPreferences;
+
+    //ShardPreferencesの保存部分
 
     private PreferencesManager(Context context) {
         sharedPreferences = context.getSharedPreferences("LightsOuts", Context.MODE_PRIVATE);
@@ -25,6 +26,7 @@ public class PreferencesManager {
     public boolean isTutorialEnd() {
         return sharedPreferences.getBoolean("tutorial", false);
     }
+    //２回目以降チュートリアル画面に行かないように
 
     public void checkTutorialEnd() {
         sharedPreferences.edit().putBoolean("tutorial", true).apply();

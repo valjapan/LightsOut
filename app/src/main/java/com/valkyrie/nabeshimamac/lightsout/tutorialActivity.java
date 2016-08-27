@@ -12,7 +12,7 @@ public class TutorialActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     Button button;
 
-
+    //チュートリアル部分
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,7 +34,7 @@ public class MakeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_make);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("新規問題作成・編集");
+        setTitle("New and Edited");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,13 +42,16 @@ public class MakeActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //ツールバーのプロパティ
 
         detailText = (TextView)findViewById(R.id.detaleTextView);
+        //盤面の情報のテキスト
 
         spinner = (Spinner)findViewById(R.id.spinner);
         final ArrayAdapter spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+        //盤面入れ替えのスピナーの部分
 
         lightsOutEachView = (LightsOutView) findViewById(R.id.lightsOutView2);
         lightsOutEachView.setMode(LightsOutView.MODE_MAKE);
@@ -80,11 +83,10 @@ public class MakeActivity extends AppCompatActivity {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
         } else {
-            // 編集
+            // 編集（新規じゃない）
             Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
             editText.setText("" + question.title);
             spinner.setEnabled(false);
@@ -107,6 +109,7 @@ public class MakeActivity extends AppCompatActivity {
         mi.inflate(R.menu.menu_make, menu);
         return super.onCreateOptionsMenu(menu);
     }
+    //ツールバーの右側のアイコン
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -116,13 +119,16 @@ public class MakeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    //セーブアイコンのみ
 
     private void save() {
         Question question = new Question();
         if (TextUtils.isEmpty(editText.getText())){
             question.title = "無題";
+            //もしtitleに何も入力しないでセーブしたら『無題』と入る
         }else {
             question.title = editText.getText().toString();
+            //titleに何か入っていたらString型で配置
         }
         // 現在日時の取得
         question.board = lightsOutEachView.getFlagsToString();
@@ -132,6 +138,7 @@ public class MakeActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         finish();
     }
+    //save部分
 
     private void updateDetailsText() {
         String board = lightsOutEachView.getFlagsToString();
@@ -141,6 +148,7 @@ public class MakeActivity extends AppCompatActivity {
                 emptyCount++;
             }
         }
+        //ListViewに表示させる内容
         detailText.setText("盤面のサイズ : "+ lightsOutEachView.getBoardSize() +"  空のマス : "+ emptyCount);
     }
 
@@ -162,7 +170,7 @@ public class MakeActivity extends AppCompatActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //  自動生成されたメソッド・スタブ
+                            // 自動生成されたメソッド・スタブ
                         }
                     })
                     .show();

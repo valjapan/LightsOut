@@ -27,9 +27,6 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     LinearLayout modeLayout;
     RelativeLayout rankLayout;
-//    private Handler mHandler = new Handler();
-//    private ScheduledExecutorService mScheduledExecutor;
-//    private TextView mLblMeasuring;
 
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;

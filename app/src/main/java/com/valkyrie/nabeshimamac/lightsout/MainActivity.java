@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 return true;
             }
         });
+        //IDの関連付け
+
 
 
         clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
@@ -102,8 +104,11 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 return true;
             }
         });
+        //IDの関連付け
+
 
         showStartModal();
+        //showStartModelを起動
 
         prePoints = new ArrayList<>();
         long questionId = getIntent().getLongExtra("question_id", -1);
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                     if (question.board.charAt(i * question.size + j) == '1') {
                         prePoints.add(new Point(i, j));
                     }
+                    //Ranking実装部分
                 }
             }
             lightsOutView.setBoardSize(question.size);
@@ -159,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             lightsOutView.checkFlag(point.x, point.y);
         }
         lightsOutView.updateFlags();
+        //パネルONかOFFになってるかの確認
     }
 
     @Override
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         MenuInflater mi = getMenuInflater();
         mi.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
+        //ツールバーの呼び出し？
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -173,27 +181,33 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             case R.id.menu_reset:
                 reset();
                 break;
+            //ツールバーのリセット部分
             case R.id.menu_info:
                 Intent intent = new Intent(this, TutorialActivity.class);
                 startActivity(intent);
                 break;
+            //ツールバーのチュートリアル部分
         }
         return super.onOptionsItemSelected(item);
+        //それらを表示させるための部分
     }
 
     public void goRetly(View v) {
         finish();
     }
+    //リトライ(そのまんま)
 
     public void goRank(View v) {
         GameClientManager.intentRanking(this, apiClient, ranking);
     }
+    //ランキングを起動させる
 
-    public void reset() { //Resetの内容
+    public void reset() {
         counterTextView.setText("00");
         counterTextView.setTextColor(Color.BLACK);
         lightsOutView.resetGame();
         loadPrePoints();
+        //Resetの内容
     }
 
     @Override
@@ -201,18 +215,20 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         super.onResume();
         if (isPlaying) {
             startTimer();
+            //途中に何かしらで止めていた時にプレイさせる場所
         }
     }
 
     public void onPause() {
         super.onPause();
-//        mp.stop();
         stopTimer();
+        //タブやホームに移った時にする場所
     }
 
     @Override
     public void onButtonTapped(int line, int row, int tapCount) {
         counterTextView.setText(String.format("%1$02d", tapCount));
+        //フォーマットによってタップカウントが1から01にするようにした
     }
 
     @Override
@@ -261,6 +277,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 playGame();
             }
         });
+        //Play開始前の画面
     }
 
     private void showClearModal() {
@@ -285,6 +302,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         this.total.setText("Total:  " + total);
 
         GameClientManager.submitScore(apiClient, ranking, total);
+        //Play開始後の画面
     }
 
 
@@ -293,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         startedAt = System.currentTimeMillis();
         startTimer();
         isPlaying = true;
+        //Play中
     }
 
     public void startTimer() {
@@ -316,13 +335,15 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 });
             }
         }, 0, 10);
-    }//Timerの処理部分
+        //Timerの処理部分
+    }
 
     private void stopTimer() {
         if (timer != null) {
             timer.cancel();
             timer = null;
         }
+        //Timerを止める時の処理部分
     }
 
     @Override
@@ -330,11 +351,12 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         super.onStart();
         apiClient.registerConnectionCallbacks(this);
         apiClient.registerConnectionFailedListener(this);
-        // 今回は画面が表示されるたびに必ず接続させる
+        // 画面が表示されるたびに必ず接続させる
         if (!apiClient.isConnected() || !apiClient.hasConnectedApi(Games.API)) {
             apiClient.connect();
             Log.d(TitleActivity.class.getSimpleName(), "Connecting Google play");
         }
+        //Googleログインの部分
     }
 
     @Override
@@ -342,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         apiClient.unregisterConnectionCallbacks(this);
         apiClient.unregisterConnectionFailedListener(this);
         super.onStop();
+        //appがバグで落ちた時にバグを送信する
     }
 
     @Override

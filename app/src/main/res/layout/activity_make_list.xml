@@ -43,7 +43,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
                 android:onClick="make"
-                android:text="新規作成"
+                android:text="Create New"
                 android:layout_margin="16dp" />
 
         </LinearLayout>

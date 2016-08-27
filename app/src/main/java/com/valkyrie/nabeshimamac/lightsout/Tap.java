@@ -14,10 +14,12 @@ public class Tap {
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
         soundId = soundPool.load(context,R.raw.tap01,1);
     }
+    //Tapされた時になる効果音
 
     public void play() {
         soundPool.play(soundId,1.0f,1.0f,0,0,1.0f);
     }
+
     public void repeatPlay(int repeat){
         int count =0;
         while (count < repeat) {
@@ -29,6 +31,5 @@ public class Tap {
                 e.printStackTrace();
             }
         }
-
     }
 }

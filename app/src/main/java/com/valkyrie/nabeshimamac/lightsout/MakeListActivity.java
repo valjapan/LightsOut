@@ -24,7 +24,7 @@ public class MakeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_list);
 
-        setTitle("作成問題一覧");
+        setTitle("Create mode");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,6 +59,7 @@ public class MakeListActivity extends AppCompatActivity {
     public void make(View v){
         Intent intent = new Intent(this,MakeActivity.class);
         startActivityForResult(intent, 10);
+        //新規作成
     }
 
     @Override

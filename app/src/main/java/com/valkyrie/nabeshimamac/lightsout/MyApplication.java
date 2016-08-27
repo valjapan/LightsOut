@@ -17,6 +17,8 @@ public class MyApplication extends Application {
     private GoogleApiClient googleApiClient;
     public FirebaseAnalytics analytics;
 
+    //GoogleGame、analytics実装クラス
+
     @Override
     public void onCreate() {
         super.onCreate();
