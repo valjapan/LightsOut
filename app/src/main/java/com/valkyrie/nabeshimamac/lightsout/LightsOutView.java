@@ -2,8 +2,10 @@ package com.valkyrie.nabeshimamac.lightsout;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -232,10 +234,12 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     private void setTapColor(int line, int row) {
         if (flag[line][row]) {
-            btns[line][row].setBackground(getContext().getDrawable(R.drawable.red_on_view));
+            Drawable drawablePink = ResourcesCompat.getDrawable(getResources(),R.drawable.red_on_view,null);
+            btns[line][row].setBackground(drawablePink);
             //押されたらピンク
         } else {
-            btns[line][row].setBackground(getContext().getDrawable(R.drawable.blue_on_view));
+            Drawable drawableBlue = ResourcesCompat.getDrawable(getResources(),R.drawable.blue_on_view,null);
+            btns[line][row].setBackground(drawableBlue);
             //押されていなかったら青
         }
     }
