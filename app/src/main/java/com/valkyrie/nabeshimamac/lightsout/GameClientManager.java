@@ -38,7 +38,7 @@ public class GameClientManager {
         FirstMakePuzzlePlay("自作Lights Outをプレイしよう", "CgkIxf6K1KAMEAIQDA"),
         FirstEazy("初級初クリア", "CgkIxf6K1KAMEAIQBQ"),
         FirstNomal("中級初クリア", "CgkIxf6K1KAMEAIQBg"),
-        FirstHard("上級初クリア", "CgkIxf6K1KAMEAIQB"),
+        FirstHard("上級初クリア", "CgkIxf6K1KAMEAIQBw"),
         ProEazy("初級パズルのプロ", "CgkIxf6K1KAMEAIQCQ"),
         ProNomal("中級パズルのプロ", "CgkIxf6K1KAMEAIQCg"),
         ProHard("上級パズルのプロ", "CgkIxf6K1KAMEAIQCw");
