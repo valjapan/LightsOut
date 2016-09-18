@@ -14,6 +14,7 @@
     <string-array name="size_spinner">
         <item>5×5</item>
         <item>6×6</item>
+        <item>5×4</item>
     </string-array>
 
 </resources>

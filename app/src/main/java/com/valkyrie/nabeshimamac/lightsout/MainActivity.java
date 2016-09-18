@@ -133,12 +133,14 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                     //Ranking実装部分
                 }
             }
-            lightsOutView.setBoardSize(question.size);
+            lightsOutView.setBoardHeight(question.size);
+            lightsOutView.setBoardWidth(question.size);
         } else {
             if (mode == 0) {
                 // 初級
                 ranking = GameClientManager.Ranking.Easy;
-                lightsOutView.setBoardSize(5);
+                lightsOutView.setBoardHeight(5);
+                lightsOutView.setBoardWidth(5);
             } else if (mode == 1) {
                 // 中級
                 for (int i = 0; i < 8; i++) {

@@ -18,7 +18,8 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     //MODE_GAME(プレイ専用)だったら0
     //MODE_MAKE(作ってからそれをプレイする場合)だったら1
 
-    private int boardSize = 6;
+    private int boardHeight = 6;
+    private int boardWidth = 6;
     //デフォルトはマス目が6×6
 
     private Button[][] btns;
@@ -84,10 +85,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     public void resetGame() {
         tapCount = 0;
-        flag = new boolean[boardSize][boardSize];
+        flag = new boolean[boardHeight][boardWidth];
 
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
                 btns[i][j].setBackgroundColor(blue);
                 //全てを青色に設置
                 flag[i][j] = false;
@@ -105,7 +106,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 // 左
                 checkFlag(line - 1, row);
             }
-            if (line < boardSize - 1) {
+            if (line < boardWidth - 1) {
                 // 右
                 checkFlag(line + 1, row);
             }
@@ -113,7 +114,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 // 上
                 checkFlag(line, row - 1);
             }
-            if (row < boardSize - 1) {
+            if (row < boardHeight - 1) {
                 // 下
                 checkFlag(line, row + 1);
             }
@@ -139,17 +140,17 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     private void loadButtons() {
         removeAllViews();
-        btns = new Button[boardSize][boardSize];
+        btns = new Button[boardHeight][boardWidth];
         int margin = 8;
         LayoutParams columnLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
         LayoutParams rowLayoutParams = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         rowLayoutParams.setMargins(margin, margin, margin, margin);
         //ボタンの配置、プロパティの設定
 
-        for (int i = 0; i < boardSize; i++) {
+        for (int i = 0; i < boardHeight; i++) {
             LinearLayout rowLayout = new LinearLayout(getContext());
             rowLayout.setOrientation(HORIZONTAL);
-            for (int j = 0; j < boardSize; j++) {
+            for (int j = 0; j < boardWidth; j++) {
                 final Point point = new Point(i, j);
                 btns[i][j] = new Button(getContext());
                 btns[i][j].setText("");
@@ -179,8 +180,8 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     public String getFlagsToString() {
         //押されているかどうかの設置
         String data = "";
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
                 if (flag[i][j]) {
                     data = data + "1";
                     //押されていれば1で0と1の文字列にする
@@ -194,34 +195,43 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void setFlagsFromString(String flagPositions) {
-        if (flagPositions.length() != boardSize * boardSize) {
+        if (flagPositions.length() != boardHeight * boardWidth) {
             return;
         }
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                flag[i][j] = flagPositions.charAt(i * boardSize + j) == '1';
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
+                flag[i][j] = flagPositions.charAt(i * boardHeight + j * boardWidth ) == '1';
             }
         }
         //boardSizeの配置
     }
 
-    public void setBoardSize(int boardSize) {
-        this.boardSize = boardSize;
+    public void setBoardHeight(int boardHeight) {
+        this.boardHeight = boardHeight;
         loadButtons();
         resetGame();
         //boardSizeの配置
 
     }
 
-    public int getBoardSize() {
-        return boardSize;
+    public void setBoardWidth(int boardWidth){
+        this.boardWidth = boardWidth;
+        loadButtons();
+        resetGame();
+        //boardWidth
+    }
+
+    public int getBoardHeight() {
+        return boardHeight;
     }
     //boardSizeの配置
 
+    public int getBoardWidth(){ return  boardWidth;}
+
 
     public void updateFlags() {
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
                 if (flag[i][j]) {
                     btns[i][j].setBackgroundColor(pink);
                 } else {
@@ -245,8 +255,8 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     private boolean judgeClear() {
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
                 if (!flag[i][j]) {
                     return false;
                 }
