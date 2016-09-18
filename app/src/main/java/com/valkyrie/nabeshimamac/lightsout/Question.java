@@ -13,8 +13,10 @@ public class Question extends Model {
     public String title;
     @Column(name = "Board")
     public String board;
-    @Column(name = "Size")
-    public int size;
+    @Column(name = "SizeHeight")
+    public int sizeHeight;
+    @Column(name = "SizeWidth")
+    public int sizeWidth;
     @Column(name = "CreatedAt")
     public Date createdAt;
 
@@ -22,11 +24,12 @@ public class Question extends Model {
         super();
     }
 
-    public Question(String title, String board, int size, Date createdAt) {
+    public Question(String title, String board, int sizeHeight,int sizeWidth ,Date createdAt) {
         super();
         this.title = title;
         this.board = board;
-        this.size = size;
+        this.sizeHeight = sizeHeight;
+        this.sizeWidth = sizeWidth;
         this.createdAt = createdAt;
     }
 }

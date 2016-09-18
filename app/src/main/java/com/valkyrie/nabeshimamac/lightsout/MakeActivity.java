@@ -29,7 +29,7 @@ public class MakeActivity extends AppCompatActivity{
     private LightsOutView lightsOutEachView;
     EditText editText;
     TextView detailText;
-    Spinner spinner;
+    Spinner spinnerHeight, spinnerWidth;
     long questionId;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -56,10 +56,12 @@ public class MakeActivity extends AppCompatActivity{
         detailText = (TextView) findViewById(R.id.detaleTextView);
         //盤面の情報のテキスト
 
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinnerHeight = (Spinner) findViewById(R.id.spinner);
+        spinnerWidth = (Spinner) findViewById(R.id.spinner2);
         final ArrayAdapter spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        spinnerHeight.setAdapter(spinnerAdapter);
+        spinnerWidth.setAdapter(spinnerAdapter);
         //盤面入れ替えのスピナーの部分
 
         lightsOutEachView = (LightsOutView) findViewById(R.id.lightsOutView2);
@@ -78,20 +80,35 @@ public class MakeActivity extends AppCompatActivity{
 
         questionId = getIntent().getLongExtra("question_id", -1);
         if (questionId == -1) {
-            spinner.setEnabled(true);
+            spinnerHeight.setEnabled(true);
+            spinnerWidth.setEnabled(true);
             // 新規作成
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spinnerHeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (position == 0) {
-                        lightsOutEachView.setBoardHeight(5);
-                        lightsOutEachView.setBoardWidth(5);
+                        lightsOutEachView.setBoardHeight(4);
                     } else if (position == 1){
-                        lightsOutEachView.setBoardHeight(6);
-                        lightsOutEachView.setBoardWidth(6);
-                    } else if (position == 2){
                         lightsOutEachView.setBoardHeight(5);
+                    } else if (position == 2){
+                        lightsOutEachView.setBoardHeight(6);
+                    }
+                    updateDetailsText();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+            spinnerWidth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) {
                         lightsOutEachView.setBoardWidth(4);
+                    } else if (position == 1){
+                        lightsOutEachView.setBoardWidth(5);
+                    } else if (position == 2){
+                        lightsOutEachView.setBoardWidth(6);
                     }
                     updateDetailsText();
                 }
@@ -104,15 +121,27 @@ public class MakeActivity extends AppCompatActivity{
             // 編集（新規じゃない）
             Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
             editText.setText("" + question.title);
-            spinner.setEnabled(false);
-            if (question.size == 5) {
-                spinner.setSelection(0, false);
-            } else if(question.size == 6) {
-                spinner.setSelection(1, false);
-            } else {
-                spinner.setSelection(2, false);
+            spinnerHeight.setEnabled(false);
+            if (question.sizeHeight == 4) {
+                spinnerHeight.setSelection(0, false);
+            } else if(question.sizeHeight == 5) {
+                spinnerHeight.setSelection(1, false);
+            } else if (question.sizeHeight == 6){
+                spinnerHeight.setSelection(2, false);
             }
-            lightsOutEachView.setBoardHeight(question.size);
+
+            //TODO よくわからないです
+            spinnerWidth.setEnabled(false);
+            if (question.sizeWidth == 4) {
+                spinnerWidth.setSelection(0, false);
+            } else if(question.sizeWidth == 5) {
+                spinnerWidth.setSelection(1, false);
+            } else if (question.sizeWidth == 6){
+                spinnerWidth.setSelection(2, false);
+            }
+
+            lightsOutEachView.setBoardHeight(question.sizeHeight);
+            lightsOutEachView.setBoardWidth(question.sizeWidth);
             lightsOutEachView.setFlagsFromString(question.board);
             lightsOutEachView.updateFlags();
         }
@@ -153,8 +182,8 @@ public class MakeActivity extends AppCompatActivity{
         }
         // 現在日時の取得
         question.board = lightsOutEachView.getFlagsToString();
-        question.size = lightsOutEachView.getBoardHeight();
-        question.size = lightsOutEachView.getBoardWidth();
+        question.sizeHeight= lightsOutEachView.getBoardHeight();
+        question.sizeWidth = lightsOutEachView.getBoardWidth();
         question.createdAt = new Date();
         question.save();
         setResult(RESULT_OK);

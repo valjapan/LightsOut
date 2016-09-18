@@ -125,16 +125,16 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             ranking = GameClientManager.Ranking.Original;
             Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
             String data = "";
-            for (int i = 0; i < question.size; i++) {
-                for (int j = 0; j < question.size; j++) {
-                    if (question.board.charAt(i * question.size + j) == '1') {
+            for (int i = 0; i < question.sizeHeight; i++) {
+                for (int j = 0; j < question.sizeWidth; j++) {
+                    if (question.board.charAt(i * question.sizeHeight + j * question.sizeWidth) == '1') {
                         prePoints.add(new Point(i, j));
                     }
                     //Ranking実装部分
                 }
             }
-            lightsOutView.setBoardHeight(question.size);
-            lightsOutView.setBoardWidth(question.size);
+            lightsOutView.setBoardHeight(question.sizeHeight);
+            lightsOutView.setBoardWidth(question.sizeWidth);
         } else {
             if (mode == 0) {
                 // 初級
