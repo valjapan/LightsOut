@@ -95,12 +95,16 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
             editText.setText("" + question.title);
             widthSpinner.setEnabled(false);
+            heightSpinner.setEnabled(false);
             // 4から8の値が入るようにする
             widthSpinner.setSelection(question.width - 4, false);
+            heightSpinner.setSelection(question.height - 4, false);
 
             lightsOutEachView.setBoardWidth(question.width);
             lightsOutEachView.setBoardHeight(question.height);
+
             lightsOutEachView.setFlagsFromString(question.board);
+
             lightsOutEachView.updateFlags();
         }
         updateDetailsText();
