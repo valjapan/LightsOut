@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="8dp"
                 android:layout_gravity="center">
 
                 <TextView
@@ -60,31 +60,27 @@
                     android:layout_gravity="center"
                     android:text="Size" />
 
+
                 <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
+                    android:id="@+id/spinnerWidth"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
                     android:focusable="false"
-                    android:spinnerMode="dropdown"
-                    android:layout_weight="1" />
+                    android:spinnerMode="dropdown" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="×"
-                    android:id="@+id/textView3"
-                    android:layout_gravity="center"
-                    android:textSize="24dp" />
+                    android:text="×" />
 
                 <Spinner
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner2"
+                    android:id="@+id/spinnerHeight"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:layout_weight="1" />
+                    android:layout_marginLeft="16dp" />
 
             </LinearLayout>
 

@@ -54,7 +54,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
 
         viewHolder.deleteImageView.setTag(position);
         viewHolder.editImageView.setTag(position);
-        viewHolder.detailTextView.setText("盤面のサイズ : " + item.sizeHeight + "×" +item.sizeWidth + " 空のマス : " + emptyCount);
+        viewHolder.detailTextView.setText("盤面のサイズ : " + item.width + "×" +item.height + " 空のマス : " + emptyCount);
         //盤面の情報
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm'('E')'"); // 日
         viewHolder.dateTextView.setText(simpleDateFormat.format(item.createdAt));

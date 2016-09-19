@@ -25,11 +25,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.Date;
 
-public class MakeActivity extends AppCompatActivity{
+public class MakeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private LightsOutView lightsOutEachView;
     EditText editText;
     TextView detailText;
-    Spinner spinnerHeight, spinnerWidth;
+    Spinner widthSpinner , heightSpinner;
     long questionId;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -56,12 +56,17 @@ public class MakeActivity extends AppCompatActivity{
         detailText = (TextView) findViewById(R.id.detaleTextView);
         //盤面の情報のテキスト
 
-        spinnerHeight = (Spinner) findViewById(R.id.spinner);
-        spinnerWidth = (Spinner) findViewById(R.id.spinner2);
-        final ArrayAdapter spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerHeight.setAdapter(spinnerAdapter);
-        spinnerWidth.setAdapter(spinnerAdapter);
+        widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
+        final ArrayAdapter widthAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
+
+        widthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        widthSpinner.setAdapter(widthAdapter);
+
+        heightSpinner = (Spinner) findViewById(R.id.spinnerHeight);
+        final ArrayAdapter heightAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
+        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        heightSpinner.setAdapter(heightAdapter);
+
         //盤面入れ替えのスピナーの部分
 
         lightsOutEachView = (LightsOutView) findViewById(R.id.lightsOutView2);
@@ -80,68 +85,21 @@ public class MakeActivity extends AppCompatActivity{
 
         questionId = getIntent().getLongExtra("question_id", -1);
         if (questionId == -1) {
-            spinnerHeight.setEnabled(true);
-            spinnerWidth.setEnabled(true);
+            widthSpinner.setEnabled(true);
             // 新規作成
-            spinnerHeight.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) {
-                        lightsOutEachView.setBoardHeight(4);
-                    } else if (position == 1){
-                        lightsOutEachView.setBoardHeight(5);
-                    } else if (position == 2){
-                        lightsOutEachView.setBoardHeight(6);
-                    }
-                    updateDetailsText();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-            spinnerWidth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) {
-                        lightsOutEachView.setBoardWidth(4);
-                    } else if (position == 1){
-                        lightsOutEachView.setBoardWidth(5);
-                    } else if (position == 2){
-                        lightsOutEachView.setBoardWidth(6);
-                    }
-                    updateDetailsText();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
+            widthSpinner.setOnItemSelectedListener(this);
+            heightSpinner.setEnabled(true);
+            heightSpinner.setOnItemSelectedListener(this);
         } else {
             // 編集（新規じゃない）
             Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
             editText.setText("" + question.title);
-            spinnerHeight.setEnabled(false);
-            if (question.sizeHeight == 4) {
-                spinnerHeight.setSelection(0, false);
-            } else if(question.sizeHeight == 5) {
-                spinnerHeight.setSelection(1, false);
-            } else if (question.sizeHeight == 6){
-                spinnerHeight.setSelection(2, false);
-            }
+            widthSpinner.setEnabled(false);
+            // 4から8の値が入るようにする
+            widthSpinner.setSelection(question.width - 4, false);
 
-            //TODO よくわからないです
-            spinnerWidth.setEnabled(false);
-            if (question.sizeWidth == 4) {
-                spinnerWidth.setSelection(0, false);
-            } else if(question.sizeWidth == 5) {
-                spinnerWidth.setSelection(1, false);
-            } else if (question.sizeWidth == 6){
-                spinnerWidth.setSelection(2, false);
-            }
-
-            lightsOutEachView.setBoardHeight(question.sizeHeight);
-            lightsOutEachView.setBoardWidth(question.sizeWidth);
+            lightsOutEachView.setBoardWidth(question.width);
+            lightsOutEachView.setBoardHeight(question.height);
             lightsOutEachView.setFlagsFromString(question.board);
             lightsOutEachView.updateFlags();
         }
@@ -182,8 +140,8 @@ public class MakeActivity extends AppCompatActivity{
         }
         // 現在日時の取得
         question.board = lightsOutEachView.getFlagsToString();
-        question.sizeHeight= lightsOutEachView.getBoardHeight();
-        question.sizeWidth = lightsOutEachView.getBoardWidth();
+        question.width = lightsOutEachView.getBoardWidth();
+        question.height = lightsOutEachView.getBoardHeight();
         question.createdAt = new Date();
         question.save();
         setResult(RESULT_OK);
@@ -200,7 +158,7 @@ public class MakeActivity extends AppCompatActivity{
             }
         }
         //ListViewに表示させる内容
-        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardHeight()+ "×" +lightsOutEachView.getBoardWidth() + "  空のマス : " + emptyCount);
+        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth()+ "×" +lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
 
     @Override
@@ -270,6 +228,24 @@ public class MakeActivity extends AppCompatActivity{
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view , int position, long id){
+        switch (parent.getId()){
+            case R.id.spinnerWidth:
+                lightsOutEachView.setBoardWidth(position + 4);
+                break;
+            case R.id.spinnerHeight:
+                lightsOutEachView.setBoardHeight(position + 4);
+                break;
+        }
+        updateDetailsText();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent){
+
     }
 
 }

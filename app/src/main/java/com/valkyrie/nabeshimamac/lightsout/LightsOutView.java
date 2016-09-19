@@ -18,8 +18,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     //MODE_GAME(プレイ専用)だったら0
     //MODE_MAKE(作ってからそれをプレイする場合)だったら1
 
-    private int boardHeight = 6;
     private int boardWidth = 6;
+    private int boardHeight = 6;
+
     //デフォルトはマス目が6×6
 
     private Button[][] btns;
@@ -204,6 +205,13 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
             }
         }
         //boardSizeの配置
+    }
+
+    public void setBoardSize(int width, int height) {
+        this.boardWidth = width;
+        this.boardHeight = height;
+        loadButtons();
+        resetGame();
     }
 
     public void setBoardHeight(int boardHeight) {
