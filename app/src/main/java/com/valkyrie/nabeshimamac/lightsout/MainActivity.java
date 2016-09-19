@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             String data = "";
             for (int i = 0; i < question.height; i++) {
                 for (int j = 0; j < question.width; j++) {
-                    if (question.board.charAt(i * question.height + j) == '1') {
+                    if (question.board.charAt(i * question.width + j) == '1') {
                         prePoints.add(new Point(i, j));
                     }
                     //Ranking実装部分
