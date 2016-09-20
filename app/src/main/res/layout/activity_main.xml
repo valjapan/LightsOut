@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#8000"
-        android:padding="24dp"
+        android:padding="20dp"
         android:visibility="invisible">
 
         <TextView
@@ -127,14 +127,14 @@
 
         <TextView
             android:id="@+id/messege"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="メッセージ"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
-            android:textSize="25dp" />
+            android:textSize="28dp"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/modalButton"

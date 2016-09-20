@@ -140,12 +140,14 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             if (mode == 0) {
                 // 初級
                 ranking = GameClientManager.Ranking.Easy;
-                lightsOutView.setBoardHeight(5);
-                lightsOutView.setBoardWidth(5);
+                lightsOutView.setBoardHeight(4);
+                lightsOutView.setBoardWidth(4);
             } else if (mode == 1) {
                 // 中級
                 for (int i = 0; i < 8; i++) {
-                    prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
+                    lightsOutView.setBoardHeight(5);
+                    lightsOutView.setBoardWidth(5);
+                    prePoints.add(new Point(random.nextInt(5), random.nextInt(5)));
                 }
                 ranking = GameClientManager.Ranking.Normal;
             } else if (mode == 2) {
@@ -283,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
         title.setText("さぁ始めよう！");
-        messege.setText("全て赤いパネルにしてください。\nStartでゲーム開始です。");
+        messege.setText("全て赤いパネルにしよう。\nStartでゲーム開始です。\n(タップ音に注意！)");
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -107,7 +107,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 // 左
                 checkFlag(line - 1, row);
             }
-            if (line < boardWidth - 1) {
+            if (line < boardHeight - 1) {
                 // 右
                 checkFlag(line + 1, row);
             }
@@ -115,7 +115,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 // 上
                 checkFlag(line, row - 1);
             }
-            if (row < boardHeight - 1) {
+            if (row < boardWidth - 1) {
                 // 下
                 checkFlag(line, row + 1);
             }

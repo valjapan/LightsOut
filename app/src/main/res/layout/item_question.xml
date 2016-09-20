@@ -48,24 +48,24 @@
         android:layout_gravity="center_vertical">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
             android:id="@+id/imageEdit"
             android:layout_gravity="center|right"
             android:src="@drawable/ic_edit_black_24px"
             android:adjustViewBounds="true"
             android:padding="8dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
             android:id="@+id/imageDelete"
             android:layout_gravity="center|right"
             android:src="@drawable/ic_delete_black_24px"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"
+            android:layout_height="50dp" />
     </LinearLayout>
 
 </LinearLayout>

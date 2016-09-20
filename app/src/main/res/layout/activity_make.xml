@@ -44,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:textSize="15dp"
-                android:hint="タイトル名を入力"/>
+                android:hint="タイトル名を入力"
+                android:imeOptions="actionDone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
