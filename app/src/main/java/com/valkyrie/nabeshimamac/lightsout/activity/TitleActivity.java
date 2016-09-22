@@ -3,8 +3,6 @@ package com.valkyrie.nabeshimamac.lightsout.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +24,7 @@ import com.valkyrie.nabeshimamac.lightsout.BuildConfig;
 import com.valkyrie.nabeshimamac.lightsout.MyApplication;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
+import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 
 /**
  * title画面のActivity
@@ -41,9 +40,6 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
-
-    private final int TWITTER_ID = 0;
-    private final String[] sharePackages = {"com.twitter.android"};
 
 
     @Override
@@ -76,21 +72,12 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
             findViewById(R.id.shareTwitter).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isShareAppInstall(TWITTER_ID)) {
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_SEND);
-                        intent.setPackage(sharePackages[TWITTER_ID]);
-                        intent.setType("image/png");
-                        intent.putExtra(Intent.EXTRA_TEXT,
-                                "新感覚シンプルパズルゲーム【LightsOut】。" +
-                                        "\nルール は簡単、押したパネルとその上下左右のボタンの色が反転する。" +
-                                        "全てのパネルを水色からピンクにすればゲームクリアだ。" +
-                                        "\n君もチャレンジしてみないか。 #LightsOutGame" +
-                                        "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
-                        startActivity(intent);
-                    } else {
-                        shareAppDl(TWITTER_ID);
-                    }
+                    ShareManager.shareTwitter(TitleActivity.this,
+                            "新感覚シンプルパズルゲーム【LightsOut】。" +
+                            "\nルール は簡単、押したパネルとその上下左右のボタンの色が反転する。" +
+                            "全てのパネルを水色からピンクにすればゲームクリアだ。" +
+                            "\n君もチャレンジしてみないか。 #LightsOutGame" +
+                            "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
                 }
             });
     }
@@ -238,24 +225,5 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
             return true;
         }
         return false;
-    }
-
-
-    // アプリがインストールされているかチェック
-    private Boolean isShareAppInstall(int shareId) {
-        try {
-            PackageManager pm = getPackageManager();
-            pm.getApplicationInfo(sharePackages[shareId], PackageManager.GET_META_DATA);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
-    // アプリが無かったのでGooglePalyに飛ばす
-    private void shareAppDl(int shareId) {
-        Uri uri = Uri.parse("market://details?id=" + sharePackages[shareId]);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
     }
 }

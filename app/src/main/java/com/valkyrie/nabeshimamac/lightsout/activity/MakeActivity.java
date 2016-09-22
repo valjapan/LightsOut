@@ -149,7 +149,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                         }
                     })
                     .show();
-
             return true;
         }
         return false;

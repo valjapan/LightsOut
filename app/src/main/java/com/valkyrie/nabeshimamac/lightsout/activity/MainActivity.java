@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements
         LightsOutView.LightsOutListener,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
-    private static final String[] sharePackages = {"com.twitter.android"};
     private static final String KEY_QUESTION_ID = "question_id";
     private static final String KEY_SHARED_QUESTION = "shared_question";
 
@@ -478,21 +475,5 @@ public class MainActivity extends AppCompatActivity implements
         return super.onKeyDown(keyCode, event);
     }
 
-    // アプリがインストールされているかチェック
-    private Boolean isShareAppInstall(int shareId) {
-        try {
-            PackageManager pm = getPackageManager();
-            pm.getApplicationInfo(sharePackages[shareId], PackageManager.GET_META_DATA);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
 
-    // アプリが無かったらGooglePlayに飛ばす
-    private void shareAppDl(int shareId) {
-        Uri uri = Uri.parse("market://details?id=" + sharePackages[shareId]);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
-    }
 }
