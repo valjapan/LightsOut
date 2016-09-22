@@ -1,0 +1,1 @@
+ALTER TABLE Questions ADD COLUMN shared_key CHAR;

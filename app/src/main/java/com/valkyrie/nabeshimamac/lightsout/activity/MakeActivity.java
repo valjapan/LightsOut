@@ -1,8 +1,8 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,29 +20,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.activeandroid.query.Select;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
-import com.valkyrie.nabeshimamac.lightsout.model.Question;
 import com.valkyrie.nabeshimamac.lightsout.R;
-
-import java.util.Date;
+import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
+import com.valkyrie.nabeshimamac.lightsout.model.Question;
+import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
+import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 /**
  * Createモードの新規作成・編集時のActivity
  */
 public class MakeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private LightsOutView lightsOutEachView;
-    EditText editText;
-    TextView detailText;
-    Spinner widthSpinner, heightSpinner;
-    long questionId;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    private EditText editText;
+    private TextView detailText;
+    private Spinner widthSpinner, heightSpinner;
+    @NonNull
+    private Question question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +83,9 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         });
         editText = (EditText) findViewById(R.id.titleEditText);
 
-        questionId = getIntent().getLongExtra("question_id", -1);
+        long questionId = getIntent().getLongExtra("question_id", -1);
         if (questionId == -1) {
+            question = new Question();
             widthSpinner.setEnabled(true);
             // 新規作成
             widthSpinner.setOnItemSelectedListener(this);
@@ -99,7 +93,12 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             heightSpinner.setOnItemSelectedListener(this);
         } else {
             // 編集（新規じゃない）
-            Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
+            question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
+            if (question == null) {
+                // 見つからなかった時は、何も処理を行わずに画面を閉じる
+                finish();
+                return;
+            }
             editText.setText("" + question.title);
             widthSpinner.setEnabled(false);
             heightSpinner.setEnabled(false);
@@ -116,10 +115,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         updateDetailsText();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -130,60 +125,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater mi = getMenuInflater();
-        mi.inflate(R.menu.menu_make, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    //ツールバーの右側のアイコン
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_save:
-                save();
-                break;
-            case R.id.menu_share:
-                share();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    //セーブアイコンのみ
-
-    private void save() {
-        Question question = new Question();
-        if (TextUtils.isEmpty(editText.getText())) {
-            question.title = "No Name";
-            //もしtitleに何も入力しないでセーブしたら『No Name』と入る
-        } else {
-            question.title = editText.getText().toString();
-            //titleに何か入っていたらString型で配置
-        }
-        // 現在日時の取得
-        question.board = lightsOutEachView.getFlagsToString();
-        question.width = lightsOutEachView.getBoardWidth();
-        question.height = lightsOutEachView.getBoardHeight();
-        question.createdAt = new Date();
-        question.save();
-        setResult(RESULT_OK);
-        finish();
-    }
-    //save部分
-
-    private void updateDetailsText() {
-        String board = lightsOutEachView.getFlagsToString();
-        int emptyCount = 0;
-        for (int i = 0; i < board.length(); i++) {
-            if (board.charAt(i) == '0') {
-                emptyCount++;
-            }
-        }
-        //ListViewに表示させる内容
-        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×" + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
 
     @Override
@@ -214,48 +155,72 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         return false;
     }
 
-    public void share(){
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mi = getMenuInflater();
+        mi.inflate(R.menu.menu_make, menu);
+        return super.onCreateOptionsMenu(menu);
     }
+    //ツールバーの右側のアイコン
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Make Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.valkyrie.nabeshimamac.lightsout/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                save();
+                return true;
+            case R.id.menu_share:
+                share();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
+    //save部分
+    private void save() {
+        updateQuestion();
+        question.save();
+        setResult(RESULT_OK);
+        finish();
+    }
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Make Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.valkyrie.nabeshimamac.lightsout/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+    private void share() {
+        updateQuestion();
+        SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
+        if (TextUtils.isEmpty(question.sharedKey)) {
+            final String key = FirebaseManager.pushObject("questions", sharedQuestion);
+            // ShareしたことがわかるようにKeyを入れておく
+            question.sharedKey = key;
+            question.save();
+        } else {
+            FirebaseManager.updateObject("questions", question.sharedKey, sharedQuestion);
+        }
+    }
+
+    private void updateQuestion() {
+        if (TextUtils.isEmpty(editText.getText())) {
+            question.title = "No Name";
+            //もしtitleに何も入力しないでセーブしたら『No Name』と入る
+        } else {
+            question.title = editText.getText().toString();
+            //titleに何か入っていたらString型で配置
+        }
+        // 現在日時の取得
+        question.board = lightsOutEachView.getFlagsToString();
+        question.width = lightsOutEachView.getBoardWidth();
+        question.height = lightsOutEachView.getBoardHeight();
+    }
+
+    private void updateDetailsText() {
+        String board = lightsOutEachView.getFlagsToString();
+        int emptyCount = 0;
+        for (int i = 0; i < board.length(); i++) {
+            if (board.charAt(i) == '0') {
+                emptyCount++;
+            }
+        }
+        //ListViewに表示させる内容
+        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×" + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
 
     @Override

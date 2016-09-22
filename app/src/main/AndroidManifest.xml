@@ -32,7 +32,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MakeListActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
@@ -45,9 +45,9 @@
             android:value="data.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="2" />
+            android:value="3" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.valkyrie.nabeshimamac.lightsout.Question" />
+            android:value="com.valkyrie.nabeshimamac.lightsout.model.Question" />
     </application>
 </manifest>

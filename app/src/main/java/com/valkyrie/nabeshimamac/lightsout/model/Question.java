@@ -22,6 +22,8 @@ public class Question extends Model {
     public int height;
     @Column(name = "CreatedAt")
     public Date createdAt;
+    @Column(name = "SharedKey")
+    public String sharedKey;
 
     public Question() {
         super();
@@ -34,5 +36,15 @@ public class Question extends Model {
         this.width = width;
         this.height = height;
         this.createdAt = createdAt;
+    }
+
+    public Question(String title, String board, int width, int height, Date createdAt, String sharedKey) {
+        super();
+        this.title = title;
+        this.board = board;
+        this.width = width;
+        this.height = height;
+        this.createdAt = createdAt;
+        this.sharedKey = sharedKey;
     }
 }
