@@ -50,7 +50,8 @@
             android:name="AA_MODELS"
             android:value="com.valkyrie.nabeshimamac.lightsout.model.Question" />
 
-        <activity android:name=".activity.SharedQuestionListActivity"></activity>
+        <activity android:name=".activity.SharedQuestionListActivity" />
+        <activity android:name=".activity.SettingActivity"></activity>
     </application>
 
 </manifest>

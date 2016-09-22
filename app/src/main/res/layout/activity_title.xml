@@ -30,25 +30,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="100dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="70dp"
+                android:layout_marginTop="40dp"
                 android:text="Large Text"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimary"
-                android:textSize="53dp" />
+                android:textSize="55dp" />
 
             <Button
                 android:id="@+id/PlayEazy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:height="75dp"
+                android:height="60dp"
                 android:background="@drawable/button_design_light_blue"
                 android:onClick="goEazy"
                 android:text="初級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="35dp" />
+                android:textSize="35dp"
+                android:minHeight="40dp" />
 
             <Button
                 android:id="@+id/PlayNomal"
@@ -56,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:height="75dp"
+                android:height="60dp"
                 android:background="@drawable/button_design_light_green"
                 android:onClick="goNomal"
                 android:text="中級"
@@ -69,11 +70,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="40dp"
-                android:height="75dp"
-                android:background="@drawable/button_deaign_orange"
+                android:layout_marginBottom="16dp"
+                android:height="60dp"
+                android:background="@drawable/button_design_orange"
                 android:onClick="goHard"
                 android:text="上級"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textSize="35dp" />
+
+            <Button
+                android:id="@+id/PlayShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="25dp"
+                android:height="60dp"
+                android:background="@drawable/button_design_pink"
+                android:onClick="goShare"
+                android:text="共有問題"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
                 android:textSize="35dp" />
@@ -98,93 +113,19 @@
                     android:onClick="goEdit"
                     android:src="@drawable/ic_edit" />
 
-                <!--<android.support.v4.widget.Space-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1" />-->
-
                 <ImageView
                     android:id="@+id/medalButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="goMedal"
-                    android:src="@drawable/googleplay" />
+                    android:src="@drawable/ic_googleplay" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rankLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#8000"
-        android:padding="@dimen/activity_vertical_margin"
-        android:visibility="invisible">
-
-        <Button
-            android:id="@+id/rankEazy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="200dp"
-            android:height="75dp"
-            android:background="@drawable/button_design_light_blue"
-            android:onClick="goEazyRank"
-            android:text="初級ランキング"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
-            android:textSize="35dp" />
-
-        <Button
-            android:id="@+id/rankNomal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/rankEazy"
-            android:layout_marginTop="16dp"
-            android:height="75dp"
-            android:background="@drawable/button_design_light_green"
-            android:onClick="goNomalRank"
-            android:text="中級ランキング"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
-            android:textSize="35dp" />
-
-        <Button
-            android:id="@+id/rankHard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/rankNomal"
-            android:layout_marginTop="16dp"
-            android:height="75dp"
-            android:background="@drawable/button_deaign_orange"
-            android:onClick="goHardRank"
-            android:text="上級ランキング"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
-            android:textSize="35dp" />
-
-        <Button
-            android:id="@+id/returnTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/rankHard"
-            android:layout_marginTop="16dp"
-            android:height="75dp"
-            android:background="@drawable/button_design_pink"
-            android:onClick="goTitle"
-            android:text="戻る"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
-            android:textSize="35dp" />
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -224,11 +165,92 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/settingLayout"
+        android:id="@+id/rankLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#8000"
-        android:visibility="invisible">
+        android:padding="@dimen/activity_vertical_margin"
+        android:visibility="invisible"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/rankEazy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="175dp"
+            android:height="60dp"
+            android:background="@drawable/button_design_light_blue"
+            android:onClick="goEazyRank"
+            android:text="初級ランキング"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp" />
+
+        <Button
+            android:id="@+id/rankNomal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rankEazy"
+            android:layout_marginTop="16dp"
+            android:height="60dp"
+            android:background="@drawable/button_design_light_green"
+            android:onClick="goNomalRank"
+            android:text="中級ランキング"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp" />
+
+        <Button
+            android:id="@+id/rankHard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:height="60dp"
+            android:background="@drawable/button_design_orange"
+            android:onClick="goHardRank"
+            android:text="上級ランキング"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp"
+            android:layout_below="@+id/rankNomal"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/rankOriginal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rankHard"
+            android:layout_marginTop="16dp"
+            android:height="60dp"
+            android:background="@drawable/button_design_purple"
+            android:onClick="goOriginalRank"
+            android:text="オリジナルランキング"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp" />
+
+
+        <Button
+            android:id="@+id/returnTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rankOriginal"
+            android:layout_marginTop="16dp"
+            android:height="60dp"
+            android:background="@drawable/button_design_pink"
+            android:onClick="goTitle"
+            android:text="戻る"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp" />
+
+
 
     </RelativeLayout>
 

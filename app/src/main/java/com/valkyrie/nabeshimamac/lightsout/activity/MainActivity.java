@@ -183,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
 
-
+        // TODO SharedPreferencesからMuteかどうかの設定を読み込む
+        lightsOutView.setMute(true);
     }
 
     private void loadQuestion(Question question) {

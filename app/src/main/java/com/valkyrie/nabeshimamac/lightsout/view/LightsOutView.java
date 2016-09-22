@@ -35,6 +35,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     private TapManager tapInstance;
     private int tapCount;
+    private boolean isMute = false;
 
     // 0 -> Game, 1 -> Make
     private int mode = MODE_GAME;
@@ -76,7 +77,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         if (v instanceof Button) {
             Point point = (Point) v.getTag();
             tapCount++;
-            tapInstance.play();
+            if (!isMute) {
+                tapInstance.play();
+            }
             check(point.x, point.y);
             if (listener != null) {
                 listener.onButtonTapped(point.x, point.y, tapCount);
@@ -280,6 +283,14 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         }
         return true;
         //押されているかどうかの判断すること
+    }
+
+    public boolean isMute() {
+        return isMute;
+    }
+
+    public void setMute(boolean mute) {
+        isMute = mute;
     }
 
     public interface LightsOutListener {
