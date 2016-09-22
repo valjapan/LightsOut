@@ -19,7 +19,6 @@ import java.util.List;
 /**
  * CreateモードのListViewのActivity
  */
-
 public class MakeListActivity extends AppCompatActivity {
     private ListView listView;
     private QuestionAdapter adapter;
@@ -49,11 +48,10 @@ public class MakeListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(MakeListActivity.class.getSimpleName(), "onItemClick");
-
                 final Question question = adapter.getItem(position);
-                final Intent intent = new Intent(MakeListActivity.this, MainActivity.class);
-                intent.putExtra("question_id", question.getId());
-                startActivity(intent);
+                startActivity(
+                        MainActivity.createIntent(MakeListActivity.this, question.getId())
+                );
             }
         });
         List<Question> questions = new Select().from(Question.class).execute();

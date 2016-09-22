@@ -1,6 +1,5 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,7 +14,6 @@ import com.google.firebase.database.Query;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.adapter.SharedQuestionAdapter;
 import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
-import com.valkyrie.nabeshimamac.lightsout.model.Question;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 
 public class SharedQuestionListActivity extends AppCompatActivity {
@@ -35,11 +33,9 @@ public class SharedQuestionListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(MakeListActivity.class.getSimpleName(), "onItemClick");
-
-                final Question question = adapter.getItem(position).toQuestion();
-                final Intent intent = new Intent(SharedQuestionListActivity.this, MainActivity.class);
-                intent.putExtra("question_id", question.getId());
-                startActivity(intent);
+                startActivity(
+                        MainActivity.createIntent(SharedQuestionListActivity.this, adapter.getItem(position))
+                );
             }
         });
         getData();

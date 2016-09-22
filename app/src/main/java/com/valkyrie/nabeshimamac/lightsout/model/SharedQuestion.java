@@ -1,11 +1,12 @@
 package com.valkyrie.nabeshimamac.lightsout.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * ActiveAndroidに問題を保存するためのmodelClass
  */
-public class SharedQuestion {
+public class SharedQuestion implements Serializable {
 
     public String title;
     public String board;

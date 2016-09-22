@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -29,12 +30,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Player;
-import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
-import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 import com.valkyrie.nabeshimamac.lightsout.MyApplication;
+import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
-import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
+import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,20 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
     private static final String[] sharePackages = {"com.twitter.android"};
+    private static final String KEY_QUESTION_ID = "question_id";
+    private static final String KEY_SHARED_QUESTION = "shared_question";
+
+    public static Intent createIntent(Context context, long questionid) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(KEY_QUESTION_ID, questionid);
+        return intent;
+    }
+
+    public static Intent createIntent(Context context, SharedQuestion sharedQuestion) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(KEY_SHARED_QUESTION, sharedQuestion);
+        return intent;
+    }
 
     private LightsOutView lightsOutView;
     private TextView timerTextView, counterTextView , titleTextView, messageTextView,
@@ -124,22 +140,16 @@ public class MainActivity extends AppCompatActivity implements
         final int mode = getIntent().getIntExtra("mode", 0);
 
         prePoints = new ArrayList<>();
-        long questionId = getIntent().getLongExtra("question_id", -1);
-        if (questionId != -1) {
+        if (getIntent().hasExtra(KEY_QUESTION_ID)) {
+            final long questionId = getIntent().getLongExtra(KEY_QUESTION_ID, -1);
             ranking = GameClientManager.Ranking.Original;
-            Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
-            String data = "";
-            for (int i = 0; i < question.height; i++) {
-                for (int j = 0; j < question.width; j++) {
-                    if (question.board.charAt(i * question.width + j) == '1') {
-                        prePoints.add(new Point(i, j));
-                    }
-                    //Ranking実装部分
-                }
-            }
-            lightsOutView.setBoardHeight(question.height);
-            lightsOutView.setBoardWidth(question.width);
-
+            final Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
+            loadQuestion(question);
+        } else if(getIntent().hasExtra(KEY_SHARED_QUESTION)) {
+            final SharedQuestion sharedQuestion = (SharedQuestion) getIntent().getSerializableExtra(KEY_SHARED_QUESTION);
+            ranking = GameClientManager.Ranking.Original;
+            final Question question = sharedQuestion.toQuestion();
+            loadQuestion(question);
         } else {
             if (mode == 0) {
                 // 初級
@@ -177,6 +187,19 @@ public class MainActivity extends AppCompatActivity implements
         }
 
 
+    }
+
+    private void loadQuestion(Question question) {
+        for (int i = 0; i < question.height; i++) {
+            for (int j = 0; j < question.width; j++) {
+                if (question.board.charAt(i * question.width + j) == '1') {
+                    prePoints.add(new Point(i, j));
+                }
+                //Ranking実装部分
+            }
+        }
+        lightsOutView.setBoardHeight(question.height);
+        lightsOutView.setBoardWidth(question.width);
     }
 
     private void loadPrePoints() {
