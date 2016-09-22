@@ -170,8 +170,9 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void goHard(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("mode", 2);
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.putExtra("mode", 2);
+        Intent intent = new Intent(this, SharedQuestionListActivity.class);
         startActivity(intent);
     }
 

@@ -2,6 +2,7 @@ package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 /**
  * Created by NabeshimaMAC on 2016/09/22.
@@ -34,6 +35,10 @@ public class FirebaseManager {
         } else {
             return pushObject(prefKey, object);
         }
+    }
+
+    public static Query  getObjects(String prefKey) {
+        return getInstnace().getReference(prefKey).orderByKey();
     }
 
 }
