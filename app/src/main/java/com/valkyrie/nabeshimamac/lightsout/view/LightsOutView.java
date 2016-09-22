@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.view;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -12,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
+
+/**
+ * lightsOutView内のシステム
+ */
 public class LightsOutView extends LinearLayout implements View.OnClickListener {
     public static final int MODE_GAME = 0;
     public static final int MODE_MAKE = 1;
@@ -27,7 +33,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     private boolean[][] flag;
     //設置するボタンを動的に設置する
 
-    private Tap tapInstance;
+    private TapManager tapInstance;
     private int tapCount;
 
     // 0 -> Game, 1 -> Make
@@ -58,11 +64,11 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         blue = ContextCompat.getColor(getContext(), R.color.colorBlueOriginal);
         pink = ContextCompat.getColor(getContext(), R.color.colorPinkOriginal);
 
-        tapInstance = new Tap(getContext());
+        tapInstance = new TapManager(getContext());
 
         loadButtons();
         resetGame();
-    //ボタンを動的に宣言するところ
+        //ボタンを動的に宣言するところ
     }
 
     @Override
@@ -222,7 +228,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     }
 
-    public void setBoardWidth(int boardWidth){
+    public void setBoardWidth(int boardWidth) {
         this.boardWidth = boardWidth;
         loadButtons();
         resetGame();
@@ -234,7 +240,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
     //boardSizeの配置
 
-    public int getBoardWidth(){ return  boardWidth;}
+    public int getBoardWidth() {
+        return boardWidth;
+    }
 
 
     public void updateFlags() {
@@ -252,11 +260,11 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     private void setTapColor(int line, int row) {
         if (flag[line][row]) {
-            Drawable drawablePink = ResourcesCompat.getDrawable(getResources(),R.drawable.red_on_view,null);
+            Drawable drawablePink = ResourcesCompat.getDrawable(getResources(), R.drawable.red_on_view, null);
             btns[line][row].setBackground(drawablePink);
             //押されたらピンク
         } else {
-            Drawable drawableBlue = ResourcesCompat.getDrawable(getResources(),R.drawable.blue_on_view,null);
+            Drawable drawableBlue = ResourcesCompat.getDrawable(getResources(), R.drawable.blue_on_view, null);
             btns[line][row].setBackground(drawableBlue);
             //押されていなかったら青
         }

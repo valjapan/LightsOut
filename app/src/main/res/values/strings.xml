@@ -10,6 +10,8 @@
     <string name="tutorial_title_1"><u>Step1</u></string>
     <string name="tutorial_title_2"><u>Step2</u></string>
     <string name="tutorial_title_3"><u>Step3</u></string>
+    <string name="make_menu_save">保存</string>
+    <string name="make_make_share">make_share</string>
 
     <string-array name="size_spinner">
         <item>4</item>

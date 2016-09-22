@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.app.Activity;
 
@@ -6,7 +6,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
 /**
- * Created by NabeshimaMAC on 16/08/21.
+ * GooglePlayGameServiceの実績・ランキング等のコード
+ * 送信・データの要求する時の処理
  */
 
 public class GameClientManager {

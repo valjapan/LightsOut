@@ -1,10 +1,10 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by NabeshimaMAC on 16/08/21.
+ * SharedPreferencesのManager
  */
 public class PreferencesManager {
     private static PreferencesManager instance;
@@ -48,16 +48,15 @@ public class PreferencesManager {
     private String getRankingKey(GameClientManager.Ranking ranking) {
         switch (ranking) {
             case Easy:
-                return  "easy_count";
+                return "easy_count";
             case Normal:
                 return "normal_count";
             case Hard:
-                return  "hard_count";
+                return "hard_count";
             case Original:
                 return "original_count";
             default:
                 return null;
         }
-
     }
 }

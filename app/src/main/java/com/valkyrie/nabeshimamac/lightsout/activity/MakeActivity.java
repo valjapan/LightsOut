@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -23,14 +23,20 @@ import com.activeandroid.query.Select;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
+import com.valkyrie.nabeshimamac.lightsout.model.Question;
+import com.valkyrie.nabeshimamac.lightsout.R;
 
 import java.util.Date;
 
-public class MakeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+/**
+ * Createモードの新規作成・編集時のActivity
+ */
+public class MakeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private LightsOutView lightsOutEachView;
     EditText editText;
     TextView detailText;
-    Spinner widthSpinner , heightSpinner;
+    Spinner widthSpinner, heightSpinner;
     long questionId;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -58,7 +64,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         //盤面の情報のテキスト
 
         widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
-        final ArrayAdapter widthAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
+        final ArrayAdapter widthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
 
         widthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         widthSpinner.setAdapter(widthAdapter);
@@ -117,7 +123,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
 
                 }
                 return false;
@@ -134,10 +140,14 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     //ツールバーの右側のアイコン
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_save:
                 save();
+                break;
+            case R.id.menu_share:
+                share();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -173,7 +183,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }
         //ListViewに表示させる内容
-        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth()+ "×" +lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
+        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×" + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
 
     @Override
@@ -204,6 +214,9 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         return false;
     }
 
+    public void share(){
+
+    }
 
     @Override
     public void onStart() {
@@ -246,8 +259,8 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view , int position, long id){
-        switch (parent.getId()){
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
             case R.id.spinnerWidth:
                 lightsOutEachView.setBoardWidth(position + 4);
                 break;
@@ -259,7 +272,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent){
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 

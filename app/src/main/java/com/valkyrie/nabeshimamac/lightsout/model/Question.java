@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.model;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -6,6 +6,9 @@ import com.activeandroid.annotation.Table;
 
 import java.util.Date;
 
+/**
+ * ActiveAndroidに問題を保存するためのmodelClass
+ */
 @Table(name = "Questions")
 public class Question extends Model {
 
@@ -24,7 +27,7 @@ public class Question extends Model {
         super();
     }
 
-    public Question(String title, String board, int width , int height, Date createdAt) {
+    public Question(String title, String board, int width, int height, Date createdAt) {
         super();
         this.title = title;
         this.board = board;

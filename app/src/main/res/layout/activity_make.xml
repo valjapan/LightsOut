@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MakeActivity">
+    tools:context=".activity.MakeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                 android:textSize="20dp"
                 android:gravity="center" />
 
-            <com.valkyrie.nabeshimamac.lightsout.LightsOutView
+            <com.valkyrie.nabeshimamac.lightsout.view.LightsOutView
                 android:id="@+id/lightsOutView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -103,7 +103,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp">
 
-            </com.valkyrie.nabeshimamac.lightsout.LightsOutView>
+            </com.valkyrie.nabeshimamac.lightsout.view.LightsOutView>
 
         </LinearLayout>
 

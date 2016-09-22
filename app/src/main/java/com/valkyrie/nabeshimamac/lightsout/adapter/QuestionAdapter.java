@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,23 +11,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.valkyrie.nabeshimamac.lightsout.model.Question;
+import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
+
 import java.text.SimpleDateFormat;
 
 /**
- * Created by NabeshimaMAC on 16/08/23.
+ * ListViewのAdapter
  */
 public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnClickListener {
-    LayoutInflater mInflater;
+    LayoutInflater inflater;
+
     public QuestionAdapter(Context context) {
         super(context, 0);
-        mInflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.item_question, parent, false);
+            convertView = inflater.inflate(R.layout.item_question, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.textTitle);
             viewHolder.dateTextView = (TextView) convertView.findViewById(R.id.textDate);
@@ -50,11 +55,9 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
         }
 
 
-
-
         viewHolder.deleteImageView.setTag(position);
         viewHolder.editImageView.setTag(position);
-        viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" +item.height +" \n・空のマス : " + emptyCount);
+        viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height + " \n・空のマス : " + emptyCount);
         //盤面の情報
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm'('EEE')'"); // 日
         viewHolder.dateTextView.setText(simpleDateFormat.format(item.createdAt));
@@ -75,7 +78,6 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
                 getContext().startActivity(intent);
                 break;
             case R.id.imageDelete:
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(false);
                 builder.setTitle("本当に削除しますか？");
@@ -91,14 +93,14 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
                 });
                 builder.setNegativeButton("Cansel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface , int i){
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 });
                 builder.show();
                 break;
         }
-                    // Deleteボタンが押された時の処理
+        // Deleteボタンが押された時の処理
     }
 
     class ViewHolder {

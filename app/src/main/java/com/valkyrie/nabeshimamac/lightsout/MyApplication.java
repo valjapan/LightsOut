@@ -10,7 +10,7 @@ import com.google.android.gms.games.Games;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
- * Created by NabeshimaMAC on 16/08/20.
+ * GooglePlayGame・Analyticsの処理
  */
 public class MyApplication extends Application {
     @NonNull

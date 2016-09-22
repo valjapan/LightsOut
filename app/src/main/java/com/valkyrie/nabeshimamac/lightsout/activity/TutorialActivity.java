@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,13 @@ import android.widget.Button;
 import android.widget.ViewFlipper;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.valkyrie.nabeshimamac.lightsout.MyApplication;
+import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
+import com.valkyrie.nabeshimamac.lightsout.R;
 
+/**
+ * tutorial画面のActivity
+ */
 public class TutorialActivity extends AppCompatActivity {
     ViewFlipper viewFlipper;
     Button button;
@@ -18,8 +24,8 @@ public class TutorialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
-        viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
-        button = (Button)findViewById(R.id.buttonTutorial);
+        viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
+        button = (Button) findViewById(R.id.buttonTutorial);
 
         Bundle bundle = new Bundle();
         ((MyApplication) getApplication()).analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, bundle);

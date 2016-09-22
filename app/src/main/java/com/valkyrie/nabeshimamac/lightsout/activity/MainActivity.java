@@ -1,4 +1,4 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +29,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Player;
+import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
+import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
+import com.valkyrie.nabeshimamac.lightsout.MyApplication;
+import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
+import com.valkyrie.nabeshimamac.lightsout.model.Question;
+import com.valkyrie.nabeshimamac.lightsout.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,26 +42,30 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements LightsOutView.LightsOutListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+/**
+ * ゲーム画面のActivity
+ */
+
+public class MainActivity extends AppCompatActivity implements
+        LightsOutView.LightsOutListener,
+        GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks {
+    private static final String[] sharePackages = {"com.twitter.android"};
 
     private LightsOutView lightsOutView;
-    private TextView timerTextView, counterTextView;
-    TextView title, messege, total, timeResult, countResult, titleClear;
-    Button modalButton;
-    RelativeLayout startLayout, clearLayout;
-    long startedAt;
-    Timer timer;
-    Handler h = new Handler();
-    boolean isPlaying = false;
-    Random random = new Random();
+    private TextView timerTextView, counterTextView , titleTextView, messageTextView,
+            totalTextView, timeResultTextView, countResultTextView, titleClearTextView;
+    private Button modalButton;
+    private RelativeLayout startLayout, clearLayout;
+    private long startedAt;
+    private Timer timer;
+    private Handler h = new Handler();
+    private boolean isPlaying = false;
+    private Random random = new Random();
     private GameClientManager.Ranking ranking;
     private List<Point> prePoints;
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
-
-    public final int TWITTER_ID = 0;
-    private final String[] sharePackages = {"com.twitter.android"};
-
 
 
     @Override
@@ -77,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         lightsOutView = (LightsOutView) findViewById(R.id.lightsOutView);
         timerTextView = (TextView) findViewById(R.id.timer);
         counterTextView = (TextView) findViewById(R.id.counter);
-        total = (TextView) findViewById(R.id.total);
-        timeResult = (TextView) findViewById(R.id.timeResult);
-        countResult = (TextView) findViewById(R.id.countResult);
-        titleClear = (TextView) findViewById(R.id.titleClear);
+        totalTextView = (TextView) findViewById(R.id.total);
+        timeResultTextView = (TextView) findViewById(R.id.timeResult);
+        countResultTextView = (TextView) findViewById(R.id.countResult);
+        titleClearTextView = (TextView) findViewById(R.id.titleClear);
         //IDの関連付け
 
         lightsOutView.setOnLigitsOutListener(this);
@@ -89,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         timerTextView.setTextColor(Color.BLACK);
         //TextViewにsetTextしているとこ
 
-        title = (TextView) findViewById(R.id.title);
-        messege = (TextView) findViewById(R.id.messege);
+        titleTextView = (TextView) findViewById(R.id.title);
+        messageTextView = (TextView) findViewById(R.id.messege);
         modalButton = (Button) findViewById(R.id.modalButton);
         startLayout = (RelativeLayout) findViewById(R.id.startLayout);
         startLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -100,9 +110,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             }
         });
         //IDの関連付け
-
-
-
         clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         clearLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -110,14 +117,11 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 return true;
             }
         });
-        //IDの関連付け
-
 
         showStartModal();
         //showStartModelを起動
 
         final int mode = getIntent().getIntExtra("mode", 0);
-
 
         prePoints = new ArrayList<>();
         long questionId = getIntent().getLongExtra("question_id", -1);
@@ -171,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
             // Tutorial画面に移動
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
-
 
 
     }
@@ -260,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
                 medal = GameClientManager.Medal.FirstNomal;
             } else if (ranking == GameClientManager.Ranking.Hard) {
                 medal = GameClientManager.Medal.FirstHard;
-            } else if (ranking == GameClientManager.Ranking.Original){
+            } else if (ranking == GameClientManager.Ranking.Original) {
                 medal = GameClientManager.Medal.FirstMakePuzzlePlay;
             }
         } else if (clearCount == 10) {
@@ -284,8 +287,8 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     private void showStartModal() {
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
-        title.setText("さぁ始めよう！");
-        messege.setText("全て赤いパネルにしよう。\nStartでゲーム開始です。\n(タップ音に注意！)");
+        titleTextView.setText("さぁ始めよう！");
+        messageTextView.setText("全て赤いパネルにしよう。\nStartでゲーム開始です。\n(タップ音に注意！)");
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -299,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     private void showClearModal() {
         startLayout.setVisibility(View.INVISIBLE);
         clearLayout.setVisibility(View.VISIBLE);
-        titleClear.setText("Congratulations");
+        titleClearTextView.setText("Congratulations");
 
         final long nowTime = System.currentTimeMillis();
         long minute = (nowTime - startedAt) / 1000 / 60;
@@ -313,9 +316,9 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
 
         final int total = (int) (totalMinute + totalSecond + lightsOutViewTotal);
 
-        timeResult.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
-        countResult.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
-        this.total.setText("Total:  " + total);
+        timeResultTextView.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
+        countResultTextView.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
+        this.totalTextView.setText("Total:  " + total);
 
         GameClientManager.submitScore(apiClient, ranking, total);
         //Play開始後の画面
@@ -426,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && isPlaying) {
             new AlertDialog.Builder(this)
                     .setTitle("プレイ中の記録は戻りません！")
@@ -453,7 +456,7 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
     }
 
     // アプリがインストールされているかチェック
-    private Boolean isShareAppInstall(int shareId){
+    private Boolean isShareAppInstall(int shareId) {
         try {
             PackageManager pm = getPackageManager();
             pm.getApplicationInfo(sharePackages[shareId], PackageManager.GET_META_DATA);
@@ -463,9 +466,9 @@ public class MainActivity extends AppCompatActivity implements LightsOutView.Lig
         }
     }
 
-    // アプリが無かったのでGooglePlayに飛ばす
-    private void shareAppDl(int shareId){
-        Uri uri = Uri.parse("market://details?id="+sharePackages[shareId]);
+    // アプリが無かったらGooglePlayに飛ばす
+    private void shareAppDl(int shareId) {
+        Uri uri = Uri.parse("market://details?id=" + sharePackages[shareId]);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }

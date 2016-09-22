@@ -1,11 +1,10 @@
-package com.valkyrie.nabeshimamac.lightsout;
+package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -23,12 +22,19 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Player;
+import com.valkyrie.nabeshimamac.lightsout.BuildConfig;
+import com.valkyrie.nabeshimamac.lightsout.MyApplication;
+import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
 
+/**
+ * title画面のActivity
+ */
 public class TitleActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView textView ,versiontextView;
-    ImageView googlePlay ,editButton , shareTwitter;
-    Button playEazy,playNomal, playHard;
+    TextView textView, versiontextView;
+    ImageView googlePlay, editButton, shareTwitter;
+    Button playEazy, playNomal, playHard;
 
     LinearLayout modeLayout;
     RelativeLayout rankLayout;
@@ -38,8 +44,6 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     private final int TWITTER_ID = 0;
     private final String[] sharePackages = {"com.twitter.android"};
-
-    int version = Build.VERSION.SDK_INT;
 
 
     @Override
@@ -52,15 +56,15 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
         googlePlay = (ImageView) findViewById(R.id.googleGame);
         editButton = (ImageView) findViewById(R.id.EditButton);
-        shareTwitter = (ImageView)findViewById(R.id.shareTwiter);
+        shareTwitter = (ImageView) findViewById(R.id.shareTwitter);
 
         textView = (TextView) findViewById(R.id.textView);
-        versiontextView = (TextView)findViewById(R.id.versionName);
+        versiontextView = (TextView) findViewById(R.id.versionName);
         textView.setText("Lights Out");
 
-        playEazy = (Button)findViewById(R.id.PlayEazy);
-        playNomal = (Button)findViewById(R.id.PlayNomal);
-        playHard = (Button)findViewById(R.id.PlayHard);
+        playEazy = (Button) findViewById(R.id.PlayEazy);
+        playNomal = (Button) findViewById(R.id.PlayNomal);
+        playHard = (Button) findViewById(R.id.PlayHard);
 
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
@@ -69,31 +73,26 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
         versiontextView.setText("v" + BuildConfig.VERSION_NAME);
 
-        if (version < 20){
-            shareTwitter.setVisibility(View.INVISIBLE);
-        }else if (version >= 20){
-
-        findViewById(R.id.shareTwiter).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    if(isShareAppInstall(TWITTER_ID)){
+            findViewById(R.id.shareTwitter).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isShareAppInstall(TWITTER_ID)) {
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND);
                         intent.setPackage(sharePackages[TWITTER_ID]);
                         intent.setType("image/png");
                         intent.putExtra(Intent.EXTRA_TEXT,
-                             "新感覚シンプルパズルゲーム【LightsOut】。" +
-                                "\nルール は簡単、押したパネルとその上下左右のボタンの色が反転する。" +
+                                "新感覚シンプルパズルゲーム【LightsOut】。" +
+                                        "\nルール は簡単、押したパネルとその上下左右のボタンの色が反転する。" +
                                         "全てのパネルを水色からピンクにすればゲームクリアだ。" +
-                                "\n君もチャレンジしてみないか。 #LightsOutGame" +
-                                "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
+                                        "\n君もチャレンジしてみないか。 #LightsOutGame" +
+                                        "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
                         startActivity(intent);
-                    }else{
+                    } else {
                         shareAppDl(TWITTER_ID);
                     }
                 }
             });
-        }
     }
 
     @Override
@@ -184,7 +183,7 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
         playHard.setVisibility(View.INVISIBLE);
     }
 
-    public void goEdit(View v){
+    public void goEdit(View v) {
         Intent intent = new Intent(this, MakeListActivity.class);
         startActivity(intent);
     }
@@ -214,7 +213,7 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             new AlertDialog.Builder(this)
                     .setTitle("アプリケーションの終了")
@@ -241,9 +240,8 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-
     // アプリがインストールされているかチェック
-    private Boolean isShareAppInstall(int shareId){
+    private Boolean isShareAppInstall(int shareId) {
         try {
             PackageManager pm = getPackageManager();
             pm.getApplicationInfo(sharePackages[shareId], PackageManager.GET_META_DATA);
@@ -254,8 +252,8 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     // アプリが無かったのでGooglePalyに飛ばす
-    private void shareAppDl(int shareId){
-        Uri uri = Uri.parse("market://details?id="+sharePackages[shareId]);
+    private void shareAppDl(int shareId) {
+        Uri uri = Uri.parse("market://details?id=" + sharePackages[shareId]);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
