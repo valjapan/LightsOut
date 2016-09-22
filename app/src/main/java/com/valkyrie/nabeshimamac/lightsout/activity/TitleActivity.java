@@ -33,7 +33,7 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     TextView textView, versiontextView;
     ImageView googlePlay, editButton, shareTwitter;
-    Button playEazy, playNomal, playHard;
+    Button playEazy, playNomal, playHard , goOridinal;
 
     LinearLayout modeLayout;
     RelativeLayout rankLayout;
@@ -61,6 +61,7 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
         playEazy = (Button) findViewById(R.id.PlayEazy);
         playNomal = (Button) findViewById(R.id.PlayNomal);
         playHard = (Button) findViewById(R.id.PlayHard);
+        goOridinal = (Button) findViewById(R.id.rankOriginal);
 
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
@@ -157,9 +158,18 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void goHard(View v) {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.putExtra("mode", 2);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("mode", 2);
+        startActivity(intent);
+    }
+    
+    public void goShare(View v){
         Intent intent = new Intent(this, SharedQuestionListActivity.class);
+        startActivity(intent);
+    }
+
+    public void goSetting(View v){
+        Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }
 
@@ -186,6 +196,10 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void goHardRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Hard);
+    }
+
+    public void goOriginalRank(View v){
+        GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Original);
     }
 
     public void goTitle(View v) {

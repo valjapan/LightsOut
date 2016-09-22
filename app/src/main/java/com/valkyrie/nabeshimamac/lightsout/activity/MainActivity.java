@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -183,9 +184,14 @@ public class MainActivity extends AppCompatActivity implements
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
 
+        SharedPreferences data = getSharedPreferences("onMuteShared", MODE_PRIVATE);
+        Boolean onMute = data.getBoolean("onMute",false);
+
         // TODO SharedPreferencesからMuteかどうかの設定を読み込む
-        lightsOutView.setMute(true);
+        lightsOutView.setMute(onMute);
     }
+
+
 
     private void loadQuestion(Question question) {
         for (int i = 0; i < question.height; i++) {

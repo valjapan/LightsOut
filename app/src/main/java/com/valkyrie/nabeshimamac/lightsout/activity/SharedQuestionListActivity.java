@@ -2,6 +2,7 @@ package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +40,17 @@ public class SharedQuestionListActivity extends AppCompatActivity {
             }
         });
         getData();
+
+        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        //アクションバーの左側（閉じる）部分
     }
 
 

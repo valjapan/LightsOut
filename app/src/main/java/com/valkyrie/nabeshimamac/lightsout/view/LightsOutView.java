@@ -48,6 +48,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     int pink;
     //使用色の宣言
 
+
     private LightsOutListener listener;
 
     public LightsOutView(Context context) {
@@ -74,6 +75,8 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+
+
         if (v instanceof Button) {
             Point point = (Point) v.getTag();
             tapCount++;

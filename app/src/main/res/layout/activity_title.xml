@@ -48,8 +48,7 @@
                 android:text="初級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="35dp"
-                android:minHeight="40dp" />
+                android:textSize="30dp"/>
 
             <Button
                 android:id="@+id/PlayNomal"
@@ -63,7 +62,7 @@
                 android:text="中級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="35dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/PlayHard"
@@ -77,7 +76,7 @@
                 android:text="上級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="35dp" />
+                android:textSize="30dp" />
 
             <Button
                 android:id="@+id/PlayShare"
@@ -91,7 +90,7 @@
                 android:text="共有問題"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="35dp" />
+                android:textSize="30dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,7 +118,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="goMedal"
-                    android:src="@drawable/ic_googleplay" />
+                    android:src="@drawable/ic_google_play" />
 
             </LinearLayout>
 
@@ -187,7 +186,7 @@
             android:text="初級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="35dp" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/rankNomal"
@@ -202,7 +201,7 @@
             android:text="中級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="35dp" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/rankHard"
@@ -215,7 +214,7 @@
             android:text="上級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:layout_below="@+id/rankNomal"
             android:layout_alignParentStart="true" />
 
@@ -242,7 +241,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/rankOriginal"
             android:layout_marginTop="16dp"
-            android:height="60dp"
+            android:height="90dp"
             android:background="@drawable/button_design_pink"
             android:onClick="goTitle"
             android:text="戻る"
