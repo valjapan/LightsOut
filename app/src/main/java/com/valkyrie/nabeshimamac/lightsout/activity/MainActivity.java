@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -46,7 +45,6 @@ import java.util.TimerTask;
 /**
  * ゲーム画面のActivity
  */
-
 public class MainActivity extends AppCompatActivity implements
         LightsOutView.LightsOutListener,
         GoogleApiClient.OnConnectionFailedListener,
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -184,34 +182,8 @@ public class MainActivity extends AppCompatActivity implements
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
 
-        SharedPreferences data = getSharedPreferences("onMuteShared", MODE_PRIVATE);
-        Boolean onMute = data.getBoolean("onMute",false);
-
-        // TODO SharedPreferencesからMuteかどうかの設定を読み込む
-        lightsOutView.setMute(onMute);
-    }
-
-
-
-    private void loadQuestion(Question question) {
-        for (int i = 0; i < question.height; i++) {
-            for (int j = 0; j < question.width; j++) {
-                if (question.board.charAt(i * question.width + j) == '1') {
-                    prePoints.add(new Point(i, j));
-                }
-                //Ranking実装部分
-            }
-        }
-        lightsOutView.setBoardHeight(question.height);
-        lightsOutView.setBoardWidth(question.width);
-    }
-
-    private void loadPrePoints() {
-        for (Point point : prePoints) {
-            lightsOutView.checkFlag(point.x, point.y);
-        }
-        lightsOutView.updateFlags();
-        //パネルONかOFFになってるかの確認
+        // SharedPreferencesからMuteかどうかの設定を読み込む
+        lightsOutView.setMute(PreferencesManager.getInstance(this).isMute());
     }
 
     @Override
@@ -222,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements
         //ツールバーの呼び出し？
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_reset:
@@ -238,24 +211,6 @@ public class MainActivity extends AppCompatActivity implements
         //それらを表示させるための部分
     }
 
-    public void goRetly(View v) {
-        finish();
-    }
-    //リトライ(そのまんま)
-
-    public void goRank(View v) {
-        GameClientManager.intentRanking(this, apiClient, ranking);
-    }
-    //ランキングを起動させる
-
-    public void reset() {
-        counterTextView.setText("00");
-        counterTextView.setTextColor(Color.BLACK);
-        lightsOutView.resetGame();
-        loadPrePoints();
-        //Resetの内容
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -265,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         stopTimer();
@@ -309,86 +265,6 @@ public class MainActivity extends AppCompatActivity implements
 
         stopTimer();
         showClearModal();
-    }
-
-    private void showStartModal() {
-        startLayout.setVisibility(View.VISIBLE);
-        clearLayout.setVisibility(View.INVISIBLE);
-        titleTextView.setText("さぁ始めよう！");
-        messageTextView.setText("全て赤いパネルにしよう。\nStartでゲーム開始です。\n(タップ音に注意！)");
-        modalButton.setText("START");
-        modalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playGame();
-            }
-        });
-        //Play開始前の画面
-    }
-
-    private void showClearModal() {
-        startLayout.setVisibility(View.INVISIBLE);
-        clearLayout.setVisibility(View.VISIBLE);
-        titleClearTextView.setText("Congratulations");
-
-        final long nowTime = System.currentTimeMillis();
-        long minute = (nowTime - startedAt) / 1000 / 60;
-        long second = (nowTime - startedAt) / 1000 % 60;
-        long mili = (nowTime - startedAt) % 1000 / 10;
-
-        long totalMinute = minute * 60;
-        long totalSecond = second;
-
-        long lightsOutViewTotal = lightsOutView.getTapCount();
-
-        final int total = (int) (totalMinute + totalSecond + lightsOutViewTotal);
-
-        timeResultTextView.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
-        countResultTextView.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
-        this.totalTextView.setText("Total:  " + total);
-
-        GameClientManager.submitScore(apiClient, ranking, total);
-        //Play開始後の画面
-    }
-
-    private void playGame() {
-        startLayout.setVisibility(View.INVISIBLE);
-        startedAt = System.currentTimeMillis();
-        startTimer();
-        isPlaying = true;
-        //Play中
-    }
-
-    public void startTimer() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                final long nowTime = System.currentTimeMillis();
-                h.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        long minute = (nowTime - startedAt) / 1000 / 60;
-                        long second = (nowTime - startedAt) / 1000 % 60;
-                        long mili = (nowTime - startedAt) % 1000 / 10;
-                        timerTextView.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
-                    }
-                });
-            }
-        }, 0, 10);
-        //Timerの処理部分
-    }
-
-    private void stopTimer() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-        //Timerを止める時の処理部分
     }
 
     @Override
@@ -482,5 +358,123 @@ public class MainActivity extends AppCompatActivity implements
         return super.onKeyDown(keyCode, event);
     }
 
+    public void goRetly(View v) {
+        finish();
+    }
+    //リトライ(そのまんま)
+
+    public void goRank(View v) {
+        GameClientManager.intentRanking(this, apiClient, ranking);
+    }
+    //ランキングを起動させる
+
+    public void reset() {
+        counterTextView.setText("00");
+        counterTextView.setTextColor(Color.BLACK);
+        lightsOutView.resetGame();
+        loadPrePoints();
+        //Resetの内容
+    }
+
+    private void loadQuestion(Question question) {
+        for (int i = 0; i < question.height; i++) {
+            for (int j = 0; j < question.width; j++) {
+                if (question.board.charAt(i * question.width + j) == '1') {
+                    prePoints.add(new Point(i, j));
+                }
+                //Ranking実装部分
+            }
+        }
+        lightsOutView.setBoardHeight(question.height);
+        lightsOutView.setBoardWidth(question.width);
+    }
+
+    private void loadPrePoints() {
+        for (Point point : prePoints) {
+            lightsOutView.checkFlag(point.x, point.y);
+        }
+        lightsOutView.updateFlags();
+        //パネルONかOFFになってるかの確認
+    }
+
+    private void showStartModal() {
+        startLayout.setVisibility(View.VISIBLE);
+        clearLayout.setVisibility(View.INVISIBLE);
+        titleTextView.setText("さぁ始めよう！");
+        messageTextView.setText("全て赤いパネルにしよう。\nStartでゲーム開始です。\n(タップ音に注意！)");
+        modalButton.setText("START");
+        modalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playGame();
+            }
+        });
+        //Play開始前の画面
+    }
+
+    private void showClearModal() {
+        startLayout.setVisibility(View.INVISIBLE);
+        clearLayout.setVisibility(View.VISIBLE);
+        titleClearTextView.setText("Congratulations");
+
+        final long nowTime = System.currentTimeMillis();
+        long minute = (nowTime - startedAt) / 1000 / 60;
+        long second = (nowTime - startedAt) / 1000 % 60;
+        long mili = (nowTime - startedAt) % 1000 / 10;
+
+        long totalMinute = minute * 60;
+        long totalSecond = second;
+
+        long lightsOutViewTotal = lightsOutView.getTapCount();
+
+        final int total = (int) (totalMinute + totalSecond + lightsOutViewTotal);
+
+        timeResultTextView.setText("Time:  " + String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
+        countResultTextView.setText("Count:    " + String.format("%1$02d", lightsOutView.getTapCount()));
+        this.totalTextView.setText("Total:  " + total);
+
+        GameClientManager.submitScore(apiClient, ranking, total);
+        //Play開始後の画面
+    }
+
+    private void playGame() {
+        startLayout.setVisibility(View.INVISIBLE);
+        startedAt = System.currentTimeMillis();
+        startTimer();
+        isPlaying = true;
+        //Play中
+    }
+
+    public void startTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                final long nowTime = System.currentTimeMillis();
+                h.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        long minute = (nowTime - startedAt) / 1000 / 60;
+                        long second = (nowTime - startedAt) / 1000 % 60;
+                        long mili = (nowTime - startedAt) % 1000 / 10;
+                        timerTextView.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
+                    }
+                });
+            }
+        }, 0, 10);
+        //Timerの処理部分
+    }
+
+    private void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        //Timerを止める時の処理部分
+    }
 
 }

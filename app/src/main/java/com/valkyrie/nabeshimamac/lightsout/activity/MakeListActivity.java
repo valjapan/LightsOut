@@ -20,6 +20,8 @@ import java.util.List;
  * CreateモードのListViewのActivity
  */
 public class MakeListActivity extends AppCompatActivity {
+    private static final int CODE_MAKE = 1;
+
     private ListView listView;
     private QuestionAdapter adapter;
 
@@ -30,7 +32,7 @@ public class MakeListActivity extends AppCompatActivity {
 
         setTitle("Create mode");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -58,20 +60,20 @@ public class MakeListActivity extends AppCompatActivity {
         adapter.addAll(questions);
     }
 
-    public void make(View v) {
-        Intent intent = new Intent(this, MakeActivity.class);
-        startActivityForResult(intent, 10);
-        //新規作成
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == RESULT_OK) {
-            List<Question> questions = new Select().from(Question.class).execute();
+        if (requestCode == CODE_MAKE && resultCode == RESULT_OK) {
+            // 新しいアイテムが追加されたので、画面を更新する
+            final List<Question> questions = new Select().from(Question.class).execute();
             adapter.clear();
             adapter.addAll(questions);
         }
+    }
 
+    public void make(View v) {
+        final Intent intent = MakeActivity.createIntent(this);
+        startActivityForResult(intent, CODE_MAKE);
+        //新規作成
     }
 }

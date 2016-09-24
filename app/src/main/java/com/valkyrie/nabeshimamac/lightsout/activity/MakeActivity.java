@@ -1,6 +1,8 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +32,11 @@ import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
  * Createモードの新規作成・編集時のActivity
  */
 public class MakeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, MakeActivity.class);
+    }
+
     private LightsOutView lightsOutEachView;
     private EditText editText;
     private TextView detailText;
@@ -41,7 +48,8 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("New and Edited");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
@@ -175,6 +183,24 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinnerWidth:
+                lightsOutEachView.setBoardWidth(position + 4);
+                break;
+            case R.id.spinnerHeight:
+                lightsOutEachView.setBoardHeight(position + 4);
+                break;
+        }
+        updateDetailsText();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     //save部分
     private void save() {
         updateQuestion();
@@ -220,24 +246,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         //ListViewに表示させる内容
         detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×" + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spinnerWidth:
-                lightsOutEachView.setBoardWidth(position + 4);
-                break;
-            case R.id.spinnerHeight:
-                lightsOutEachView.setBoardHeight(position + 4);
-                break;
-        }
-        updateDetailsText();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
 }

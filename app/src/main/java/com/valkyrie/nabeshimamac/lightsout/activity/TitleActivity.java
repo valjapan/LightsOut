@@ -164,12 +164,12 @@ public class TitleActivity extends AppCompatActivity implements GoogleApiClient.
     }
     
     public void goShare(View v){
-        Intent intent = new Intent(this, SharedQuestionListActivity.class);
+        final Intent intent = new Intent(this, SharedQuestionListActivity.class);
         startActivity(intent);
     }
 
     public void goSetting(View v){
-        Intent intent = new Intent(this, SettingActivity.class);
+        final Intent intent = SettingActivity.createIntent(this);
         startActivity(intent);
     }
 

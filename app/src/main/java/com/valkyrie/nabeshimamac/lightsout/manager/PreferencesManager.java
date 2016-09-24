@@ -2,18 +2,21 @@ package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * SharedPreferencesのManager
  */
 public class PreferencesManager {
     private static PreferencesManager instance;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences appPreferences;
+    private SharedPreferences defaultPreferences;
 
     //ShardPreferencesの保存部分
 
     private PreferencesManager(Context context) {
-        sharedPreferences = context.getSharedPreferences("LightsOuts", Context.MODE_PRIVATE);
+        appPreferences = context.getSharedPreferences("LightsOuts", Context.MODE_PRIVATE);
+        defaultPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static PreferencesManager getInstance(Context context) {
@@ -24,25 +27,29 @@ public class PreferencesManager {
     }
 
     public boolean isTutorialEnd() {
-        return sharedPreferences.getBoolean("tutorial", false);
+        return appPreferences.getBoolean("tutorial", false);
     }
     //２回目以降チュートリアル画面に行かないように
 
     public void checkTutorialEnd() {
-        sharedPreferences.edit().putBoolean("tutorial", true).apply();
+        appPreferences.edit().putBoolean("tutorial", true).apply();
     }
 
     public int getClearCount(GameClientManager.Ranking ranking) {
         String key = getRankingKey(ranking);
-        return sharedPreferences.getInt(key, 0);
+        return appPreferences.getInt(key, 0);
     }
 
     public int addClearCount(GameClientManager.Ranking ranking) {
         int clearCount = getClearCount(ranking);
         clearCount++;
         String key = getRankingKey(ranking);
-        sharedPreferences.edit().putInt(key, clearCount).apply();
+        appPreferences.edit().putInt(key, clearCount).apply();
         return clearCount;
+    }
+
+    public boolean isMute() {
+        return defaultPreferences.getBoolean("mute", false);
     }
 
     private String getRankingKey(GameClientManager.Ranking ranking) {
