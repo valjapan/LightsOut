@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
-        lightsOutView.setMute(PreferencesManager.getInstance(this).isMute());
+        lightsOutView.setSound(PreferencesManager.getInstance(this).isSoude());
     }
 
     @Override

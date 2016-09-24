@@ -48,8 +48,8 @@ public class PreferencesManager {
         return clearCount;
     }
 
-    public boolean isMute() {
-        return defaultPreferences.getBoolean("mute", false);
+    public boolean isSoude() {
+        return defaultPreferences.getBoolean("sound", true);
     }
 
     private String getRankingKey(GameClientManager.Ranking ranking) {

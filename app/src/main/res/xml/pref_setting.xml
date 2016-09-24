@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
-        android:key="mute"
+        android:key="sound"
         android:summary="@string/setting_mute_summary"
         android:title="@string/setting_mute_title" />
 
