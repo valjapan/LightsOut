@@ -19,15 +19,14 @@ import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
  * lightsOutView内のシステム
  */
 public class LightsOutView extends LinearLayout implements View.OnClickListener {
-    public static final int MODE_GAME = 0;
-    public static final int MODE_MAKE = 1;
     //MODE_GAME(プレイ専用)だったら0
     //MODE_MAKE(作ってからそれをプレイする場合)だったら1
-
-    private int boardHeight = 6;
-    private int boardWidth = 6;
+    public static final int MODE_GAME = 0;
+    public static final int MODE_MAKE = 1;
 
     //デフォルトはマス目が6×6
+    private int boardHeight = 6;
+    private int boardWidth = 6;
 
     private Button[][] btns;
     private boolean[][] flag;
@@ -47,7 +46,6 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     @ColorInt
     int pink;
     //使用色の宣言
-
 
     private LightsOutListener listener;
 

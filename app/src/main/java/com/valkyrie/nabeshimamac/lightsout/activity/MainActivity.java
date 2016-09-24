@@ -261,7 +261,6 @@ public class MainActivity extends AppCompatActivity implements
         if (medal != null) {
             GameClientManager.unlockMedal(apiClient, medal);
         }
-
         stopTimer();
         showClearModal();
     }
