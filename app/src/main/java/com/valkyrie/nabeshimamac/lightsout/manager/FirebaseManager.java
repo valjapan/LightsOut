@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.lightsout.manager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -21,9 +22,13 @@ public class FirebaseManager {
         }
     }
 
-    public static String pushObject(String prefKey, Object object) {
+    public static String pushObject(String prefKey, Object object, OnCompleteListener<Void> completeListener) {
         final DatabaseReference reference = getInstnace().getReference(prefKey).push();
-        reference.setValue(object);
+        if (completeListener != null) {
+            reference.setValue(object).addOnCompleteListener(completeListener);
+        } else {
+            reference.setValue(object);
+        }
         return reference.getKey();
     }
 
@@ -33,7 +38,7 @@ public class FirebaseManager {
             reference.setValue(object);
             return key;
         } else {
-            return pushObject(prefKey, object);
+            return pushObject(prefKey, object, null);
         }
     }
 

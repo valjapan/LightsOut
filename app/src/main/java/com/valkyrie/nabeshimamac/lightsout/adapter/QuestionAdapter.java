@@ -60,7 +60,9 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
         viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height + " \n・空のマス : " + emptyCount);
         //盤面の情報
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm'('EEE')'"); // 日
-        viewHolder.dateTextView.setText(simpleDateFormat.format(item.createdAt));
+        if (item.createdAt != null) {
+            viewHolder.dateTextView.setText(simpleDateFormat.format(item.createdAt));
+        }
         //日付の情報
         return convertView;
     }

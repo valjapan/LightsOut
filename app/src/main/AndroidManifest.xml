@@ -23,8 +23,7 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TutorialActivity"
             android:screenOrientation="portrait" />
@@ -34,6 +33,19 @@
         <activity
             android:name=".activity.MakeListActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.SharedQuestionCallbackActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="lightsout.game"
+                    android:pathPattern="/.*"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
@@ -46,13 +58,13 @@
             android:value="data.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="3" />
+            android:value="4" />
         <meta-data
             android:name="AA_MODELS"
             android:value="com.valkyrie.nabeshimamac.lightsout.model.Question" />
 
         <activity android:name=".activity.SharedQuestionListActivity" />
-        <activity android:name=".activity.SettingActivity"/>
+        <activity android:name=".activity.SettingActivity" />
     </application>
 
 </manifest>

@@ -18,15 +18,22 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.activeandroid.query.Select;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
+import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
+import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
+
+import java.util.Date;
 
 /**
  * Createモードの新規作成・編集時のActivity
@@ -41,6 +48,8 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     private EditText editText;
     private TextView detailText;
     private Spinner widthSpinner, heightSpinner;
+    private RelativeLayout shareCompleteLayout;
+
     @NonNull
     private Question question;
 
@@ -75,6 +84,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightSpinner.setAdapter(heightAdapter);
 
+        shareCompleteLayout = (RelativeLayout) findViewById(R.id.shareCompleteLayout);
         //盤面入れ替えのスピナーの部分
 
         lightsOutEachView = (LightsOutView) findViewById(R.id.lightsOutView2);
@@ -133,6 +143,8 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        // SharedPreferencesからMuteかどうかの設定を読み込む
+        lightsOutEachView.setSound(PreferencesManager.getInstance(this).isSoude());
     }
 
     @Override
@@ -201,6 +213,15 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    public void shareTwitter(View view) {
+        final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
+        ShareManager.shareTwitter(this, "URLをクリックして問題をとこう！！ \n" + questionUrl);
+    }
+
+    public void closeShareComplete(View view) {
+        shareCompleteLayout.setVisibility(View.INVISIBLE);
+    }
+
     //save部分
     private void save() {
         updateQuestion();
@@ -213,7 +234,12 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         updateQuestion();
         SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
         if (TextUtils.isEmpty(question.sharedKey)) {
-            final String key = FirebaseManager.pushObject("questions", sharedQuestion);
+            final String key = FirebaseManager.pushObject("questions", sharedQuestion, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    shareCompleteLayout.setVisibility(View.VISIBLE);
+                }
+            });
             // ShareしたことがわかるようにKeyを入れておく
             question.sharedKey = key;
             question.save();
@@ -234,6 +260,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         question.board = lightsOutEachView.getFlagsToString();
         question.width = lightsOutEachView.getBoardWidth();
         question.height = lightsOutEachView.getBoardHeight();
+        question.createdAt = new Date();
     }
 
     private void updateDetailsText() {

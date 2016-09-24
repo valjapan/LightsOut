@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.text.TextUtils;
 
 /**
  * Created by NabeshimaMAC on 2016/09/22.
@@ -41,6 +42,13 @@ public class ShareManager {
         Uri uri = Uri.parse("market://details?id=" + shareId);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         activity.startActivity(intent);
+    }
+
+    public static String createShareQuestionUrl(String shareKey) {
+        if (TextUtils.isEmpty(shareKey)) {
+            return "";
+        }
+        return "https://lightsout.game/questions/" + shareKey;
     }
 
 }
