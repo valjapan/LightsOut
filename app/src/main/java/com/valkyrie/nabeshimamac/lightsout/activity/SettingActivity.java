@@ -57,7 +57,7 @@ public class SettingActivity extends AppCompatActivity {
         }else {
             onMuteBoolean = true;
             muteImageView.setBackgroundResource(R.drawable.ic_volume_off_black_48dp);
-            muteInfo.setText("タップ音はミュートになっています.。");
+            muteInfo.setText("タップ音はミュートになっています。");
         }
     }
 
