@@ -15,8 +15,8 @@ import com.valkyrie.nabeshimamac.lightsout.R;
  * tutorial画面のActivity
  */
 public class TutorialActivity extends AppCompatActivity {
-    ViewFlipper viewFlipper;
-    Button button;
+    private ViewFlipper viewFlipper;
+    private Button button;
 
     //チュートリアル部分
 

@@ -29,14 +29,14 @@ import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 /**
  * title画面のActivity
  */
-public class TitleActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class TitleActivity extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView textView, versiontextView;
-    ImageView googlePlay, editButton, shareTwitter;
-    Button playEazy, playNomal, playHard , goOridinal;
-
-    LinearLayout modeLayout;
-    RelativeLayout rankLayout;
+    private TextView textView, versiontextView;
+    private ImageView googlePlay, editButton, shareTwitter;
+    private Button playEazy, playNomal, playHard , goOridinal;
+    private LinearLayout modeLayout;
+    private RelativeLayout rankLayout;
 
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
