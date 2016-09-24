@@ -75,8 +75,6 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-
-
         if (v instanceof Button) {
             Point point = (Point) v.getTag();
             tapCount++;
@@ -90,6 +88,13 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 //そこでjavaで一つずつ入れていく。
             }
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        loadButtons();
+        updateFlags();
     }
 
     public void setOnLigitsOutListener(LightsOutListener listener) {
@@ -154,9 +159,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     private void loadButtons() {
         removeAllViews();
         btns = new Button[boardHeight][boardWidth];
-        int margin = 8;
-        LayoutParams columnLayoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
-        LayoutParams rowLayoutParams = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        final int margin = 8;
+        final int blockSize = Math.min(getWidth() / boardWidth, getHeight() / boardHeight);
+        final LayoutParams columnLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final LayoutParams rowLayoutParams = new LayoutParams(blockSize - margin * 2, blockSize - margin * 2);
         rowLayoutParams.setMargins(margin, margin, margin, margin);
         //ボタンの配置、プロパティの設定
 
@@ -173,6 +179,16 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
             }
             this.addView(rowLayout, columnLayoutParams);
         }
+        // Boardを中央によせる
+        final int horizontalPadding = (getWidth() - blockSize * boardWidth) / 2;
+        final int verticalPadding = (getHeight() - blockSize * boardHeight) / 2;
+        setPadding(
+                horizontalPadding,
+                verticalPadding,
+                horizontalPadding,
+                verticalPadding
+        );
+
     }
 
     public int getMode() {

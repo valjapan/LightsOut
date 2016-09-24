@@ -148,19 +148,18 @@ public class MainActivity extends AppCompatActivity implements
             loadQuestion(question);
         } else {
             if (mode == 0) {
+                lightsOutView.setBoardSize(4, 4);
                 // 初級
                 ranking = GameClientManager.Ranking.Easy;
-                lightsOutView.setBoardHeight(4);
-                lightsOutView.setBoardWidth(4);
             } else if (mode == 1) {
+                lightsOutView.setBoardSize(5, 5);
                 // 中級
                 for (int i = 0; i < 8; i++) {
-                    lightsOutView.setBoardHeight(5);
-                    lightsOutView.setBoardWidth(5);
                     prePoints.add(new Point(random.nextInt(5), random.nextInt(5)));
                 }
                 ranking = GameClientManager.Ranking.Normal;
             } else if (mode == 2) {
+                lightsOutView.setBoardSize(6, 6);
                 // 上級
                 for (int i = 0; i < 15; i++) {
                     prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
