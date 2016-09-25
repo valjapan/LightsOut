@@ -110,6 +110,8 @@
 
     </LinearLayout>
 
-    <include layout="@layout/layout_modal_make_share" />
+    <include layout="@layout/layout_modal_make_share"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

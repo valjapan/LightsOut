@@ -18,7 +18,7 @@ import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 import java.util.List;
 
 /**
- * Created by NabeshimaMAC on 2016/09/24.
+ * SharedQuestionがCallbackしたときの処理
  */
 
 public class SharedQuestionCallbackActivity extends AppCompatActivity {

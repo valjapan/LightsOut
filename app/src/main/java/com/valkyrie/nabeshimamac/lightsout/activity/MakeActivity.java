@@ -215,11 +215,15 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void shareTwitter(View view) {
         final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
-        ShareManager.shareTwitter(this, "URLをクリックして問題をとこう！！ \n" + questionUrl);
+        ShareManager.shareTwitter(this, "問題を共有しました！！\nURLをクリックして問題をとこう！！ \n#LightsOut" + questionUrl);
     }
 
     public void closeShareComplete(View view) {
         shareCompleteLayout.setVisibility(View.INVISIBLE);
+        lightsOutEachView.setButtonEnabled(true);
+        editText.setEnabled(true);
+        widthSpinner.setEnabled(true);
+        heightSpinner.setEnabled(true);
     }
 
     //save部分
@@ -238,6 +242,10 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     shareCompleteLayout.setVisibility(View.VISIBLE);
+                    lightsOutEachView.setButtonEnabled(false);
+                    editText.setEnabled(false);
+                    widthSpinner.setEnabled(false);
+                    heightSpinner.setEnabled(false);
                 }
             });
             // ShareしたことがわかるようにKeyを入れておく

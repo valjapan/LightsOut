@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * SharedPreferencesのManager
+ * SharedPreferences(保存部分)のManager
  */
 public class PreferencesManager {
     private static PreferencesManager instance;

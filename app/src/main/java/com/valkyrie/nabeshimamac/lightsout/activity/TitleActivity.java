@@ -33,10 +33,10 @@ import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 public class TitleActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private TextView textView, versiontextView;
+    private TextView textView, versionTextView;
     private ImageView googlePlay, editButton, shareTwitter;
-    private Button playEazy, playNomal, playHard , goOridinal;
-    private LinearLayout modeLayout;
+    private Button playEazy, playNomal, playHard , playShare;
+    private LinearLayout modeLayout, otherLayout;
     private RelativeLayout rankLayout;
 
     private GoogleApiClient apiClient;
@@ -54,26 +54,27 @@ public class TitleActivity extends AppCompatActivity implements
 
         modeLayout = (LinearLayout) findViewById(R.id.modeLayout);
         rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
+        otherLayout = (LinearLayout) findViewById(R.id.OtherLayout);
 
         googlePlay = (ImageView) findViewById(R.id.googleGame);
         editButton = (ImageView) findViewById(R.id.EditButton);
         shareTwitter = (ImageView) findViewById(R.id.shareTwitter);
 
         textView = (TextView) findViewById(R.id.textView);
-        versiontextView = (TextView) findViewById(R.id.versionName);
+        versionTextView = (TextView) findViewById(R.id.versionName);
         textView.setText("Lights Out");
 
         playEazy = (Button) findViewById(R.id.PlayEazy);
         playNomal = (Button) findViewById(R.id.PlayNomal);
         playHard = (Button) findViewById(R.id.PlayHard);
-        goOridinal = (Button) findViewById(R.id.rankOriginal);
+        playShare = (Button) findViewById(R.id.PlayShare);
 
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
         apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
 
 
-        versiontextView.setText("v" + BuildConfig.VERSION_NAME);
+        versionTextView.setText("v" + BuildConfig.VERSION_NAME);
 
             findViewById(R.id.shareTwitter).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -179,11 +180,11 @@ public class TitleActivity extends AppCompatActivity implements
     }
 
     public void googleGame(View v) {
-        modeLayout.setVisibility(View.VISIBLE);
-        rankLayout.setVisibility(View.VISIBLE);
         playEazy.setVisibility(View.INVISIBLE);
         playNomal.setVisibility(View.INVISIBLE);
         playHard.setVisibility(View.INVISIBLE);
+        playShare.setVisibility(View.INVISIBLE);
+        rankLayout.setVisibility(View.VISIBLE);
     }
 
     public void goEdit(View v) {
@@ -208,11 +209,11 @@ public class TitleActivity extends AppCompatActivity implements
     }
 
     public void goTitle(View v) {
-        modeLayout.setVisibility(View.VISIBLE);
-        rankLayout.setVisibility(View.INVISIBLE);
         playEazy.setVisibility(View.VISIBLE);
         playNomal.setVisibility(View.VISIBLE);
         playHard.setVisibility(View.VISIBLE);
+        playShare.setVisibility(View.VISIBLE);
+        rankLayout.setVisibility(View.INVISIBLE);
     }
 
     public void goMedal(View v) {

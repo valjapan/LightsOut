@@ -316,6 +316,16 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         isSound = sound;
     }
 
+
+    public void setButtonEnabled(boolean bool){
+        for (int i = 0; i < boardHeight; i++) {
+            for (int j = 0; j < boardWidth; j++) {
+                btns[i][j].setEnabled(bool);
+            }
+        }
+    }
+
+
     public interface LightsOutListener {
         // ますをタップした時に呼ばれる
         void onButtonTapped(int line, int row, int tapCount);
