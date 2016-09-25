@@ -4,6 +4,7 @@
     <SwitchPreference
         android:key="sound"
         android:summary="@string/setting_mute_summary"
-        android:title="@string/setting_mute_title" />
+        android:title="@string/setting_mute_title"
+        android:defaultValue="true" />
 
 </PreferenceScreen>

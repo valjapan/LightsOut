@@ -47,7 +47,6 @@ public class ShareManager {
         Uri uri = Uri.parse("market://details?id=" + shareId);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         activity.startActivity(intent);
-
     }
 
     public static String createShareQuestionUrl(String shareKey) {
