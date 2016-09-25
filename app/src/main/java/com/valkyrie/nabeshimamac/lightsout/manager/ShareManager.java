@@ -1,17 +1,22 @@
 package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 
 /**
- * Created by NabeshimaMAC on 2016/09/22.
+ * SNS共有(Twitter)のManager
  */
 
 public class ShareManager {
     private static final String TWITTER_ID = "com.twitter.android";
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, ShareManager.class);
+    }
 
     public static void shareTwitter(Activity activity, String shareText) {
         if (isShareAppInstall(activity, TWITTER_ID)) {

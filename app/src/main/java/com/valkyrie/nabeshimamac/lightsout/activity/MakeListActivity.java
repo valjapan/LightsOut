@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,10 @@ public class MakeListActivity extends AppCompatActivity {
 
     private ListView listView;
     private QuestionAdapter adapter;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, MakeListActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

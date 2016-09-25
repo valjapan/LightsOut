@@ -1,6 +1,7 @@
 package com.valkyrie.nabeshimamac.lightsout.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,11 @@ public class SharedQuestionAdapter extends ArrayAdapter<SharedQuestion> {
         super(context, 0);
         inflater = LayoutInflater.from(context);
     }
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SharedQuestionAdapter.class);
+    }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

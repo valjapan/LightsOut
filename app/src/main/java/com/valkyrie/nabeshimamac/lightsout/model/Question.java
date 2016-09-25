@@ -1,5 +1,8 @@
 package com.valkyrie.nabeshimamac.lightsout.model;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -24,6 +27,10 @@ public class Question extends Model {
     public Date createdAt;
     @Column(name = "SharedKey")
     public String sharedKey;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, Question.class);
+    }
 
     public Question() {
         super();

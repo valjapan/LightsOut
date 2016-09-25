@@ -1,6 +1,7 @@
 package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
@@ -12,6 +13,10 @@ import com.valkyrie.nabeshimamac.lightsout.R;
 public class TapManager {
     private SoundPool soundPool;
     private int soundId;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, TapManager.class);
+    }
 
     public TapManager(Context context) {
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);

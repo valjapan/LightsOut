@@ -1,6 +1,7 @@
 package com.valkyrie.nabeshimamac.lightsout.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
 import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
 
 /**
@@ -46,6 +48,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     @ColorInt
     int pink;
     //使用色の宣言
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, MakeActivity.class);
+    }
 
     private LightsOutListener listener;
 

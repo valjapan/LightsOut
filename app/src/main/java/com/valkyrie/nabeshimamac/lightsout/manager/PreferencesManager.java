@@ -1,6 +1,7 @@
 package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -13,6 +14,10 @@ public class PreferencesManager {
     private SharedPreferences defaultPreferences;
 
     //ShardPreferencesの保存部分
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, PreferencesManager.class);
+    }
 
     private PreferencesManager(Context context) {
         appPreferences = context.getSharedPreferences("LightsOuts", Context.MODE_PRIVATE);

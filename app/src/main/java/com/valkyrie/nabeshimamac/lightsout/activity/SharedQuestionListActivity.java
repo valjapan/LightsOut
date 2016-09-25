@@ -1,5 +1,7 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,11 +19,19 @@ import com.valkyrie.nabeshimamac.lightsout.adapter.SharedQuestionAdapter;
 import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 
+
+/**
+ * 共有問題のListView
+ */
 public class SharedQuestionListActivity extends AppCompatActivity {
     private static final String TAG = SharedQuestionListActivity.class.getSimpleName();
 
     private ListView listView;
     private SharedQuestionAdapter adapter;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SharedQuestionCallbackActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

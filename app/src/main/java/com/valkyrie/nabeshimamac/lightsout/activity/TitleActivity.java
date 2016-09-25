@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -40,6 +41,10 @@ public class TitleActivity extends AppCompatActivity implements
 
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, TitleActivity.class);
+    }
 
 
     @Override
@@ -146,19 +151,19 @@ public class TitleActivity extends AppCompatActivity implements
     }
 
     public void goEazy(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 0);
         startActivity(intent);
     }
 
     public void goNomal(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 1);
         startActivity(intent);
     }
 
     public void goHard(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 2);
         startActivity(intent);
     }

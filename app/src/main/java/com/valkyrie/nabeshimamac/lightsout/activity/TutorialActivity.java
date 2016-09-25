@@ -1,5 +1,7 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +19,10 @@ import com.valkyrie.nabeshimamac.lightsout.R;
 public class TutorialActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
     private Button button;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, TitleActivity.class);
+    }
 
     //チュートリアル部分
 

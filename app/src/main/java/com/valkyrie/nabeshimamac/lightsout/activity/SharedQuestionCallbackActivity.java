@@ -1,5 +1,6 @@
 package com.valkyrie.nabeshimamac.lightsout.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,10 @@ import java.util.List;
  */
 
 public class SharedQuestionCallbackActivity extends AppCompatActivity {
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SharedQuestionListActivity.class);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

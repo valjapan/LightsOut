@@ -28,6 +28,10 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
         inflater = LayoutInflater.from(context);
     }
 
+    public static Intent createIntent(Context context) {
+        return new Intent(context, QuestionAdapter.class);
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder viewHolder;

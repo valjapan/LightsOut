@@ -1,17 +1,24 @@
 package com.valkyrie.nabeshimamac.lightsout;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 /**
- * Created by NabeshimaMAC on 2016/09/24.
+ * 設定のFragment
  */
 
 public class SettingFragment extends PreferenceFragment {
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context,SettingFragment.class);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.pref_setting);
     }
+
 }

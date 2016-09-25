@@ -1,6 +1,8 @@
 package com.valkyrie.nabeshimamac.lightsout.manager;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -15,6 +17,10 @@ public class GameClientManager {
     public static final int CODE_RANKING = 200;
     public static final int CODE_MEDAL = 300;
     //どこの画面に遷移しましたよっていう値
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, GameClientManager.class);
+    }
 
     public enum Ranking {
         Easy("初級ランキング", "CgkIxf6K1KAMEAIQAQ"),

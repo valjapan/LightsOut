@@ -1,17 +1,24 @@
 package com.valkyrie.nabeshimamac.lightsout.manager;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 /**
- * Created by NabeshimaMAC on 2016/09/22.
+ * FirebaseのManager
  */
 public class FirebaseManager {
     private static final Object LOCK = new Object();
 
     private static FirebaseDatabase database;
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, FirebaseManager.class);
+    }
 
     private static FirebaseDatabase getInstnace() {
         synchronized (LOCK) {

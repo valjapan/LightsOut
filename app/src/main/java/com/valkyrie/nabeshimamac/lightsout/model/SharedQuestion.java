@@ -1,5 +1,8 @@
 package com.valkyrie.nabeshimamac.lightsout.model;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +17,10 @@ public class SharedQuestion implements Serializable {
     public int height;
 
     public SharedQuestion() {
+    }
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SharedQuestion.class);
     }
 
     public SharedQuestion(String title, String board, int width, int height) {
