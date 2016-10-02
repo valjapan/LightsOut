@@ -74,13 +74,17 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         //盤面の情報のテキスト
 
         widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
-        final ArrayAdapter widthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
+
+        final ArrayAdapter widthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.size_spinner));
 
         widthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         widthSpinner.setAdapter(widthAdapter);
 
         heightSpinner = (Spinner) findViewById(R.id.spinnerHeight);
-        final ArrayAdapter heightAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.size_spinner));
+        final ArrayAdapter heightAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.size_spinner));
+
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightSpinner.setAdapter(heightAdapter);
 
@@ -215,7 +219,8 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void shareTwitter(View view) {
         final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
-        ShareManager.shareTwitter(this, "問題を共有しました！！\nURLをクリックして問題をとこう！！ \n#LightsOut" + questionUrl);
+        ShareManager.shareTwitter(this, "シンプルパズルゲーム【LightsOut】で問題を共有しました！！" +
+                "\nURLをクリックして問題をとこう！！ \n#LightsOut \n" + questionUrl);
     }
 
     public void closeShareComplete(View view) {

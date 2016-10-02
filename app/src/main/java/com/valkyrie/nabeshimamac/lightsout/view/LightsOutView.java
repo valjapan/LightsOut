@@ -240,6 +240,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void setBoardSize(int width, int height) {
+        if (width == 0 || height == 0){
+            return;
+        }
         this.boardHeight = height;
         this.boardWidth = width;
         loadButtons();
@@ -247,14 +250,19 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void setBoardHeight(int boardHeight) {
+        if (boardHeight == 0 ){
+            return;
+        }
         this.boardHeight = boardHeight;
         loadButtons();
         resetGame();
         //boardSizeの配置
-
     }
 
     public void setBoardWidth(int boardWidth) {
+        if (boardWidth == 0){
+            return;
+        }
         this.boardWidth = boardWidth;
         loadButtons();
         resetGame();
