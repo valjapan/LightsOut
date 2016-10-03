@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -34,8 +35,9 @@ public class TitleActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private TextView textView, versionTextView;
-    private ImageView googlePlay, editButton, shareTwitter;
-    private Button playEazy, playNomal, playHard , playShare;
+    private ImageView googlePlayImageView, editButtonImageView, shareTwitter;
+    private Button playEazy, playNomal, playHard , playShare , goEazyRank , goNomalRank ,
+            goHardRank , goShareRank ,returmMode;
     private LinearLayout modeLayout, otherLayout;
     private RelativeLayout rankLayout;
 
@@ -52,22 +54,43 @@ public class TitleActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
 
+        Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
+        Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
+
+
         modeLayout = (LinearLayout) findViewById(R.id.modeLayout);
         rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
         otherLayout = (LinearLayout) findViewById(R.id.OtherLayout);
 
-        googlePlay = (ImageView) findViewById(R.id.googleGame);
-        editButton = (ImageView) findViewById(R.id.EditButton);
+        googlePlayImageView = (ImageView) findViewById(R.id.googleGame);
+        editButtonImageView = (ImageView) findViewById(R.id.EditButton);
         shareTwitter = (ImageView) findViewById(R.id.shareTwitter);
 
         textView = (TextView) findViewById(R.id.textView);
+
+
+
         versionTextView = (TextView) findViewById(R.id.versionName);
-        textView.setText("Lights Out");
 
         playEazy = (Button) findViewById(R.id.PlayEazy);
         playNomal = (Button) findViewById(R.id.PlayNomal);
         playHard = (Button) findViewById(R.id.PlayHard);
         playShare = (Button) findViewById(R.id.PlayShare);
+        goEazyRank = (Button) findViewById(R.id.rankEazy);
+        goNomalRank = (Button) findViewById(R.id.rankNomal);
+        goHardRank = (Button) findViewById(R.id.rankHard);
+        goShareRank = (Button) findViewById(R.id.rankOriginal);
+        returmMode = (Button) findViewById(R.id.returnTitle);
+
+        textView.setTypeface(gothicAdobe);
+        playEazy.setTypeface(gothicApple);
+        playNomal.setTypeface(gothicApple);
+        playHard.setTypeface(gothicApple);
+        playShare.setTypeface(gothicApple);
+        goEazyRank.setTypeface(gothicApple);
+        goNomalRank.setTypeface(gothicApple);
+        goHardRank.setTypeface(gothicApple);
+        goShareRank.setTypeface(gothicApple);
 
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
@@ -149,6 +172,10 @@ public class TitleActivity extends AppCompatActivity implements
     @Override
     public void onConnectionSuspended(int i) {
         apiClient.connect();
+    }
+
+    public void fonts(){
+
     }
 
     public void goEazy(View v) {

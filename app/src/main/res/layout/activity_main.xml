@@ -103,7 +103,7 @@
 
             </com.valkyrie.nabeshimamac.lightsout.view.LightsOutView>
 
-        </LinearLayout>
+            </LinearLayout>
     </LinearLayout>
 
     <include layout="@layout/layout_modal_start" />

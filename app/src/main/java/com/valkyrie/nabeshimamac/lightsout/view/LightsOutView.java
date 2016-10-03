@@ -38,6 +38,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     private int tapCount;
     private boolean isSound = true;
 
+    private Drawable drawablePinkOff;
+    private Drawable drawableBlueOff;
+
     // 0 -> Game, 1 -> Make
     private int mode = MODE_GAME;
 
@@ -69,6 +72,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
         blue = ContextCompat.getColor(getContext(), R.color.colorBlueOriginal);
         pink = ContextCompat.getColor(getContext(), R.color.colorPinkOriginal);
+
+        drawablePinkOff = ResourcesCompat.getDrawable(getResources(), R.drawable.red_off_view, null);
+        drawableBlueOff = ResourcesCompat.getDrawable(getResources(), R.drawable.blue_off_view, null);
 
         tapInstance = new TapManager(getContext());
 
@@ -111,7 +117,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
         for (int i = 0; i < boardHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
-                btns[i][j].setBackgroundColor(blue);
+                btns[i][j].setBackground(drawableBlueOff);
                 //全てを青色に設置
                 flag[i][j] = false;
                 //Boolean型で統一する
@@ -163,7 +169,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     private void loadButtons() {
         removeAllViews();
         btns = new Button[boardHeight][boardWidth];
-        final int margin = 8;
+        final int margin = 13;
         final int blockSize = Math.min(getWidth() / boardWidth, getHeight() / boardHeight);
         final LayoutParams columnLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         final LayoutParams rowLayoutParams = new LayoutParams(blockSize - margin * 2, blockSize - margin * 2);
@@ -283,9 +289,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         for (int i = 0; i < boardHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
                 if (flag[i][j]) {
-                    btns[i][j].setBackgroundColor(pink);
+                    btns[i][j].setBackground(drawablePinkOff);
                 } else {
-                    btns[i][j].setBackgroundColor(blue);
+                    btns[i][j].setBackground(drawableBlueOff);
                 }
             }
         }

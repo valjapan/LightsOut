@@ -33,7 +33,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="70dp"
                 android:layout_marginTop="40dp"
-                android:text="Large Text"
+                android:text="Lights Out"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorPrimary"
                 android:textSize="55dp" />
@@ -46,10 +46,10 @@
                 android:height="60dp"
                 android:background="@drawable/button_design_light_blue"
                 android:onClick="goEazy"
-                android:text="初級"
+                android:text="初 級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="30dp"
+                android:textSize="33dp"
                 android:layout_gravity="center_horizontal" />
 
             <Button
@@ -61,10 +61,10 @@
                 android:height="60dp"
                 android:background="@drawable/button_design_light_green"
                 android:onClick="goNomal"
-                android:text="中級"
+                android:text="中 級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="30dp" />
+                android:textSize="33dp" />
 
             <Button
                 android:id="@+id/PlayHard"
@@ -75,10 +75,10 @@
                 android:height="60dp"
                 android:background="@drawable/button_design_orange"
                 android:onClick="goHard"
-                android:text="上級"
+                android:text="上 級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="30dp" />
+                android:textSize="33dp" />
 
             <Button
                 android:id="@+id/PlayShare"
@@ -92,7 +92,7 @@
                 android:text="共有問題"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="30dp" />
+                android:textSize="33dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,9 +174,9 @@
         android:background="#8000"
         android:padding="@dimen/activity_vertical_margin"
         android:visibility="invisible"
+        android:splitMotionEvents="false"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:splitMotionEvents="false">
+        android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/rankEazy"
@@ -191,7 +191,7 @@
             android:text="初級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="30dp"
+            android:textSize="32dp"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -207,7 +207,7 @@
             android:text="中級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="30dp"
+            android:textSize="32dp"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -221,7 +221,7 @@
             android:text="上級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="30dp"
+            android:textSize="32dp"
             android:layout_below="@+id/rankNomal"
             android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true" />
@@ -238,7 +238,7 @@
             android:text="オリジナルランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="25dp"
+            android:textSize="27dp"
             android:layout_below="@+id/rankHard"
             android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true" />
@@ -253,7 +253,7 @@
             android:text="戻る"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="30dp"
+            android:textSize="32dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="16dp" />

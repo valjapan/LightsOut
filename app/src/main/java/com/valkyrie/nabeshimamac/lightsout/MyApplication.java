@@ -9,7 +9,6 @@ import com.activeandroid.app.Application;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
 
 /**
  * GooglePlayGame・Analyticsの処理
@@ -36,6 +35,7 @@ public class MyApplication extends Application {
                 .build();
 
         analytics = FirebaseAnalytics.getInstance(this);
+
     }
 
     @Override

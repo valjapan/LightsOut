@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -105,11 +106,16 @@ public class MainActivity extends AppCompatActivity implements
         titleClearTextView = (TextView) findViewById(R.id.titleClear);
         //IDの関連付け
 
+        Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
+        Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
+        Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
+
+
+
         lightsOutView.setOnLigitsOutListener(this);
         counterTextView.setText(String.format("%1$02d", 0));
         timerTextView.setText("00:00:00");
         timerTextView.setTextColor(Color.BLACK);
-        //TextViewにsetTextしているとこ
 
         titleTextView = (TextView) findViewById(R.id.title);
         messageTextView = (TextView) findViewById(R.id.messege);
@@ -129,6 +135,16 @@ public class MainActivity extends AppCompatActivity implements
                 return true;
             }
         });
+
+        timerTextView.setTypeface(gothicAdobe);
+        counterTextView.setTypeface(gothicAdobe);
+        totalTextView.setTypeface(gothicAdobe);
+        messageTextView.setTypeface(gothicApple);
+        titleTextView.setTypeface(gothicApple);
+        titleClearTextView.setTypeface(sign);
+        countResultTextView.setTypeface(gothicAdobe);
+        timeResultTextView.setTypeface(gothicAdobe);
+        //TextViewにsetTextしているとこ
 
         showStartModal();
         //showStartModelを起動
@@ -399,7 +415,8 @@ public class MainActivity extends AppCompatActivity implements
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
         titleTextView.setText("さぁ始めよう！");
-        messageTextView.setText("全て赤いパネルにしよう。\nStartでゲーム開始です。\n(タップ音に注意！)");
+        messageTextView.setText("全て反対のパネルにしよう。\nStartでゲーム開始です。");
+        //TODO if文を使って反対→〇〇色に変える
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -413,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements
     private void showClearModal() {
         startLayout.setVisibility(View.INVISIBLE);
         clearLayout.setVisibility(View.VISIBLE);
-        titleClearTextView.setText("Congratulations");
+        titleClearTextView.setText("Congratulations!");
 
         final long nowTime = System.currentTimeMillis();
         long minute = (nowTime - startedAt) / 1000 / 60;

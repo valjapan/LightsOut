@@ -10,15 +10,16 @@ import android.widget.ViewFlipper;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.valkyrie.nabeshimamac.lightsout.MyApplication;
-import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 
 /**
  * tutorial画面のActivity
  */
 public class TutorialActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
-    private Button button;
+    private Button buttonTutorial;
+
 
     public static Intent createIntent(Context context) {
         return new Intent(context, TitleActivity.class);
@@ -31,21 +32,21 @@ public class TutorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
-        button = (Button) findViewById(R.id.buttonTutorial);
+        buttonTutorial = (Button) findViewById(R.id.buttonTutorial);
 
         Bundle bundle = new Bundle();
         ((MyApplication) getApplication()).analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, bundle);
     }
 
     public void next(View v) {
-        if (viewFlipper.getDisplayedChild() < 2) {
+        if (viewFlipper.getDisplayedChild() < 3) {
             viewFlipper.showNext();
         } else {
             finish();
         }
-        if (viewFlipper.getDisplayedChild() == 2) {
+        if (viewFlipper.getDisplayedChild() == 3) {
             PreferencesManager.getInstance(this).checkTutorialEnd();
-            button.setText("ゲームに戻る");
+
         }
     }
 }

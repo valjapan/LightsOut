@@ -159,7 +159,48 @@
                     android:src="@drawable/img_tutorial3"
                     android:scaleType="fitCenter" />
             </LinearLayout>
-        </ViewFlipper>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/layoutStep4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/tutorial_title_4"
+                    android:textIsSelectable="false"
+                    android:textSize="50dp"
+                    android:textColor="@android:color/holo_blue_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="パネルをタップします"
+                    android:textSize="30dp"
+                    android:textColor="@android:color/holo_blue_light"
+                    android:lines="3" />
+
+
+            </LinearLayout>
+
+
+                 <com.valkyrie.nabeshimamac.lightsout.view.LightsOutView
+                     android:id="@+id/lightsOutView"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentTop="true"
+                     android:layout_weight="1">
+                  </com.valkyrie.nabeshimamac.lightsout.view.LightsOutView>
+
+    </ViewFlipper>
 
         <Button
             android:id="@+id/buttonTutorial"
