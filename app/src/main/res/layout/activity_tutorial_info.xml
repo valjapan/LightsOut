@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activity.TutorialActivity">
+    tools:context=".activity.TutorialInformationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:id="@+id/layoutStep1">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center|top"
@@ -35,22 +35,23 @@
                     android:text="@string/tutorial_title_1"
                     android:textIsSelectable="false"
                     android:textSize="50dp"
-                    android:textColor="@android:color/holo_blue_light" />
+                    android:textColor="@android:color/holo_blue_light"
+                    android:id="@+id/tutorialInfoTitle1"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:text="パネルをタップします"
+                    android:text="パネルをタップします\n\n"
                     android:textSize="30dp"
                     android:textColor="@android:color/holo_blue_light"
-                    android:lines="3" />
+                    android:id="@+id/tutorialInfoContents1" />
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:src="@drawable/img_tutorial1"
                     android:scaleType="fitCenter" />
             </LinearLayout>
@@ -62,8 +63,8 @@
                 android:id="@+id/layoutStep2" >
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tutorialInfoTitle2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center|top"
@@ -71,10 +72,11 @@
                     android:text="@string/tutorial_title_2"
                     android:textIsSelectable="false"
                     android:textSize="50dp"
-                    android:textColor="@android:color/holo_blue_light" />
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/tutorialInfoContents2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -99,8 +101,8 @@
                 android:id="@+id/layoutStep3" >
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tutorialInfoTitle3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center|top"
@@ -108,7 +110,8 @@
                     android:text="@string/tutorial_title_3"
                     android:textIsSelectable="false"
                     android:textSize="50dp"
-                    android:textColor="@android:color/holo_blue_light" />
+                    android:textColor="@android:color/holo_blue_light"
+                    android:textAlignment="center" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -121,34 +124,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="全て"
-                        android:id="@+id/textView4"
+                        android:text="全て\n"
+                        android:id="@+id/tutorialInfoContents3Of1"
                         android:layout_gravity="center"
                         android:textColor="@color/colorBlueOriginal"
                         android:textSize="30dp"
-                        android:lines="3" />
+                        android:layout_marginTop="20dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="ピンクに"
-                        android:id="@+id/textView7"
+                        android:text="ピンクに\n"
+                        android:id="@+id/tutorialInfoContents3Of2"
                         android:layout_gravity="center"
                         android:textColor="@color/colorPinkOriginal"
                         android:textSize="30dp"
-                        android:lines="3" />
+                        android:layout_marginTop="20dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="します"
-                        android:id="@+id/textView8"
+                        android:text="します\n"
+                        android:id="@+id/tutorialInfoContents3Of3"
                         android:layout_gravity="center"
                         android:textColor="@color/colorBlueOriginal"
                         android:textSize="30dp"
-                        android:lines="3" />
+                        android:layout_marginTop="20dp" />
                 </LinearLayout>
 
                 <ImageView
@@ -160,47 +163,8 @@
                     android:scaleType="fitCenter" />
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/layoutStep4">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center|top"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/tutorial_title_4"
-                    android:textIsSelectable="false"
-                    android:textSize="50dp"
-                    android:textColor="@android:color/holo_blue_light" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:text="パネルをタップします"
-                    android:textSize="30dp"
-                    android:textColor="@android:color/holo_blue_light"
-                    android:lines="3" />
-
-
-            </LinearLayout>
-
-
-                 <com.valkyrie.nabeshimamac.lightsout.view.LightsOutView
-                     android:id="@+id/lightsOutView"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:layout_alignParentStart="true"
-                     android:layout_alignParentTop="true"
-                     android:layout_weight="1">
-                  </com.valkyrie.nabeshimamac.lightsout.view.LightsOutView>
-
-    </ViewFlipper>
+        </ViewFlipper>
 
         <Button
             android:id="@+id/buttonTutorial"

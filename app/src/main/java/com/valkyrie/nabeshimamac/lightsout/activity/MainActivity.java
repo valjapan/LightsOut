@@ -104,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements
         timeResultTextView = (TextView) findViewById(R.id.timeResult);
         countResultTextView = (TextView) findViewById(R.id.countResult);
         titleClearTextView = (TextView) findViewById(R.id.titleClear);
+        titleTextView = (TextView) findViewById(R.id.title);
+        messageTextView = (TextView) findViewById(R.id.messege);
+        modalButton = (Button) findViewById(R.id.modalButton);
+        startLayout = (RelativeLayout) findViewById(R.id.startLayout);
+        clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         //IDの関連付け
 
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
@@ -117,24 +122,19 @@ public class MainActivity extends AppCompatActivity implements
         timerTextView.setText("00:00:00");
         timerTextView.setTextColor(Color.BLACK);
 
-        titleTextView = (TextView) findViewById(R.id.title);
-        messageTextView = (TextView) findViewById(R.id.messege);
-        modalButton = (Button) findViewById(R.id.modalButton);
-        startLayout = (RelativeLayout) findViewById(R.id.startLayout);
         startLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
-        //IDの関連付け
-        clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         clearLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
+        //startレイアウトとclearレイアウトの表示部分
 
         timerTextView.setTypeface(gothicAdobe);
         counterTextView.setTypeface(gothicAdobe);
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements
         titleClearTextView.setTypeface(sign);
         countResultTextView.setTypeface(gothicAdobe);
         timeResultTextView.setTypeface(gothicAdobe);
-        //TextViewにsetTextしているとこ
+        //フォントの変更
 
         showStartModal();
         //showStartModelを起動
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements
         apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
 
         if (!PreferencesManager.getInstance(this).isTutorialEnd()) {
-            Intent intent = new Intent(this, TutorialActivity.class);
+            Intent intent = new Intent(this, TutorialInformationActivity.class);
             startActivity(intent);
             // チュートリアルが終わってない場合
             // Tutorial画面に移動
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             //ツールバーのリセット部分
             case R.id.menu_info:
-                Intent intent = new Intent(this, TutorialActivity.class);
+                Intent intent = new Intent(this, TutorialInformationActivity.class);
                 startActivity(intent);
                 break;
             //ツールバーのチュートリアル部分

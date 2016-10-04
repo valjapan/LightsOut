@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -44,13 +42,6 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     // 0 -> Game, 1 -> Make
     private int mode = MODE_GAME;
 
-    private
-    @ColorInt
-    int blue;
-    private
-    @ColorInt
-    int pink;
-    //使用色の宣言
 
     public static Intent createIntent(Context context) {
         return new Intent(context, MakeActivity.class);
@@ -69,9 +60,6 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     public LightsOutView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.setOrientation(VERTICAL);
-
-        blue = ContextCompat.getColor(getContext(), R.color.colorBlueOriginal);
-        pink = ContextCompat.getColor(getContext(), R.color.colorPinkOriginal);
 
         drawablePinkOff = ResourcesCompat.getDrawable(getResources(), R.drawable.red_off_view, null);
         drawableBlueOff = ResourcesCompat.getDrawable(getResources(), R.drawable.blue_off_view, null);

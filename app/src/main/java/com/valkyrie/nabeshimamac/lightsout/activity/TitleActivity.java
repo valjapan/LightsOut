@@ -31,6 +31,7 @@ import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 /**
  * title画面のActivity
  */
+
 public class TitleActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -172,10 +173,6 @@ public class TitleActivity extends AppCompatActivity implements
     @Override
     public void onConnectionSuspended(int i) {
         apiClient.connect();
-    }
-
-    public void fonts(){
-
     }
 
     public void goEazy(View v) {
