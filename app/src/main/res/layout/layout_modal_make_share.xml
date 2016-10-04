@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/total"
+                    android:id="@+id/totalShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/titleClear"
@@ -69,11 +69,11 @@
             android:gravity="center_vertical"
             android:text="作った問題をSNSでシェアしよう！"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:visibility="visible" />
 
         <Button
-            android:id="@+id/rankButton"
+            android:id="@+id/shareTwitterButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

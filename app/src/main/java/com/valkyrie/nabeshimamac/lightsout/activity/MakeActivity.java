@@ -3,6 +3,7 @@ package com.valkyrie.nabeshimamac.lightsout.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -46,9 +48,10 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private LightsOutView lightsOutEachView;
     private EditText editText;
-    private TextView detailText;
+    private TextView detailText, shareTitle, shareConrents;
     private Spinner widthSpinner, heightSpinner;
     private RelativeLayout shareCompleteLayout;
+    private Button shareTwitterButton, shareBackButton;
 
     @NonNull
     private Question question;
@@ -72,6 +75,11 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         detailText = (TextView) findViewById(R.id.detaleTextView);
         //盤面の情報のテキスト
+
+        shareTitle = (TextView) findViewById(R.id.totalShare);
+        shareConrents = (TextView) findViewById(R.id.countResult);
+        shareTwitterButton = (Button) findViewById(R.id.shareTwitterButton);
+        shareBackButton = (Button) findViewById(R.id.retryButton);
 
         widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
 
@@ -242,6 +250,12 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     private void share() {
         updateQuestion();
         SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
+        Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
+        shareTitle.setTypeface(gothicApple);
+        shareConrents.setTypeface(gothicApple);
+        shareTwitterButton.setTypeface(gothicApple);
+        shareBackButton.setTypeface(gothicApple);
+
         if (TextUtils.isEmpty(question.sharedKey)) {
             final String key = FirebaseManager.pushObject("questions", sharedQuestion, new OnCompleteListener<Void>() {
                 @Override
