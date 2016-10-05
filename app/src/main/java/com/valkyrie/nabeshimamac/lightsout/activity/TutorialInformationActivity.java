@@ -28,8 +28,6 @@ public class TutorialInformationActivity extends AppCompatActivity {
         return new Intent(context, TitleActivity.class);
     }
 
-    //チュートリアル部分
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +36,6 @@ public class TutorialInformationActivity extends AppCompatActivity {
         buttonTutorial = (Button) findViewById(R.id.buttonTutorial);
 
         buttonTutorial.setText("NEXT");
-
 
         Bundle bundle = new Bundle();
         ((MyApplication) getApplication()).analytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, bundle);
@@ -55,16 +52,18 @@ public class TutorialInformationActivity extends AppCompatActivity {
 
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
+        //フォントの読み込み
 
         titleTextView1.setTypeface(sign);
         titleTextView2.setTypeface(sign);
         titleTextView3.setTypeface(sign);
-
         contentsTextView1.setTypeface(gothicAdobe);
         contentsTextView2.setTypeface(gothicAdobe);
         contentsTextView3Of1.setTypeface(gothicAdobe);
         contentsTextView3Of2.setTypeface(gothicAdobe);
         contentsTextView3Of3.setTypeface(gothicAdobe);
+        buttonTutorial.setTypeface(gothicAdobe);
+        //フォントの指定
 
     }
 

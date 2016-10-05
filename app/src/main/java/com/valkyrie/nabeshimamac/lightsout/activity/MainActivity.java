@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
     private LightsOutView lightsOutView;
     private TextView timerTextView, counterTextView , titleTextView, messageTextView,
             totalTextView, timeResultTextView, countResultTextView, titleClearTextView;
-    private Button modalButton;
+    private Button modalButton, returnTitleButton, goMyRankButton;
     private RelativeLayout startLayout, clearLayout;
     private long startedAt;
     private Timer timer;
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements
         //アクションバーの左側（閉じる）部分
 
         lightsOutView = (LightsOutView) findViewById(R.id.lightsOutView);
+
         timerTextView = (TextView) findViewById(R.id.timer);
         counterTextView = (TextView) findViewById(R.id.counter);
         totalTextView = (TextView) findViewById(R.id.total);
@@ -106,7 +107,11 @@ public class MainActivity extends AppCompatActivity implements
         titleClearTextView = (TextView) findViewById(R.id.titleClear);
         titleTextView = (TextView) findViewById(R.id.title);
         messageTextView = (TextView) findViewById(R.id.messege);
+
         modalButton = (Button) findViewById(R.id.modalButton);
+        returnTitleButton = (Button) findViewById(R.id.retryButton);
+        goMyRankButton = (Button) findViewById(R.id.rankButton);
+
         startLayout = (RelativeLayout) findViewById(R.id.startLayout);
         clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         //IDの関連付け
@@ -114,13 +119,13 @@ public class MainActivity extends AppCompatActivity implements
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
-
-
+        //Typeの呼び出し
 
         lightsOutView.setOnLigitsOutListener(this);
         counterTextView.setText(String.format("%1$02d", 0));
         timerTextView.setText("00:00:00");
         timerTextView.setTextColor(Color.BLACK);
+        //timerの表示部分
 
         startLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -144,6 +149,9 @@ public class MainActivity extends AppCompatActivity implements
         titleClearTextView.setTypeface(sign);
         countResultTextView.setTypeface(gothicAdobe);
         timeResultTextView.setTypeface(gothicAdobe);
+        modalButton.setTypeface(gothicAdobe);
+        returnTitleButton.setTypeface(gothicAdobe);
+        goMyRankButton.setTypeface(gothicAdobe);
         //フォントの変更
 
         showStartModal();
@@ -152,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements
         final int mode = getIntent().getIntExtra("mode", 0);
 
         prePoints = new ArrayList<>();
+
         if (getIntent().hasExtra(KEY_QUESTION_ID)) {
             final long questionId = getIntent().getLongExtra(KEY_QUESTION_ID, -1);
             ranking = GameClientManager.Ranking.Original;
@@ -163,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements
             final Question question = sharedQuestion.toQuestion();
             loadQuestion(question);
         } else {
+
             if (mode == 0) {
                 lightsOutView.setBoardSize(4, 4);
                 // 初級
@@ -253,6 +263,7 @@ public class MainActivity extends AppCompatActivity implements
         isPlaying = false;
         final int clearCount = PreferencesManager.getInstance(this).addClearCount(ranking);
         GameClientManager.Medal medal = null;
+
         if (clearCount == 1) {
             // いずれかの難易度の初回クリア
             if (ranking == GameClientManager.Ranking.Easy) {
@@ -264,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements
             } else if (ranking == GameClientManager.Ranking.Original) {
                 medal = GameClientManager.Medal.FirstMakePuzzlePlay;
             }
+
         } else if (clearCount == 10) {
             // いずれかの難易度の10回クリア
             if (ranking == GameClientManager.Ranking.Easy) {

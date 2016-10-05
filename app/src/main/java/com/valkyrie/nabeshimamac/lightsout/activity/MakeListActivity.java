@@ -22,7 +22,6 @@ import java.util.List;
  */
 public class MakeListActivity extends AppCompatActivity {
     private static final int CODE_MAKE = 1;
-
     private ListView listView;
     private QuestionAdapter adapter;
 

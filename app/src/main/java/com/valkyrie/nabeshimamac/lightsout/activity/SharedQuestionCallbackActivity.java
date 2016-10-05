@@ -52,6 +52,7 @@ public class SharedQuestionCallbackActivity extends AppCompatActivity {
             Log.d(SharedQuestionCallbackActivity.class.getSimpleName(), "ShareKey: " + sharedKey);
             getData(sharedKey);
         }
+        //shareするURLを取得
     }
 
 
@@ -88,5 +89,6 @@ public class SharedQuestionCallbackActivity extends AppCompatActivity {
             }
         });
     }
+    //データ取得する処理
 
 }

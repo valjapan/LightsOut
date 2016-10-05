@@ -59,19 +59,25 @@ public class TutorialLightsOutView extends LightsOutView {
                 String message = "";
                 // 間違った場所をタップ
                 final int dx = tapPoint.x - tutorialPoint.x;
+                //縦の座標
                 final int dy = tapPoint.y - tutorialPoint.y;
+                //横の座標
+
                 if (dx > 0) {
-                    message += "右に" + dx + "マス、 ";
+                    message += "上に" + dx + "マス ";
+                } else if (dx == 0) {
+                    message += "";
                 } else if (dx < 0) {
-                    message += "左に" + -dx + "マス、 ";
+                    message += "下に" + -dx + "マス ";
                 }
 
                 if (dy > 0) {
-                    message += "下に" + dy + "マス、";
-                } else if (dy < 0) {
-                    message += "上に" + -dy + "マス、 ";
+                    message += "左に" + dy + "マス";
+                }else if (dy == 0){
+                    message += "";
+                }else if (dy < 0) {
+                    message += "右に" + -dy + "マス ";
                 }
-
                 message += "をタップしてね！";
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }

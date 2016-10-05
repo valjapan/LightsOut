@@ -48,6 +48,7 @@ public class SharedQuestionAdapter extends ArrayAdapter<SharedQuestion> {
             }
         }
         viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height + " \n・空のマス : " + emptyCount);
+        //盤面の情報
         return convertView;
     }
 

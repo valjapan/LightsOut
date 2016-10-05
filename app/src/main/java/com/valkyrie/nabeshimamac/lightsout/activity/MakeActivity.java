@@ -80,21 +80,25 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         shareConrents = (TextView) findViewById(R.id.countResult);
         shareTwitterButton = (Button) findViewById(R.id.shareTwitterButton);
         shareBackButton = (Button) findViewById(R.id.retryButton);
-
         widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
+        heightSpinner = (Spinner) findViewById(R.id.spinnerHeight);
+        editText = (EditText) findViewById(R.id.titleEditText);
+
+        //IDの関連付け
 
         final ArrayAdapter widthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.size_spinner));
-
         widthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         widthSpinner.setAdapter(widthAdapter);
+        //spinnerの横部分
 
-        heightSpinner = (Spinner) findViewById(R.id.spinnerHeight);
+
         final ArrayAdapter heightAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.size_spinner));
-
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightSpinner.setAdapter(heightAdapter);
+        //spinnerの縦部分
+
 
         shareCompleteLayout = (RelativeLayout) findViewById(R.id.shareCompleteLayout);
         //盤面入れ替えのスピナーの部分
@@ -111,7 +115,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClearListener() {
             }
         });
-        editText = (EditText) findViewById(R.id.titleEditText);
 
         long questionId = getIntent().getLongExtra("question_id", -1);
         if (questionId == -1) {
@@ -192,7 +195,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         mi.inflate(R.menu.menu_make, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    //ツールバーの右側のアイコン
+    //toolbarの右側のアイコン
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -206,6 +209,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         return super.onOptionsItemSelected(item);
     }
+    //toolbar右側のアイコンの処理
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -219,6 +223,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         updateDetailsText();
     }
+    //spinnerのマス目選択部分
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
@@ -230,6 +235,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         ShareManager.shareTwitter(this, "シンプルパズルゲーム【LightsOut】で問題を共有しました！！" +
                 "\nURLをクリックして問題をとこう！！ \n#LightsOut \n" + questionUrl);
     }
+    //share時のtwitter共有文章
 
     public void closeShareComplete(View view) {
         shareCompleteLayout.setVisibility(View.INVISIBLE);
@@ -238,6 +244,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         widthSpinner.setEnabled(true);
         heightSpinner.setEnabled(true);
     }
+    //share画面を閉じる部分
 
     //save部分
     private void save() {
@@ -298,8 +305,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                 emptyCount++;
             }
         }
-        //ListViewに表示させる内容
         detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×" + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
-
+    //ListViewに表示させる内容
 }

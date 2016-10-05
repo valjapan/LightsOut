@@ -49,7 +49,6 @@ public class TitleActivity extends AppCompatActivity implements
         return new Intent(context, TitleActivity.class);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +56,7 @@ public class TitleActivity extends AppCompatActivity implements
 
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
-
+        //フォントの読み込み
 
         modeLayout = (LinearLayout) findViewById(R.id.modeLayout);
         rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
@@ -68,9 +67,6 @@ public class TitleActivity extends AppCompatActivity implements
         shareTwitter = (ImageView) findViewById(R.id.shareTwitter);
 
         textView = (TextView) findViewById(R.id.textView);
-
-
-
         versionTextView = (TextView) findViewById(R.id.versionName);
 
         playEazy = (Button) findViewById(R.id.PlayEazy);
@@ -82,6 +78,7 @@ public class TitleActivity extends AppCompatActivity implements
         goHardRank = (Button) findViewById(R.id.rankHard);
         goShareRank = (Button) findViewById(R.id.rankOriginal);
         returmMode = (Button) findViewById(R.id.returnTitle);
+        //IDの関連付け
 
         textView.setTypeface(gothicAdobe);
         playEazy.setTypeface(gothicApple);
@@ -92,9 +89,12 @@ public class TitleActivity extends AppCompatActivity implements
         goNomalRank.setTypeface(gothicApple);
         goHardRank.setTypeface(gothicApple);
         goShareRank.setTypeface(gothicApple);
+        //フォントの指定
 
         modeLayout.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
+        //表示させるかどうか
+
         apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
 
 
@@ -111,6 +111,7 @@ public class TitleActivity extends AppCompatActivity implements
                             "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
                 }
             });
+        //Twitterの投稿文章
     }
 
     @Override
@@ -131,6 +132,7 @@ public class TitleActivity extends AppCompatActivity implements
         apiClient.unregisterConnectionFailedListener(this);
         super.onStop();
     }
+    //stopした時の処理
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -179,28 +181,33 @@ public class TitleActivity extends AppCompatActivity implements
         final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 0);
         startActivity(intent);
+        //初級
     }
 
     public void goNomal(View v) {
         final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 1);
         startActivity(intent);
+        //中級
     }
 
     public void goHard(View v) {
         final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 2);
         startActivity(intent);
+        //上級
     }
     
     public void goShare(View v){
         final Intent intent = new Intent(this, SharedQuestionListActivity.class);
         startActivity(intent);
+        //共有問題
     }
 
     public void goSetting(View v){
         final Intent intent = SettingActivity.createIntent(this);
         startActivity(intent);
+        //設定画面
     }
 
     public void googleGame(View v) {
@@ -209,27 +216,33 @@ public class TitleActivity extends AppCompatActivity implements
         playHard.setVisibility(View.INVISIBLE);
         playShare.setVisibility(View.INVISIBLE);
         rankLayout.setVisibility(View.VISIBLE);
+        //PlayGameを利用したランキング一覧を表示
     }
 
     public void goEdit(View v) {
         Intent intent = new Intent(this, MakeListActivity.class);
         startActivity(intent);
+        //クリエイトモード
     }
 
     public void goEazyRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Easy);
+        //初級ランキング
     }
 
     public void goNomalRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Normal);
+        //中級ランキング
     }
 
     public void goHardRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Hard);
+        //上級ランキング
     }
 
     public void goOriginalRank(View v){
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Original);
+        //オリジナルランキング
     }
 
     public void goTitle(View v) {
@@ -238,11 +251,13 @@ public class TitleActivity extends AppCompatActivity implements
         playHard.setVisibility(View.VISIBLE);
         playShare.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
+        //ランキング選択画面の非表示
     }
 
     public void goMedal(View v) {
         GameClientManager.intentMedal(this, apiClient);
     }
+    //実績を見る
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -270,4 +285,5 @@ public class TitleActivity extends AppCompatActivity implements
         }
         return false;
     }
+    //アプリが落ちていいかの確認
 }

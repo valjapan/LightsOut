@@ -20,7 +20,7 @@ public class FirebaseManager {
         return new Intent(context, FirebaseManager.class);
     }
 
-    private static FirebaseDatabase getInstnace() {
+    private static FirebaseDatabase getInstance() {
         synchronized (LOCK) {
             if (database == null) {
                 database = FirebaseDatabase.getInstance();
@@ -30,7 +30,7 @@ public class FirebaseManager {
     }
 
     public static String pushObject(String prefKey, Object object, OnCompleteListener<Void> completeListener) {
-        final DatabaseReference reference = getInstnace().getReference(prefKey).push();
+        final DatabaseReference reference = getInstance().getReference(prefKey).push();
         if (completeListener != null) {
             reference.setValue(object).addOnCompleteListener(completeListener);
         } else {
@@ -40,7 +40,7 @@ public class FirebaseManager {
     }
 
     public static String updateObject(String prefKey, String key, Object object) {
-        final DatabaseReference reference = getInstnace().getReference(prefKey).child(key);
+        final DatabaseReference reference = getInstance().getReference(prefKey).child(key);
         if (reference != null) {
             reference.setValue(object);
             return key;
@@ -50,7 +50,7 @@ public class FirebaseManager {
     }
 
     public static Query  getObjects(String prefKey) {
-        return getInstnace().getReference(prefKey).orderByKey();
+        return getInstance().getReference(prefKey).orderByKey();
     }
 
 }

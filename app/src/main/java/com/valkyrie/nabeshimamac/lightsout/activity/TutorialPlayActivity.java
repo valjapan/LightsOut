@@ -20,9 +20,11 @@ import com.valkyrie.nabeshimamac.lightsout.view.TutorialLightsOutView;
  */
 
 public class TutorialPlayActivity extends AppCompatActivity implements TutorialLightsOutView.OnTutorialClearListener {
+
     public static Intent createIntent(Context context) {
         return new Intent(context, TitleActivity.class);
     }
+
     private TextView title, contents, contents2;
 
     @Override
@@ -37,13 +39,16 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
         title = (TextView) findViewById(R.id.tutorialTitle);
         contents = (TextView) findViewById(R.id.tutorialContents);
         contents2 = (TextView) findViewById(R.id.tutorialContents2);
+        //IDの関連付け
 
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
+        //フォントの読み込み
 
         title.setTypeface(sign);
         contents.setTypeface(gothicAdobe);
         contents2.setTypeface(gothicAdobe);
+        //フォントの指定
     }
 
     @Override

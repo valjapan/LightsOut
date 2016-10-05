@@ -325,6 +325,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 btns[i][j].setEnabled(bool);
             }
         }
+        //ボタンを固定（タップをできなく）する設定
     }
 
 
