@@ -53,7 +53,7 @@ public class PreferencesManager {
         return clearCount;
     }
 
-    public boolean isSoude() {
+    public boolean isSound() {
         return defaultPreferences.getBoolean("sound", true);
     }
 

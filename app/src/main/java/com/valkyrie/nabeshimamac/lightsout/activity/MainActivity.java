@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
         //Typeの呼び出し
 
-        lightsOutView.setOnLigitsOutListener(this);
+        lightsOutView.setOnLightsOutListener(this);
         counterTextView.setText(String.format("%1$02d", 0));
         timerTextView.setText("00:00:00");
         timerTextView.setTextColor(Color.BLACK);
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
-        lightsOutView.setSound(PreferencesManager.getInstance(this).isSoude());
+        lightsOutView.setSound(PreferencesManager.getInstance(this).isSound());
     }
 
     @Override

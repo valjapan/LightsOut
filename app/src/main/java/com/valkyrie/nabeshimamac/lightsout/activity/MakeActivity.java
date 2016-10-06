@@ -105,7 +105,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         lightsOutEachView = (LightsOutView) findViewById(R.id.lightsOutView2);
         lightsOutEachView.setMode(LightsOutView.MODE_MAKE);
-        lightsOutEachView.setOnLigitsOutListener(new LightsOutView.LightsOutListener() {
+        lightsOutEachView.setOnLightsOutListener(new LightsOutView.LightsOutListener() {
             @Override
             public void onButtonTapped(int line, int row, int tapCount) {
                 updateDetailsText();
@@ -159,7 +159,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
-        lightsOutEachView.setSound(PreferencesManager.getInstance(this).isSoude());
+        lightsOutEachView.setSound(PreferencesManager.getInstance(this).isSound());
     }
 
     @Override

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
+
 /**
  * Tutorial版LightsOutViewのシステム
  */
@@ -20,10 +22,15 @@ public class TutorialLightsOutView extends LightsOutView {
             new Point(0, 2),
             new Point(2, 0),
     };
+    private boolean isSound = true;
+
     // 現在どのチュートリアルまでやったかを記録する場所
     private int tutorialIndex = 0;
     // クリア時に呼ばれるリスナー
     private OnTutorialClearListener tutorialClearListener;
+    private TapManager tapInstance;
+
+
 
     public TutorialLightsOutView(Context context) {
         this(context, null);
@@ -36,6 +43,8 @@ public class TutorialLightsOutView extends LightsOutView {
     public TutorialLightsOutView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setBoardSize(3, 3);
+        tapInstance = new TapManager(getContext());
+
     }
 
     @Override
@@ -82,7 +91,14 @@ public class TutorialLightsOutView extends LightsOutView {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         }
+
+        if (v instanceof Button) {
+            if (isSound  == true) {
+                tapInstance.play();
+            }
+        }
     }
+
 
     public OnTutorialClearListener getOnTutorialClearListener() {
         return tutorialClearListener;
@@ -95,6 +111,14 @@ public class TutorialLightsOutView extends LightsOutView {
 
     public interface OnTutorialClearListener {
         void onTutorialClear();
+    }
+
+    public boolean isSound() {
+        return isSound;
+    }
+
+    public void setSound(boolean sound) {
+        isSound = sound;
     }
 
 }

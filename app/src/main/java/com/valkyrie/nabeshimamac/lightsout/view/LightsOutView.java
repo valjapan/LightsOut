@@ -95,7 +95,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         updateFlags();
     }
 
-    public void setOnLigitsOutListener(LightsOutListener listener) {
+    public void setOnLightsOutListener(LightsOutListener listener) {
         this.listener = listener;
     }
 
