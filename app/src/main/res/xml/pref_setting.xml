@@ -6,5 +6,12 @@
         android:summary="@string/setting_mute_summary"
         android:title="@string/setting_mute_title"
         android:defaultValue="true" />
+    <ListPreference
+        android:defaultValue="color-value1"
+        android:title="@string/setting_color_title"
+        android:entries="@array/color_Entries"
+        android:summary="@string/setting_color_summary"
+        android:entryValues="@android:array/emailAddressTypes"
+        android:key="list_preference_1" />
 
 </PreferenceScreen>
