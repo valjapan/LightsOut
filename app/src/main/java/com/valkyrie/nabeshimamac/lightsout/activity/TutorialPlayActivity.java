@@ -54,6 +54,8 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
         tutorialLightsOut.setSound(PreferencesManager.getInstance(this).isSound());
         tutorialLightsOut.setOnTutorialClearListener(this);
 
+
+
     }
 
     @Override
