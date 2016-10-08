@@ -287,11 +287,11 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     private void setTapColor(int line, int row) {
         if (flag[line][row]) {
-            Drawable drawableOn = ResourcesCompat.getDrawable(getResources(), isColor(), null);
+            Drawable drawableOn = ResourcesCompat.getDrawable(getResources(), R.drawable.red_on_view, null);
             btns[line][row].setBackground(drawableOn);
             //押されたらピンク
         } else {
-            Drawable drawableOff = ResourcesCompat.getDrawable(getResources(), isColor(), null);
+            Drawable drawableOff = ResourcesCompat.getDrawable(getResources(), R.drawable.sky_blue_on_view, null);
             btns[line][row].setBackground(drawableOff);
             //押されていなかったら青
         }
