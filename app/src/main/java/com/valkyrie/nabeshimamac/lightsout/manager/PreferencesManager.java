@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.valkyrie.nabeshimamac.lightsout.model.ThemeColors;
+
 /**
  * SharedPreferences(保存部分)のManager
  */
@@ -57,7 +59,10 @@ public class PreferencesManager {
         return defaultPreferences.getBoolean("sound", true);
     }
 
-    public int isColor() { return defaultPreferences.getInt("color", 0); }
+    public ThemeColors getThemeColor() {
+        final String color = defaultPreferences.getString("color", "PinkBlue");
+        return ThemeColors.valueOf(color);
+    }
 
     private String getRankingKey(GameClientManager.Ranking ranking) {
         switch (ranking) {

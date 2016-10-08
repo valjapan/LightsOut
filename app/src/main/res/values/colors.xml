@@ -8,22 +8,23 @@
     <color name="colorDeepOrange">#f5a623</color>
     <color name="colorPinkOriginal">#ec407a</color>
     <!-- puzzle使用色-->
-    <color name="colorYellow">#FFEB3B</color>
+    <color name="colorYellow">#FBC02D</color>
     <color name="colorSkyBlue">#29b6f6</color>
-    <color name="colorBlue">#2196F3</color>
+    <color name="colorDeepBlue">#3949AB</color>
     <color name="colorPink">#EC407A</color>
     <color name="colorGreenFrame">#43A047</color>
     <color name="colorGreen">#4CAF50</color>
+    <color name="colorGreenFrame2">#76FF03</color>
     <!-- title上級-->
-    <color name="colorCyanOriginal">#00BCD4</color>
-    <color name="colorLightBlueOriginal">#00B9E6</color>
+    <color name="colorCyan">#00BCD4</color>
+    <color name="colorLightBlue">#00B9E6</color>
     <!-- title初級 -->
-    <color name="colorPinkOriginalRank">#f55b6e</color>
+    <color name="colorPinkRank">#f55b6e</color>
     <!-- titleランキング -->
-    <color name="colorRedOriginal">#F44336</color>
-    <color name="colorPurpleOriginal">#9C27B0</color>
-    <color name="colorDeepPurpleOriginal">#7B1FA2</color>
-    <color name="colorLimeGreenOriginal">#7ED321</color>
+    <color name="colorRed">#F44336</color>
+    <color name="colorPurple">#9C27B0</color>
+    <color name="colorDeepPurple">#7B1FA2</color>
+    <color name="colorLimeGreen">#7ED321</color>
     <!--title中級-->
     <color name="colorGreenOriginal">#689F38</color>
     <color name="colorShadow">#6000</color>

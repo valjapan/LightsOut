@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="color_Entries">
-        <item>Pink×SkyBlue</item>
+    <string-array name="color_entries">
+        <item>SkyBlue×Pink</item>
         <item>Yellow×Blue</item>
-        <item>Purple×Green</item>
+        <item>Orange×Green</item>
+    </string-array>
+    <string-array name="color_entry_values">
+        <item>PinkBlue</item>
+        <item>YellowBlue</item>
+        <item>OrangeGreen</item>
     </string-array>
 </resources>

@@ -2,16 +2,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
+        android:defaultValue="true"
         android:key="sound"
         android:summary="@string/setting_mute_summary"
-        android:title="@string/setting_mute_title"
-        android:defaultValue="true" />
+        android:title="@string/setting_mute_title" />
+
     <ListPreference
-        android:defaultValue="color-value1"
-        android:title="@string/setting_color_title"
-        android:entries="@array/color_Entries"
+        android:defaultValue="true"
+        android:entries="@array/color_entries"
+        android:entryValues="@array/color_entry_values"
+        android:key="color"
         android:summary="@string/setting_color_summary"
-        android:entryValues="@android:array/emailAddressTypes"
-        android:key="color" />
+        android:title="@string/setting_color_title" />
 
 </PreferenceScreen>

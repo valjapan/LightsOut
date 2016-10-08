@@ -37,8 +37,6 @@ import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 import java.util.Date;
 
-import static com.valkyrie.nabeshimamac.lightsout.R.id.lightsOutView;
-
 /**
  * Createモードの新規作成・編集時のActivity
  */
@@ -162,7 +160,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
         lightsOutEachView.setSound(PreferencesManager.getInstance(this).isSound());
-        lightsOutEachView.setColor(PreferencesManager.getInstance(this).isColor());
+        lightsOutEachView.setColor(PreferencesManager.getInstance(this).getThemeColor());
     }
 
     @Override

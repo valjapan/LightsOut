@@ -52,8 +52,9 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
         tutorialLightsOut.setSound(PreferencesManager.getInstance(this).isSound());
+        tutorialLightsOut.setColor(PreferencesManager.getInstance(this).getThemeColor());
         tutorialLightsOut.setOnTutorialClearListener(this);
-        tutorialLightsOut.setColor(PreferencesManager.getInstance(this).isColor());
+
     }
 
     @Override

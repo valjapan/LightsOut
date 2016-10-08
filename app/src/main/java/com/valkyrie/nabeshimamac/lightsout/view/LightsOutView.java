@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
 import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
+import com.valkyrie.nabeshimamac.lightsout.model.ThemeColors;
 
 /**
  * lightsOutView内のシステム
@@ -35,10 +36,13 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     private TapManager tapInstance;
     private int tapCount;
     private boolean isSound = true;
-    private int isColor = 0;
 
-    private Drawable drawablePinkOff;
-    private Drawable drawableBlueOff;
+    // タイルのカラー
+    private Drawable drawablePrimaryOff;
+    private Drawable drawablePrimaryOn;
+    private Drawable drawableSecondaryOff;
+    private Drawable drawableSecondaryOn;
+
 
     // 0 -> Game, 1 -> Make
     private int mode = MODE_GAME;
@@ -61,8 +65,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         super(context, attrs, defStyleAttr);
         this.setOrientation(VERTICAL);
 
-        drawablePinkOff = ResourcesCompat.getDrawable(getResources(), R.drawable.red_off_view, null);
-        drawableBlueOff = ResourcesCompat.getDrawable(getResources(), R.drawable.sky_blue_off_view, null);
+        drawablePrimaryOff = ResourcesCompat.getDrawable(getResources(), R.drawable.red_off_view, null);
+        drawablePrimaryOn = ResourcesCompat.getDrawable(getResources(), R.drawable.red_on_view, null);
+        drawableSecondaryOff = ResourcesCompat.getDrawable(getResources(), R.drawable.sky_blue_off_view, null);
+        drawableSecondaryOn = ResourcesCompat.getDrawable(getResources(), R.drawable.sky_blue_on_view, null);
 
         tapInstance = new TapManager(getContext());
 
@@ -105,7 +111,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
         for (int i = 0; i < boardHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
-                btns[i][j].setBackground(drawableBlueOff);
+                btns[i][j].setBackground(drawableSecondaryOff);
                 //全てを青色に設置
                 flag[i][j] = false;
                 //Boolean型で統一する
@@ -186,7 +192,6 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 horizontalPadding,
                 verticalPadding
         );
-
     }
 
     public int getMode() {
@@ -234,7 +239,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void setBoardSize(int width, int height) {
-        if (width == 0 || height == 0){
+        if (width == 0 || height == 0) {
             return;
         }
         this.boardHeight = height;
@@ -244,7 +249,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void setBoardHeight(int boardHeight) {
-        if (boardHeight == 0 ){
+        if (boardHeight == 0) {
             return;
         }
         this.boardHeight = boardHeight;
@@ -254,7 +259,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void setBoardWidth(int boardWidth) {
-        if (boardWidth == 0){
+        if (boardWidth == 0) {
             return;
         }
         this.boardWidth = boardWidth;
@@ -276,9 +281,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         for (int i = 0; i < boardHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
                 if (flag[i][j]) {
-                    btns[i][j].setBackground(drawablePinkOff);
+                    btns[i][j].setBackground(drawablePrimaryOff);
                 } else {
-                    btns[i][j].setBackground(drawableBlueOff);
+                    btns[i][j].setBackground(drawableSecondaryOff);
                 }
             }
         }
@@ -287,12 +292,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
 
     private void setTapColor(int line, int row) {
         if (flag[line][row]) {
-            Drawable drawableOn = ResourcesCompat.getDrawable(getResources(), R.drawable.red_on_view, null);
-            btns[line][row].setBackground(drawableOn);
+            btns[line][row].setBackground(drawablePrimaryOn);
             //押されたらピンク
         } else {
-            Drawable drawableOff = ResourcesCompat.getDrawable(getResources(), R.drawable.sky_blue_on_view, null);
-            btns[line][row].setBackground(drawableOff);
+            btns[line][row].setBackground(drawableSecondaryOn);
             //押されていなかったら青
         }
     }
@@ -317,19 +320,15 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         isSound = sound;
     }
 
-    public int isColor() {
-        return isColor;
+    public void setColor(ThemeColors colors) {
+        drawablePrimaryOff = ResourcesCompat.getDrawable(getResources(), colors.primaryOff, null);
+        drawablePrimaryOn = ResourcesCompat.getDrawable(getResources(), colors.primaryOn, null);
+        drawableSecondaryOff = ResourcesCompat.getDrawable(getResources(), colors.secondaryOff, null);
+        drawableSecondaryOn = ResourcesCompat.getDrawable(getResources(), colors.secondaryOn, null);
+        updateFlags();
     }
 
-    public void setColor(int color){
-        isColor = color;
-    }
-
-    private void setColorSet(int colorPattern){
-        isColor = colorPattern;
-    }
-
-    public void setButtonEnabled(boolean bool){
+    public void setButtonEnabled(boolean bool) {
         for (int i = 0; i < boardHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
                 btns[i][j].setEnabled(bool);

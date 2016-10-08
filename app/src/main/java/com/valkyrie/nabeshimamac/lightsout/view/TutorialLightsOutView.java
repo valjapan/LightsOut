@@ -22,13 +22,11 @@ public class TutorialLightsOutView extends LightsOutView {
     // タップする場所の指定
 
     private boolean isSound = true;
-    private int isColor = 0;
 
     // 現在どのチュートリアルまでやったかを記録する場所
     private int tutorialIndex = 0;
     // クリア時に呼ばれるリスナー
     private OnTutorialClearListener tutorialClearListener;
-
 
 
     public TutorialLightsOutView(Context context) {
@@ -43,15 +41,6 @@ public class TutorialLightsOutView extends LightsOutView {
         super(context, attrs, defStyleAttr);
         setBoardSize(3, 3);
     }
-
-    public int isColor() {
-        return isColor;
-    }
-
-    public void setColor(int color){
-        isColor = color;
-    }
-
 
     @Override
     public void onClick(View v) {
