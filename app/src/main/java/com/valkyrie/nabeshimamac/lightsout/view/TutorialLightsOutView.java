@@ -7,14 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
-
 /**
  * Tutorial版LightsOutViewのシステム
  */
 public class TutorialLightsOutView extends LightsOutView {
     public static final String TAG = TutorialLightsOutView.class.getSimpleName();
-    //TODO Tutorialで押させるポイントを書く
     private Point[] STORIES = {
             new Point(0, 0),
             new Point(1, 1),
@@ -22,13 +19,15 @@ public class TutorialLightsOutView extends LightsOutView {
             new Point(0, 2),
             new Point(2, 0),
     };
+    // タップする場所の指定
+
     private boolean isSound = true;
+    private int isColor = 0;
 
     // 現在どのチュートリアルまでやったかを記録する場所
     private int tutorialIndex = 0;
     // クリア時に呼ばれるリスナー
     private OnTutorialClearListener tutorialClearListener;
-    private TapManager tapInstance;
 
 
 
@@ -43,9 +42,16 @@ public class TutorialLightsOutView extends LightsOutView {
     public TutorialLightsOutView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setBoardSize(3, 3);
-        tapInstance = new TapManager(getContext());
-
     }
+
+    public int isColor() {
+        return isColor;
+    }
+
+    public void setColor(int color){
+        isColor = color;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -91,12 +97,6 @@ public class TutorialLightsOutView extends LightsOutView {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         }
-
-        if (v instanceof Button) {
-            if (isSound  == true) {
-                tapInstance.play();
-            }
-        }
     }
 
 
@@ -106,19 +106,9 @@ public class TutorialLightsOutView extends LightsOutView {
 
     public void setOnTutorialClearListener(OnTutorialClearListener tutorialClearListener) {
         this.tutorialClearListener = tutorialClearListener;
-
     }
 
     public interface OnTutorialClearListener {
         void onTutorialClear();
     }
-
-    public boolean isSound() {
-        return isSound;
-    }
-
-    public void setSound(boolean sound) {
-        isSound = sound;
-    }
-
 }

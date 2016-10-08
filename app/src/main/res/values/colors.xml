@@ -4,11 +4,16 @@
     <color name="colorPrimaryDark">#039BE5</color>
     <color name="colorAccent">#FF4081</color>
     
-    <color name="colorYellowOriginal">#FFEB3B</color>
     <color name="colorOrangeNAme">#FF9800</color>
+    <color name="colorDeepOrange">#f5a623</color>
     <color name="colorPinkOriginal">#ec407a</color>
-    <color name="colorBlueOriginal">#29b6f6</color>
-    <color name="colorDeepOrangeOriginal">#f5a623</color>
+    <!-- puzzle使用色-->
+    <color name="colorYellow">#FFEB3B</color>
+    <color name="colorSkyBlue">#29b6f6</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorPink">#EC407A</color>
+    <color name="colorGreenFrame">#43A047</color>
+    <color name="colorGreen">#4CAF50</color>
     <!-- title上級-->
     <color name="colorCyanOriginal">#00BCD4</color>
     <color name="colorLightBlueOriginal">#00B9E6</color>

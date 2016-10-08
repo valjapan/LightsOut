@@ -10,7 +10,7 @@ import android.view.View;
 import com.valkyrie.nabeshimamac.lightsout.R;
 
 /**
- * ミュート等の設定画面
+ * 設定画面
  */
 
 public class SettingActivity extends AppCompatActivity {

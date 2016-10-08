@@ -39,23 +39,21 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
         contents = (TextView) findViewById(R.id.tutorialContents);
         contents2 = (TextView) findViewById(R.id.tutorialContents2);
         tutorialLightsOut = (TutorialLightsOutView) findViewById(R.id.tutorialLightsOutView);
-        //IDの関連付け
+        // IDの関連付け
 
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
-        //フォントの読み込み
+        // フォントの読み込み
 
         title.setTypeface(sign);
         contents.setTypeface(gothicAdobe);
         contents2.setTypeface(gothicAdobe);
-        //フォントの指定
+        // フォントの指定
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
         tutorialLightsOut.setSound(PreferencesManager.getInstance(this).isSound());
         tutorialLightsOut.setOnTutorialClearListener(this);
-
-
-
+        tutorialLightsOut.setColor(PreferencesManager.getInstance(this).isColor());
     }
 
     @Override

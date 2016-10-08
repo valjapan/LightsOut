@@ -18,7 +18,7 @@
     <!-- Setting -->
     <string name="setting_mute_title">効果音</string>
     <string name="setting_mute_summary">ゲーム中の効果音のON/OFFを切り替えます。</string>
-    <string name="setting_color_title">テーマカラー</string>
+    <string name="setting_color_title">Theme Color</string>
     <string name="setting_color_summary">パズルのテーマカラーを選択します。</string>
 
     <!-- ゲームのボードサイズ -->

@@ -57,6 +57,8 @@ public class PreferencesManager {
         return defaultPreferences.getBoolean("sound", true);
     }
 
+    public int isColor() { return defaultPreferences.getInt("color", 0); }
+
     private String getRankingKey(GameClientManager.Ranking ranking) {
         switch (ranking) {
             case Easy:

@@ -12,6 +12,6 @@
         android:entries="@array/color_Entries"
         android:summary="@string/setting_color_summary"
         android:entryValues="@android:array/emailAddressTypes"
-        android:key="list_preference_1" />
+        android:key="color" />
 
 </PreferenceScreen>
