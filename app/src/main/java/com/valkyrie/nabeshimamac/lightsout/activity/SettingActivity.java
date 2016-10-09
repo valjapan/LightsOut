@@ -33,5 +33,6 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //toolBarの表示部分
     }
 }

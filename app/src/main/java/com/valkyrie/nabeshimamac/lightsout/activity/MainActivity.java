@@ -289,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements
         }
         if (medal != null) {
             GameClientManager.unlockMedal(apiClient, medal);
+            //実績解除
         }
         stopTimer();
         showClearModal();
@@ -385,7 +386,7 @@ public class MainActivity extends AppCompatActivity implements
         return super.onKeyDown(keyCode, event);
     }
 
-    public void goRetly(View v) {
+    public void goRetry(View v) {
         finish();
     }
     //リトライ(そのまんま)
@@ -429,7 +430,6 @@ public class MainActivity extends AppCompatActivity implements
         clearLayout.setVisibility(View.INVISIBLE);
         titleTextView.setText("さぁ始めよう！");
         messageTextView.setText("全て反対のパネルにしよう。\nStartでゲーム開始です。");
-        //TODO if文を使って反対→〇〇色に変える
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
             @Override

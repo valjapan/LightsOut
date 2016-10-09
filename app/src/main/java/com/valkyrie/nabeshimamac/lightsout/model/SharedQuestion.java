@@ -28,6 +28,7 @@ public class SharedQuestion implements Serializable {
         this.board = board;
         this.width = width;
         this.height = height;
+        //共有用のサイズ
     }
 
     public static SharedQuestion valueOf(Question question) {

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 /**
- * 設定のFragment
+ * 設定画面のFragment
  */
 
 public class SettingFragment extends PreferenceFragment {

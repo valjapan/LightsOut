@@ -327,6 +327,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         drawableSecondaryOn = ResourcesCompat.getDrawable(getResources(), colors.secondaryOn, null);
         updateFlags();
     }
+    // テーマカラーごとの設定
 
     public void setButtonEnabled(boolean bool) {
         for (int i = 0; i < boardHeight; i++) {

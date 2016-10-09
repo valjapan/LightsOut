@@ -5,7 +5,7 @@ import android.support.annotation.DrawableRes;
 import com.valkyrie.nabeshimamac.lightsout.R;
 
 /**
- * 色の設定
+ * 色のテーマごとの設定
  */
 public enum ThemeColors {
     PinkBlue(
@@ -14,18 +14,25 @@ public enum ThemeColors {
             R.drawable.sky_blue_off_view,
             R.drawable.sky_blue_on_view
     ),
+    // PinkとSlyBlue（デフォルト）の場合
+
     YellowBlue(
             R.drawable.deep_blue_off_view,
             R.drawable.deep_blue_on_view,
             R.drawable.yellow_off_view,
             R.drawable.yellow_on_view
     ),
+    // YellowとBlueの部分
+
     OrangeGreen(
             R.drawable.green_off_view,
             R.drawable.green_on_view,
             R.drawable.orange_off_view,
             R.drawable.orange_on_view
     );
+    // OrangeとGreenの部分
+
+
     @DrawableRes
     public int primaryOff;
     @DrawableRes
@@ -40,5 +47,7 @@ public enum ThemeColors {
         this.primaryOn = primaryOn;
         this.secondaryOff = secondaryOff;
         this.secondaryOn = secondaryOn;
+
+        //指定した色をThemeColorsで定義する
     }
 }

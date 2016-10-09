@@ -43,6 +43,8 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             viewHolder.detailTextView = (TextView) convertView.findViewById(R.id.textDetail);
             viewHolder.deleteImageView = (ImageView) convertView.findViewById(R.id.imageDelete);
             viewHolder.editImageView = (ImageView) convertView.findViewById(R.id.imageEdit);
+            //Idの関連付け
+
             viewHolder.editImageView.setOnClickListener(this);
             viewHolder.deleteImageView.setOnClickListener(this);
             convertView.setTag(viewHolder);
@@ -58,10 +60,10 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             }
         }
 
-
         viewHolder.deleteImageView.setTag(position);
         viewHolder.editImageView.setTag(position);
-        viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height + " \n・空のマス : " + emptyCount);
+        viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
+                " \n・空のマス : " + emptyCount);
         //盤面の情報
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm'('EEE')'"); // 日
         if (item.createdAt != null) {

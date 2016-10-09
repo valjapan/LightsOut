@@ -82,12 +82,16 @@ public class SharedQuestionCallbackActivity extends AppCompatActivity {
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
             }
+
         });
+
     }
     //データ取得する処理
 

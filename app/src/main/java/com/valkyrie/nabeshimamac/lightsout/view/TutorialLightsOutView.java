@@ -95,6 +95,7 @@ public class TutorialLightsOutView extends LightsOutView {
 
     public void setOnTutorialClearListener(OnTutorialClearListener tutorialClearListener) {
         this.tutorialClearListener = tutorialClearListener;
+        // SharedPreferenceに初tutorialクリアを伝える
     }
 
     public interface OnTutorialClearListener {

@@ -62,5 +62,6 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
         Toast.makeText(this, "チュートリアルクリア！", Toast.LENGTH_SHORT).show();
         PreferencesManager.getInstance(this).checkTutorialEnd();
         finish();
+        // クリアしたらの処理
     }
 }

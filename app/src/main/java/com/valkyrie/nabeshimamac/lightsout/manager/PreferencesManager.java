@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import com.valkyrie.nabeshimamac.lightsout.model.ThemeColors;
 
@@ -60,8 +61,12 @@ public class PreferencesManager {
     }
 
     public ThemeColors getThemeColor() {
-        final String color = defaultPreferences.getString("color", "PinkBlue");
-        return ThemeColors.valueOf(color);
+        final String color = defaultPreferences.getString("color", null);
+        if (TextUtils.isEmpty(color) ) {
+            return ThemeColors.PinkBlue;
+        } else {
+            return ThemeColors.valueOf(color);
+        }
     }
 
     private String getRankingKey(GameClientManager.Ranking ranking) {

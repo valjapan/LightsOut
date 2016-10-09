@@ -83,7 +83,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
         heightSpinner = (Spinner) findViewById(R.id.spinnerHeight);
         editText = (EditText) findViewById(R.id.titleEditText);
-
         //IDの関連付け
 
         final ArrayAdapter widthAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
@@ -141,9 +140,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
             lightsOutEachView.setBoardWidth(question.width);
             lightsOutEachView.setBoardHeight(question.height);
-
             lightsOutEachView.setFlagsFromString(question.board);
-
             lightsOutEachView.updateFlags();
         }
         updateDetailsText();
@@ -152,7 +149,6 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-
                 }
                 return false;
             }
@@ -160,6 +156,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // SharedPreferencesからMuteかどうかの設定を読み込む
         lightsOutEachView.setSound(PreferencesManager.getInstance(this).isSound());
+        // SharedPreferencesからColorかどうかの設定を読み込む
         lightsOutEachView.setColor(PreferencesManager.getInstance(this).getThemeColor());
     }
 
@@ -258,11 +255,13 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     private void share() {
         updateQuestion();
         SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
+
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
         shareTitle.setTypeface(gothicApple);
         shareConrents.setTypeface(gothicApple);
         shareTwitterButton.setTypeface(gothicApple);
         shareBackButton.setTypeface(gothicApple);
+        //フォントの設定
 
         if (TextUtils.isEmpty(question.sharedKey)) {
             final String key = FirebaseManager.pushObject("questions", sharedQuestion, new OnCompleteListener<Void>() {
@@ -306,7 +305,8 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                 emptyCount++;
             }
         }
-        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×" + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
+        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×"
+                + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
     //ListViewに表示させる内容
 }

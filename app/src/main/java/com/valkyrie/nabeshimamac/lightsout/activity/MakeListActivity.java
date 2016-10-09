@@ -35,8 +35,10 @@ public class MakeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_make_list);
 
         setTitle("Create mode");
-
+        //toolBarのtitle
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        listView = (ListView) findViewById(R.id.listView);
+
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -45,8 +47,7 @@ public class MakeListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        listView = (ListView) findViewById(R.id.listView);
+        //toolbarの右側
 
         adapter = new QuestionAdapter(this);
         listView.setAdapter(adapter);

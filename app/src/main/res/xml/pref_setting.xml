@@ -13,6 +13,7 @@
         android:entryValues="@array/color_entry_values"
         android:key="color"
         android:summary="@string/setting_color_summary"
-        android:title="@string/setting_color_title" />
+        android:title="@string/setting_color_title"
+        />
 
 </PreferenceScreen>
