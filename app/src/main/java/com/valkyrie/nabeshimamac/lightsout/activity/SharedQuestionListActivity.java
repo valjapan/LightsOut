@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.adapter.SharedQuestionAdapter;
-import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
+import com.valkyrie.nabeshimamac.lightsout.manager.FireBaseManager;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 
 
@@ -65,7 +65,7 @@ public class SharedQuestionListActivity extends AppCompatActivity {
 
 
     public void getData() {
-        final Query query = FirebaseManager.getObjects("questions");
+        final Query query = FireBaseManager.getObjects("questions");
         query.limitToLast(20);
         query.addChildEventListener(new ChildEventListener() {
             @Override

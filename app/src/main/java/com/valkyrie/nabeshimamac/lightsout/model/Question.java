@@ -44,7 +44,7 @@ public class Question extends Model {
         this.height = height;
         this.createdAt = createdAt;
     }
-    //動的にパネル配置をする
+    //Shareではなく動的にパネル配置をする
 
     public Question(String title, String board, int width, int height, Date createdAt, String sharedKey) {
         super();
@@ -54,5 +54,6 @@ public class Question extends Model {
         this.height = height;
         this.createdAt = createdAt;
         this.sharedKey = sharedKey;
+        //Shareでかつ動的にパネル配置をする
     }
 }

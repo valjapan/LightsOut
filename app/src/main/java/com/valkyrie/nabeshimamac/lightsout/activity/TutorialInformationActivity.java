@@ -33,7 +33,10 @@ public class TutorialInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial_info);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
+        //ViewFlipperのIDの関連付け
         buttonTutorial = (Button) findViewById(R.id.buttonTutorial);
+        //ButtonのIDの関連付け
+
 
         buttonTutorial.setText("NEXT");
 
@@ -43,12 +46,12 @@ public class TutorialInformationActivity extends AppCompatActivity {
         titleTextView1 = (TextView) findViewById(R.id.tutorialInfoTitle1);
         titleTextView2 = (TextView) findViewById(R.id.tutorialInfoTitle2);
         titleTextView3 = (TextView) findViewById(R.id.tutorialInfoTitle3);
-
         contentsTextView1 = (TextView) findViewById(R.id.tutorialInfoContents1);
         contentsTextView2 = (TextView) findViewById(R.id.tutorialInfoContents2);
         contentsTextView3Of1 = (TextView) findViewById(R.id.tutorialInfoContents3Of1);
         contentsTextView3Of2 = (TextView) findViewById(R.id.tutorialInfoContents3Of2);
         contentsTextView3Of3 = (TextView) findViewById(R.id.tutorialInfoContents3Of3);
+        //TextViewのIDの関連付け
 
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");

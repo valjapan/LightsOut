@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements
         //アクションバーの左側（閉じる）部分
 
         lightsOutView = (LightsOutView) findViewById(R.id.lightsOutView);
+        //LightsOutViewのIDの関連付け
 
         timerTextView = (TextView) findViewById(R.id.timer);
         counterTextView = (TextView) findViewById(R.id.counter);
@@ -107,19 +108,23 @@ public class MainActivity extends AppCompatActivity implements
         titleClearTextView = (TextView) findViewById(R.id.titleClear);
         titleTextView = (TextView) findViewById(R.id.title);
         messageTextView = (TextView) findViewById(R.id.messege);
+        //TextViewのIDの関連付け
+
 
         modalButton = (Button) findViewById(R.id.modalButton);
         returnTitleButton = (Button) findViewById(R.id.retryButton);
         goMyRankButton = (Button) findViewById(R.id.rankButton);
+        //ButtonのIDの関連付け
+
 
         startLayout = (RelativeLayout) findViewById(R.id.startLayout);
         clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
-        //IDの関連付け
+        //RelativeLayoutのIDの関連付け
 
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
-        //Typeの呼び出し
+        //フォントの呼び出し
 
         lightsOutView.setOnLightsOutListener(this);
         counterTextView.setText(String.format("%1$02d", 0));
@@ -195,9 +200,9 @@ public class MainActivity extends AppCompatActivity implements
         }
         loadPrePoints();
 
+        apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
         // 初期設定
         // 各種リスナー登録とGoogleAPIで利用するAPIやスコープの設定
-        apiClient = ((MyApplication) getApplication()).getGoogleApiClient();
 
         if (!PreferencesManager.getInstance(this).isTutorialEnd()) {
             Intent intent = new Intent(this, TutorialInformationActivity.class);
@@ -217,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements
         MenuInflater mi = getMenuInflater();
         mi.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
-        //ツールバーの呼び出し？
+        //ツールバーの呼び出し
     }
 
     @Override
@@ -266,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements
         GameClientManager.Medal medal = null;
 
         if (clearCount == 1) {
-            // いずれかの難易度の初回クリア
+            // いずれかの難易度の初回クリア(実績)
             if (ranking == GameClientManager.Ranking.Easy) {
                 medal = GameClientManager.Medal.FirstEazy;
             } else if (ranking == GameClientManager.Ranking.Normal) {
@@ -278,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements
             }
 
         } else if (clearCount == 10) {
-            // いずれかの難易度の10回クリア
+            // いずれかの難易度の10回クリア(実績)
             if (ranking == GameClientManager.Ranking.Easy) {
                 medal = GameClientManager.Medal.ProEazy;
             } else if (ranking == GameClientManager.Ranking.Normal) {

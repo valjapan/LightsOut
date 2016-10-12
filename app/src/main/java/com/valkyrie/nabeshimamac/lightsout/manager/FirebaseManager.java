@@ -9,15 +9,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 /**
- * FirebaseのManager
+ * FireBaseのManager
  */
-public class FirebaseManager {
+public class FireBaseManager {
     private static final Object LOCK = new Object();
 
     private static FirebaseDatabase database;
 
     public static Intent createIntent(Context context) {
-        return new Intent(context, FirebaseManager.class);
+        return new Intent(context, FireBaseManager.class);
     }
 
     private static FirebaseDatabase getInstance() {
@@ -52,5 +52,4 @@ public class FirebaseManager {
     public static Query  getObjects(String prefKey) {
         return getInstance().getReference(prefKey).orderByKey();
     }
-
 }

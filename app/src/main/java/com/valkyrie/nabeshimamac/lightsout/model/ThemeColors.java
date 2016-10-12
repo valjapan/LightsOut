@@ -14,7 +14,7 @@ public enum ThemeColors {
             R.drawable.sky_blue_off_view,
             R.drawable.sky_blue_on_view
     ),
-    // PinkとSlyBlue（デフォルト）の場合
+    // PinkとSlyBlue（初期設定）の場合
 
     YellowBlue(
             R.drawable.deep_blue_off_view,

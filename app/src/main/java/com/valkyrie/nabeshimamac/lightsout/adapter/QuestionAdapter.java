@@ -42,8 +42,9 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             viewHolder.dateTextView = (TextView) convertView.findViewById(R.id.textDate);
             viewHolder.detailTextView = (TextView) convertView.findViewById(R.id.textDetail);
             viewHolder.deleteImageView = (ImageView) convertView.findViewById(R.id.imageDelete);
+            //TextViewのIDの関連付け
             viewHolder.editImageView = (ImageView) convertView.findViewById(R.id.imageEdit);
-            //Idの関連付け
+            //ImageViewのIDの関連付け
 
             viewHolder.editImageView.setOnClickListener(this);
             viewHolder.deleteImageView.setOnClickListener(this);

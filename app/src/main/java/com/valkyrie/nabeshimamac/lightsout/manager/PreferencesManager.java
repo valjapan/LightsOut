@@ -15,7 +15,6 @@ public class PreferencesManager {
     private static PreferencesManager instance;
     private SharedPreferences appPreferences;
     private SharedPreferences defaultPreferences;
-
     //ShardPreferencesの保存部分
 
     public static Intent createIntent(Context context) {
@@ -59,13 +58,16 @@ public class PreferencesManager {
     public boolean isSound() {
         return defaultPreferences.getBoolean("sound", true);
     }
+    //タップ音のミュートしているかどうかの保存部分
 
     public ThemeColors getThemeColor() {
         final String color = defaultPreferences.getString("color", null);
         if (TextUtils.isEmpty(color) ) {
             return ThemeColors.PinkBlue;
+            // インストール時何も入らないから、デフォルト（何も入ってない状態）をピンクブルーに設定
         } else {
             return ThemeColors.valueOf(color);
+            // 他色を選択した時にこっちに入る
         }
     }
 
@@ -83,4 +85,5 @@ public class PreferencesManager {
                 return null;
         }
     }
+    // クリア数をカウントする保存場所
 }

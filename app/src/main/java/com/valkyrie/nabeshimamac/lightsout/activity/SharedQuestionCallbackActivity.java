@@ -12,7 +12,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
-import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
+import com.valkyrie.nabeshimamac.lightsout.manager.FireBaseManager;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 
 import java.util.List;
@@ -57,7 +57,7 @@ public class SharedQuestionCallbackActivity extends AppCompatActivity {
 
 
     public void getData(final String sharedKey) {
-        final Query query = FirebaseManager.getObjects("questions");
+        final Query query = FireBaseManager.getObjects("questions");
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

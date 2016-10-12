@@ -59,15 +59,19 @@ public class TitleActivity extends AppCompatActivity implements
         //フォントの読み込み
 
         modeLayout = (LinearLayout) findViewById(R.id.modeLayout);
-        rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
         otherLayout = (LinearLayout) findViewById(R.id.OtherLayout);
+        rankLayout = (RelativeLayout) findViewById(R.id.rankLayout);
+        //Layout関係のIDの関連付け
+
 
         googlePlayImageView = (ImageView) findViewById(R.id.googleGame);
         editButtonImageView = (ImageView) findViewById(R.id.EditButton);
         shareTwitter = (ImageView) findViewById(R.id.shareTwitter);
+        //ImageViewのIDの関連付け
 
         textView = (TextView) findViewById(R.id.textView);
         versionTextView = (TextView) findViewById(R.id.versionName);
+        //TextViewIDの関連付け
 
         playEazy = (Button) findViewById(R.id.PlayEazy);
         playNomal = (Button) findViewById(R.id.PlayNomal);
@@ -78,7 +82,7 @@ public class TitleActivity extends AppCompatActivity implements
         goHardRank = (Button) findViewById(R.id.rankHard);
         goShareRank = (Button) findViewById(R.id.rankOriginal);
         returmMode = (Button) findViewById(R.id.returnTitle);
-        //IDの関連付け
+        //ButtonのIDの関連付け
 
         textView.setTypeface(gothicAdobe);
         playEazy.setTypeface(gothicApple);

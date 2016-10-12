@@ -28,7 +28,7 @@ import com.activeandroid.query.Select;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.valkyrie.nabeshimamac.lightsout.R;
-import com.valkyrie.nabeshimamac.lightsout.manager.FirebaseManager;
+import com.valkyrie.nabeshimamac.lightsout.manager.FireBaseManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
@@ -253,6 +253,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void share() {
+        //共有部分
         updateQuestion();
         SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
 
@@ -264,7 +265,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         //フォントの設定
 
         if (TextUtils.isEmpty(question.sharedKey)) {
-            final String key = FirebaseManager.pushObject("questions", sharedQuestion, new OnCompleteListener<Void>() {
+            final String key = FireBaseManager.pushObject("questions", sharedQuestion, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     shareCompleteLayout.setVisibility(View.VISIBLE);
@@ -278,7 +279,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             question.sharedKey = key;
             question.save();
         } else {
-            FirebaseManager.updateObject("questions", question.sharedKey, sharedQuestion);
+            FireBaseManager.updateObject("questions", question.sharedKey, sharedQuestion);
         }
     }
 
@@ -308,5 +309,5 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×"
                 + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
     }
-    //ListViewに表示させる内容
+    //ShareからListViewに表示させる内容
 }
