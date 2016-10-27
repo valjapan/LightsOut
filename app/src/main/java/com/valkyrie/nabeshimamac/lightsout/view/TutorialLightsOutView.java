@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 /**
  * Tutorial版LightsOutViewのシステム
  */
@@ -22,6 +24,8 @@ public class TutorialLightsOutView extends LightsOutView {
     // タップする場所の指定
 
     private boolean isSound = true;
+    private Locale locale = Locale.getDefault();
+
 
     // 現在どのチュートリアルまでやったかを記録する場所
     private int tutorialIndex = 0;
@@ -67,22 +71,41 @@ public class TutorialLightsOutView extends LightsOutView {
                 final int dy = tapPoint.y - tutorialPoint.y;
                 //横の座標
 
-                if (dx > 0) {
-                    message += "上に" + dx + "マス ";
-                } else if (dx == 0) {
-                    message += "";
-                } else if (dx < 0) {
-                    message += "下に" + -dx + "マス ";
-                }
+                if (locale.equals(Locale.JAPAN)) {
+                    if (dx > 0) {
+                        message += "上に" + dx + "マス ";
+                    } else if (dx == 0) {
+                        message += "";
+                    } else if (dx < 0) {
+                        message += "下に" + -dx + "マス ";
+                    }
 
-                if (dy > 0) {
-                    message += "左に" + dy + "マス";
-                }else if (dy == 0){
-                    message += "";
-                }else if (dy < 0) {
-                    message += "右に" + -dy + "マス ";
+                    if (dy > 0) {
+                        message += "左に" + dy + "マス";
+                    } else if (dy == 0) {
+                        message += "";
+                    } else if (dy < 0) {
+                        message += "右に" + -dy + "マス ";
+                    }
+                    message += "をタップしてね！";
+                }else {
+                    if (dx > 0) {
+                        message += dx + "trout above";
+                    } else if (dx == 0) {
+                        message += "";
+                    } else if (dx < 0) {
+                        message += -dx + "trout under ";
+                    }
+
+                    if (dy > 0) {
+                        message += dy + " trout to the left";
+                    } else if (dy == 0) {
+                        message += "";
+                    } else if (dy < 0) {
+                        message += -dy + " trout to the right";
+                    }
+                    message += " tap please!";
                 }
-                message += "をタップしてね！";
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         }

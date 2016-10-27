@@ -7,8 +7,8 @@ android {
         applicationId "com.valkyrie.nabeshimamac.lightsout"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 13
-        versionName "1.4.3"
+        versionCode 15
+        versionName "1.4.5"
         //versioncodeをアプデ時に必ず変更すること
 
         multiDexEnabled true

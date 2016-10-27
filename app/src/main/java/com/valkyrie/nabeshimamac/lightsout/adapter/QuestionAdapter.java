@@ -16,12 +16,14 @@ import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * ListViewのAdapter
  */
 public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnClickListener {
     LayoutInflater inflater;
+    private Locale locale = Locale.getDefault();
 
     public QuestionAdapter(Context context) {
         super(context, 0);
@@ -63,8 +65,13 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
 
         viewHolder.deleteImageView.setTag(position);
         viewHolder.editImageView.setTag(position);
-        viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
-                " \n・空のマス : " + emptyCount);
+        if (locale.equals(Locale.JAPAN)) {
+            viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
+                    " \n・空のマス : " + emptyCount);
+        }else {
+            viewHolder.detailTextView.setText("・Size : " + item.width + "×" + item.height +
+                    " \n・Empty Board : " + emptyCount);
+        }
         //盤面の情報
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm'('EEE')'"); // 日
         if (item.createdAt != null) {
@@ -89,23 +96,41 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
             case R.id.imageDelete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(false);
-                builder.setTitle("本当に削除しますか？");
-                builder.setMessage("セーブ" +
-                        "データは戻ってきません！！");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                        question.delete();
-                        remove(question);
-                    }
-                });
-                builder.setNegativeButton("Cansel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+                if (locale.equals(Locale.JAPAN)) {
+                    builder.setTitle("本当に削除しますか？");
+                    builder.setMessage("セーブデータは戻ってきません！！");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            question.delete();
+                            remove(question);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                }else {
+                    builder.setTitle("Do you really want to delete this?");
+                    builder.setMessage("Save data does not return!!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            question.delete();
+                            remove(question);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                }
                 builder.show();
                 break;
         }

@@ -39,6 +39,7 @@ import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements
     private List<Point> prePoints;
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
+    private Locale locale = Locale.getDefault();
 
 
     @Override
@@ -273,9 +275,9 @@ public class MainActivity extends AppCompatActivity implements
         if (clearCount == 1) {
             // いずれかの難易度の初回クリア(実績)
             if (ranking == GameClientManager.Ranking.Easy) {
-                medal = GameClientManager.Medal.FirstEazy;
+                medal = GameClientManager.Medal.FirstEasy;
             } else if (ranking == GameClientManager.Ranking.Normal) {
-                medal = GameClientManager.Medal.FirstNomal;
+                medal = GameClientManager.Medal.FirstNormal;
             } else if (ranking == GameClientManager.Ranking.Hard) {
                 medal = GameClientManager.Medal.FirstHard;
             } else if (ranking == GameClientManager.Ranking.Original) {
@@ -285,9 +287,9 @@ public class MainActivity extends AppCompatActivity implements
         } else if (clearCount == 10) {
             // いずれかの難易度の10回クリア(実績)
             if (ranking == GameClientManager.Ranking.Easy) {
-                medal = GameClientManager.Medal.ProEazy;
+                medal = GameClientManager.Medal.ProEasy;
             } else if (ranking == GameClientManager.Ranking.Normal) {
-                medal = GameClientManager.Medal.ProNomal;
+                medal = GameClientManager.Medal.ProNormal;
             } else if (ranking == GameClientManager.Ranking.Hard) {
                 medal = GameClientManager.Medal.ProHard;
             }
@@ -367,26 +369,49 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && isPlaying) {
-            new AlertDialog.Builder(this)
-                    .setTitle("プレイ中の記録は戻りません！")
-                    .setMessage("よろしいですか？")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            if (locale.equals(Locale.JAPAN)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("プレイ中の記録は戻りません！")
+                        .setMessage("よろしいですか？")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //自動生成されたメソッド・スタブ
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //自動生成されたメソッド・スタブ
-                        }
-                    })
-                    .show();
-            return true;
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                            }
+                        })
+                        .show();
+                return true;
+            }else {
+                new AlertDialog.Builder(this)
+                        .setTitle("Do not come back!!")
+                        .setMessage("Is it OK?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                            }
+                        })
+                        .show();
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -433,8 +458,13 @@ public class MainActivity extends AppCompatActivity implements
     private void showStartModal() {
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
-        titleTextView.setText("さぁ始めよう！");
-        messageTextView.setText("全て反対のパネルにしよう。\nStartでゲーム開始です。");
+        if (locale.equals(Locale.JAPAN)){
+            titleTextView.setText("さぁ始めよう！");
+            messageTextView.setText("全て反対のパネルにしよう。\nStartでゲーム開始です。");
+        }else {
+            titleTextView.setText("Let's Play!");
+            messageTextView.setText("Please to all opposite color.\nThe game is started with START.");
+        }
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
             @Override

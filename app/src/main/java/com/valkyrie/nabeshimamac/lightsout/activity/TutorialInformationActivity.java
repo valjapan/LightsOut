@@ -14,6 +14,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.valkyrie.nabeshimamac.lightsout.MyApplication;
 import com.valkyrie.nabeshimamac.lightsout.R;
 
+import java.util.Locale;
+
 /**
  * tutorial画面のActivity
  */
@@ -22,6 +24,7 @@ public class TutorialInformationActivity extends AppCompatActivity {
     private Button buttonTutorial;
     private TextView titleTextView1 ,contentsTextView1 ,titleTextView2 ,contentsTextView2,
                     titleTextView3 , contentsTextView3Of1 ,contentsTextView3Of2 ,contentsTextView3Of3;
+    private Locale locale =Locale.getDefault();
 
 
     public static Intent createIntent(Context context) {
@@ -68,6 +71,19 @@ public class TutorialInformationActivity extends AppCompatActivity {
         buttonTutorial.setTypeface(gothicAdobe);
         //フォントの指定
 
+        if (locale.equals(Locale.JAPAN)){
+            contentsTextView1.setText("パネルをタップします");
+            contentsTextView2.setText("触ったパネルと \n  上下左右の色が \n       反転します");
+            contentsTextView3Of1.setText("全て\n");
+            contentsTextView3Of2.setText("反転\n");
+            contentsTextView3Of3.setText("させます\n");
+        }else {
+            contentsTextView1.setText("Tap the Panel");
+            contentsTextView2.setText("The panel in contact \n with the tap the panel \n will be inverted");
+            contentsTextView3Of1.setText("It reverses \n");
+            contentsTextView3Of2.setText("the\n");
+            contentsTextView3Of3.setText("all panel\n");
+        }
     }
 
     public void next(View v) {

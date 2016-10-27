@@ -28,6 +28,8 @@ import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.ShareManager;
 
+import java.util.Locale;
+
 /**
  * title画面のActivity
  */
@@ -37,14 +39,14 @@ public class TitleActivity extends AppCompatActivity implements
 
     private TextView textView, versionTextView;
     private ImageView googlePlayImageView, editButtonImageView, shareTwitter;
-    private Button playEazy, playNomal, playHard , playShare , goEazyRank , goNomalRank ,
+    private Button playEasy, playNormal, playHard , playShare , goEasyRank , goNormalRank,
             goHardRank , goShareRank ,returmMode;
     private LinearLayout modeLayout, otherLayout;
     private RelativeLayout rankLayout;
 
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
-
+    private Locale locale = Locale.getDefault();
     public static Intent createIntent(Context context) {
         return new Intent(context, TitleActivity.class);
     }
@@ -73,24 +75,24 @@ public class TitleActivity extends AppCompatActivity implements
         versionTextView = (TextView) findViewById(R.id.versionName);
         //TextViewIDの関連付け
 
-        playEazy = (Button) findViewById(R.id.PlayEazy);
-        playNomal = (Button) findViewById(R.id.PlayNomal);
+        playEasy = (Button) findViewById(R.id.PlayEasy);
+        playNormal = (Button) findViewById(R.id.PlayNormal);
         playHard = (Button) findViewById(R.id.PlayHard);
         playShare = (Button) findViewById(R.id.PlayShare);
-        goEazyRank = (Button) findViewById(R.id.rankEazy);
-        goNomalRank = (Button) findViewById(R.id.rankNomal);
+        goEasyRank = (Button) findViewById(R.id.rankEasy);
+        goNormalRank = (Button) findViewById(R.id.rankNormal);
         goHardRank = (Button) findViewById(R.id.rankHard);
         goShareRank = (Button) findViewById(R.id.rankOriginal);
         returmMode = (Button) findViewById(R.id.returnTitle);
         //ButtonのIDの関連付け
 
         textView.setTypeface(gothicAdobe);
-        playEazy.setTypeface(gothicApple);
-        playNomal.setTypeface(gothicApple);
+        playEasy.setTypeface(gothicApple);
+        playNormal.setTypeface(gothicApple);
         playHard.setTypeface(gothicApple);
         playShare.setTypeface(gothicApple);
-        goEazyRank.setTypeface(gothicApple);
-        goNomalRank.setTypeface(gothicApple);
+        goEasyRank.setTypeface(gothicApple);
+        goNormalRank.setTypeface(gothicApple);
         goHardRank.setTypeface(gothicApple);
         goShareRank.setTypeface(gothicApple);
         //フォントの指定
@@ -104,18 +106,55 @@ public class TitleActivity extends AppCompatActivity implements
 
         versionTextView.setText("v" + BuildConfig.VERSION_NAME);
 
+        if (locale.equals(Locale.JAPAN)){
+            playEasy.setText("初級");
+            playNormal.setText("中級");
+            playHard.setText("上級");
+            playShare.setText("共有問題");
+            goEasyRank.setText("初級ランキング");
+            goNormalRank.setText("中級ランキング");
+            goHardRank.setText("上級ランキング");
+            goShareRank.setText("オリジナルランキング");
+            returmMode.setText("戻る");
+
             findViewById(R.id.shareTwitter).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ShareManager.shareTwitter(TitleActivity.this,
                             "新感覚シンプルパズルゲーム【LightsOut】。" +
-                            "\nルール は簡単、押したパネルとその上下左右のボタンの色が反転する。" +
-                            "全てのパネルを水色からピンクにすればゲームクリアだ。" +
-                            "\n君もチャレンジしてみないか。 #LightsOutGame" +
-                            "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
+                                    "\nルール は簡単、押したパネルとその上下左右のボタンの色が反転する。" +
+                                    "全てのパネルを反転色にすればゲームクリアだ。" +
+                                    "\n君もチャレンジしてみないか。 #LightsOut" +
+                                    "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
                 }
             });
-        //Twitterの投稿文章
+            //Twitterの投稿文章
+
+        }else {
+            playEasy.setText("Easy");
+            playNormal.setText("Normal");
+            playHard.setText("Hard");
+            playShare.setText("ShareMode");
+            goEasyRank.setText("EasyRanking");
+            goNormalRank.setText("NormalRanking");
+            goHardRank.setText("HardRanking");
+            goShareRank.setText("OriginalRanking");
+            returmMode.setText("Back");
+
+            findViewById(R.id.shareTwitter).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShareManager.shareTwitter(TitleActivity.this,
+                            "LightsOut is a simple puzzle game." +
+                                    "\n Anyone can easily play." +
+                                    "\n Waiting challenge." +
+                                    "\n #LightsOut" +
+                                    "\nhttps://play.google.com/store/apps/details?id=com.valkyrie.nabeshimamac.lightsout");
+                }
+            });
+            //Twitterの投稿文章
+        }
+
     }
 
     @Override
@@ -181,14 +220,14 @@ public class TitleActivity extends AppCompatActivity implements
         apiClient.connect();
     }
 
-    public void goEazy(View v) {
+    public void goEasy(View v) {
         final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 0);
         startActivity(intent);
         //初級
     }
 
-    public void goNomal(View v) {
+    public void goNormal(View v) {
         final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("mode", 1);
         startActivity(intent);
@@ -215,8 +254,8 @@ public class TitleActivity extends AppCompatActivity implements
     }
 
     public void googleGame(View v) {
-        playEazy.setVisibility(View.INVISIBLE);
-        playNomal.setVisibility(View.INVISIBLE);
+        playEasy.setVisibility(View.INVISIBLE);
+        playNormal.setVisibility(View.INVISIBLE);
         playHard.setVisibility(View.INVISIBLE);
         playShare.setVisibility(View.INVISIBLE);
         rankLayout.setVisibility(View.VISIBLE);
@@ -229,12 +268,12 @@ public class TitleActivity extends AppCompatActivity implements
         //クリエイトモード
     }
 
-    public void goEazyRank(View v) {
+    public void goEasyRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Easy);
         //初級ランキング
     }
 
-    public void goNomalRank(View v) {
+    public void goNormalRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Normal);
         //中級ランキング
     }
@@ -250,8 +289,8 @@ public class TitleActivity extends AppCompatActivity implements
     }
 
     public void goTitle(View v) {
-        playEazy.setVisibility(View.VISIBLE);
-        playNomal.setVisibility(View.VISIBLE);
+        playEasy.setVisibility(View.VISIBLE);
+        playNormal.setVisibility(View.VISIBLE);
         playHard.setVisibility(View.VISIBLE);
         playShare.setVisibility(View.VISIBLE);
         rankLayout.setVisibility(View.INVISIBLE);
@@ -266,9 +305,32 @@ public class TitleActivity extends AppCompatActivity implements
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (locale.equals(Locale.JAPAN)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("アプリケーションの終了")
+                        .setMessage("アプリケーションを終了してもよろしいですか？")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                                TitleActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                            }
+                        })
+                        .show();
+                return true;
+            }
+        }else {
             new AlertDialog.Builder(this)
-                    .setTitle("アプリケーションの終了")
-                    .setMessage("アプリケーションを終了してもよろしいですか？")
+                    .setTitle("End of application")
+                    .setMessage("Do you want to exit the application?")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                         @Override

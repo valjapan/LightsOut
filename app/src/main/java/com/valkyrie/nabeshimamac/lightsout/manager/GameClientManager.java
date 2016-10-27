@@ -43,11 +43,11 @@ public class GameClientManager {
         //大量にデータを宣言使うときに使う
         FirstTutorial("初めてのLightsOut", "CgkIxf6K1KAMEAIQCA"),
         FirstMakePuzzlePlay("自作Lights Outをプレイしよう", "CgkIxf6K1KAMEAIQDA"),
-        FirstEazy("初級初クリア", "CgkIxf6K1KAMEAIQBQ"),
-        FirstNomal("中級初クリア", "CgkIxf6K1KAMEAIQBg"),
+        FirstEasy("初級初クリア", "CgkIxf6K1KAMEAIQBQ"),
+        FirstNormal("中級初クリア", "CgkIxf6K1KAMEAIQBg"),
         FirstHard("上級初クリア", "CgkIxf6K1KAMEAIQBw"),
-        ProEazy("初級パズルのプロ", "CgkIxf6K1KAMEAIQCQ"),
-        ProNomal("中級パズルのプロ", "CgkIxf6K1KAMEAIQCg"),
+        ProEasy("初級パズルのプロ", "CgkIxf6K1KAMEAIQCQ"),
+        ProNormal("中級パズルのプロ", "CgkIxf6K1KAMEAIQCg"),
         ProHard("上級パズルのプロ", "CgkIxf6K1KAMEAIQCw");
         //(実績名,実績コード(ディベロッパーコンソールにあり))
         public String name;

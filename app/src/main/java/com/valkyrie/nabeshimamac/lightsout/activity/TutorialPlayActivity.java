@@ -14,6 +14,8 @@ import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.view.TutorialLightsOutView;
 
+import java.util.Locale;
+
 /**
  * Tutorialのユーザーがプレイする部分
  * Info→Play(今ここ)→通常問題
@@ -27,6 +29,8 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
 
     private TextView title, contents, contents2;
     private TutorialLightsOutView tutorialLightsOut;
+    private Locale locale =Locale.getDefault();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,15 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
 
     @Override
     public void onTutorialClear() {
-        Toast.makeText(this, "チュートリアルクリア！", Toast.LENGTH_SHORT).show();
-        PreferencesManager.getInstance(this).checkTutorialEnd();
-        finish();
-        // クリアしたらの処理
+        if (locale.equals(Locale.JAPAN)) {
+            Toast.makeText(this, "チュートリアルクリア！", Toast.LENGTH_SHORT).show();
+            PreferencesManager.getInstance(this).checkTutorialEnd();
+            finish();
+        }else {
+            Toast.makeText(this, "Tutorial Clear!!", Toast.LENGTH_SHORT).show();
+            PreferencesManager.getInstance(this).checkTutorialEnd();
+            finish();
+        }
     }
+    // クリアしたらの処理
 }

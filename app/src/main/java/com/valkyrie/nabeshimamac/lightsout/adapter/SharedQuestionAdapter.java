@@ -11,11 +11,15 @@ import android.widget.TextView;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 
+import java.util.Locale;
+
 /**
  * ListViewのAdapter
  */
 public class SharedQuestionAdapter extends ArrayAdapter<SharedQuestion> {
     LayoutInflater inflater;
+    private Locale locale = Locale.getDefault();
+
 
     public SharedQuestionAdapter(Context context) {
         super(context, 0);
@@ -47,8 +51,13 @@ public class SharedQuestionAdapter extends ArrayAdapter<SharedQuestion> {
                 emptyCount++;
             }
         }
-        viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
-                " \n・空のマス : " + emptyCount);
+        if (locale.equals(Locale.JAPAN)) {
+            viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
+                    " \n・空のマス : " + emptyCount);
+        }else {
+            viewHolder.detailTextView.setText("・Size : " + item.width + "×" + item.height +
+                    " \n・Empty Board : " + emptyCount);
+        }
         //盤面の情報
         return convertView;
     }

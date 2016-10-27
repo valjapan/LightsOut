@@ -36,6 +36,7 @@ import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Createモードの新規作成・編集時のActivity
@@ -52,6 +53,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner widthSpinner, heightSpinner;
     private RelativeLayout shareCompleteLayout;
     private Button shareTwitterButton, shareBackButton;
+    private Locale locale = Locale.getDefault();
 
     @NonNull
     private Question question;
@@ -158,31 +160,55 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         lightsOutEachView.setSound(PreferencesManager.getInstance(this).isSound());
         // SharedPreferencesからColorかどうかの設定を読み込む
         lightsOutEachView.setColor(PreferencesManager.getInstance(this).getThemeColor());
+
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(this)
-                    .setTitle("注意")
-                    .setMessage("戻ってしまうとパズルの編集が消えてしまいます！")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            if (locale.equals(Locale.JAPAN)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("注意")
+                        .setMessage("戻ってしまうとパズルの編集が消えてしまいます！")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // 自動生成されたメソッド・スタブ
-                            MakeActivity.this.finish();
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 自動生成されたメソッド・スタブ
+                                MakeActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // 自動生成されたメソッド・スタブ
-                        }
-                    })
-                    .show();
-            return true;
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 自動生成されたメソッド・スタブ
+                            }
+                        })
+                        .show();
+                return true;
+            }else {
+                new AlertDialog.Builder(this)
+                        .setTitle("Caution")
+                        .setMessage("It will disappear editing of puzzle!!")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 自動生成されたメソッド・スタブ
+                                MakeActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 自動生成されたメソッド・スタブ
+                            }
+                        })
+                        .show();
+                return true;
+            }
         }
         return false;
     }
@@ -229,9 +255,15 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void shareTwitter(View view) {
-        final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
-        ShareManager.shareTwitter(this, "シンプルパズルゲーム【LightsOut】で問題を共有しました！！" +
-                "\nURLをクリックして問題をとこう！！ \n#LightsOut \n" + questionUrl);
+        if (locale.equals(Locale.JAPAN)) {
+            final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
+            ShareManager.shareTwitter(this, "シンプルパズルゲーム【LightsOut】で問題を共有しました！！" +
+                    "\nURLをクリックして問題をとこう！！ \n#LightsOut \n" + questionUrl);
+        }else{
+            final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
+            ShareManager.shareTwitter(this, "Shared question in LightsOut." +
+                    "\nTrying to play down the URL. \n#LightsOut \n" + questionUrl);
+        }
     }
     //share時のtwitter共有文章
 
@@ -263,6 +295,17 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         shareTwitterButton.setTypeface(gothicApple);
         shareBackButton.setTypeface(gothicApple);
         //フォントの設定
+
+        if (locale.equals(Locale.JAPAN)){
+            shareTitle.setText("シェアが完了しました！");
+            shareConrents.setText("作った問題をSNSでシェアしよう！");
+            shareTwitterButton.setText("Twitterでシェア");
+
+        }else {
+            shareTitle.setText("Share was completed!!");
+            shareConrents.setText("Trying to share the problems created by the SNS!");
+            shareTwitterButton.setText("Share on Twitter");
+        }
 
         if (TextUtils.isEmpty(question.sharedKey)) {
             final String key = FireBaseManager.pushObject("questions", sharedQuestion, new OnCompleteListener<Void>() {
@@ -306,8 +349,13 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                 emptyCount++;
             }
         }
-        detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×"
-                + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
+        if (locale.equals(Locale.JAPAN)){
+            detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×"
+                    + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
+        }else {
+            detailText.setText("Size : " + lightsOutEachView.getBoardWidth() + "×"
+                + lightsOutEachView.getBoardHeight() + "  Empty Board : " + emptyCount);
+        }
     }
     //ShareからListViewに表示させる内容
 }
