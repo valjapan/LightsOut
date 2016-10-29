@@ -303,7 +303,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         }else {
             shareTitle.setText("Share was completed!!");
-            shareConrents.setText("Trying to share the problems created by the SNS!");
+            shareConrents.setText("Trying to share the question created by the SNS!");
             shareTwitterButton.setText("Share on Twitter");
         }
 

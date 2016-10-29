@@ -78,7 +78,7 @@ public class TutorialInformationActivity extends AppCompatActivity {
             contentsTextView3Of2.setText("反転\n");
             contentsTextView3Of3.setText("させます\n");
         }else {
-            contentsTextView1.setText("Tap the Panel");
+            contentsTextView1.setText("Tap the Panel\n");
             contentsTextView2.setText("The panel in contact \n with the tap the panel \n will be inverted");
             contentsTextView3Of1.setText("It reverses \n");
             contentsTextView3Of2.setText("the\n");

@@ -59,6 +59,14 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
         tutorialLightsOut.setColor(PreferencesManager.getInstance(this).getThemeColor());
         tutorialLightsOut.setOnTutorialClearListener(this);
 
+        if (locale.equals(Locale.JAPAN)){
+            contents.setText("実際にやってみよう！！");
+            contents2.setText("左上からスタートです");
+        }else {
+            contents.setText("Let's actually doing!!");
+            contents2.setText("The first is from the upper left.");
+        }
+
     }
 
     @Override
