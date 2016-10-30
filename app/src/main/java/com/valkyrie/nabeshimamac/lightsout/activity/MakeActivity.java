@@ -289,11 +289,19 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         updateQuestion();
         SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
 
-        Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
-        shareTitle.setTypeface(gothicApple);
-        shareConrents.setTypeface(gothicApple);
-        shareTwitterButton.setTypeface(gothicApple);
-        shareBackButton.setTypeface(gothicApple);
+        if (locale.equals(Locale.JAPAN)){
+            Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
+            shareTitle.setTypeface(gothicApple);
+            shareConrents.setTypeface(gothicApple);
+            shareTwitterButton.setTypeface(gothicApple);
+            shareBackButton.setTypeface(gothicApple);
+        }else {
+            Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
+            shareTitle.setTypeface(gothicAdobe);
+            shareConrents.setTypeface(gothicAdobe);
+            shareTwitterButton.setTypeface(gothicAdobe);
+            shareBackButton.setTypeface(gothicAdobe);
+        }
         //フォントの設定
 
         if (locale.equals(Locale.JAPAN)){

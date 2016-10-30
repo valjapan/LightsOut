@@ -59,6 +59,7 @@ public class TitleActivity extends AppCompatActivity implements
 
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
+        Typeface cooperBlack = Typeface.createFromAsset(getAssets(), "CooperBlackStd.otf");
         //フォントの読み込み
 
         modeLayout = (LinearLayout) findViewById(R.id.modeLayout);
@@ -138,7 +139,7 @@ public class TitleActivity extends AppCompatActivity implements
             playShare.setText("ShareMode");
             goEasyRank.setText("EasyRanking");
             goNormalRank.setText("NormalRanking");
-            goHardRank.setText("HardRanking");
+            goHardRank.setText("HardRanking");wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
             goShareRank.setText("OriginalRanking");
             returmMode.setText("Back");
 
@@ -159,7 +160,7 @@ public class TitleActivity extends AppCompatActivity implements
         editButtonImageView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v){
-                Toast.makeText(getApplicationContext(), "長押し", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "クリエイトモード", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

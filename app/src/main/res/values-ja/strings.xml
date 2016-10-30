@@ -20,6 +20,8 @@
     <string name="setting_mute_summary">ゲーム中の効果音のON/OFFを切り替えます。</string>
     <string name="setting_color_title">テーマカラー</string>
     <string name="setting_color_summary">パズルのテーマカラーを選択します。</string>
+    <string name="setting_feedback_title">フィードバック</string>
+    <string name="setting_feedback_summary">よかったらフィードバックをお願いします！</string>
 
     <!-- ゲームのボードサイズ -->
     <string-array name="size_spinner">

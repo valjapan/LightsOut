@@ -62,7 +62,7 @@ public class PreferencesManager {
 
     public ThemeColors getThemeColor() {
         final String color = defaultPreferences.getString("color", null);
-        if (TextUtils.isEmpty(color) ) {
+        if (TextUtils.isEmpty(color)) {
             return ThemeColors.PinkBlue;
             // インストール時何も入らないから、デフォルト（何も入ってない状態）をピンクブルーに設定
         } else {

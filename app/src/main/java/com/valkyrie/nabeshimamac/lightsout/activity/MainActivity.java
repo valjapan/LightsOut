@@ -31,6 +31,7 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Player;
 import com.valkyrie.nabeshimamac.lightsout.MyApplication;
 import com.valkyrie.nabeshimamac.lightsout.R;
+import com.valkyrie.nabeshimamac.lightsout.manager.FireBaseManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
     private Locale locale = Locale.getDefault();
-
+    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
+        Typeface cooperBlack = Typeface.createFromAsset(getAssets(), "CooperBlackStd.otf");
         //フォントの呼び出し
 
         lightsOutView.setOnLightsOutListener(this);
@@ -148,17 +150,31 @@ public class MainActivity extends AppCompatActivity implements
         });
         //startレイアウトとclearレイアウトの表示部分
 
-        timerTextView.setTypeface(gothicAdobe);
-        counterTextView.setTypeface(gothicAdobe);
-        totalTextView.setTypeface(gothicAdobe);
-        messageTextView.setTypeface(gothicApple);
-        titleTextView.setTypeface(gothicApple);
-        titleClearTextView.setTypeface(sign);
-        countResultTextView.setTypeface(gothicAdobe);
-        timeResultTextView.setTypeface(gothicAdobe);
-        modalButton.setTypeface(gothicAdobe);
-        returnTitleButton.setTypeface(gothicAdobe);
-        goMyRankButton.setTypeface(gothicAdobe);
+        if (locale.equals(Locale.JAPAN)){
+            timerTextView.setTypeface(gothicAdobe);
+            counterTextView.setTypeface(gothicAdobe);
+            totalTextView.setTypeface(gothicAdobe);
+            messageTextView.setTypeface(gothicApple);
+            titleTextView.setTypeface(gothicApple);
+            titleClearTextView.setTypeface(sign);
+            countResultTextView.setTypeface(gothicAdobe);
+            timeResultTextView.setTypeface(gothicAdobe);
+            modalButton.setTypeface(gothicAdobe);
+            returnTitleButton.setTypeface(gothicAdobe);
+            goMyRankButton.setTypeface(gothicAdobe);
+        }else {
+            timerTextView.setTypeface(gothicAdobe);
+            counterTextView.setTypeface(gothicAdobe);
+            totalTextView.setTypeface(gothicAdobe);
+            messageTextView.setTypeface(gothicApple);
+            titleTextView.setTypeface(gothicApple);
+            titleClearTextView.setTypeface(sign);
+            countResultTextView.setTypeface(gothicAdobe);
+            timeResultTextView.setTypeface(gothicAdobe);
+            modalButton.setTypeface(gothicAdobe);
+            returnTitleButton.setTypeface(gothicAdobe);
+            goMyRankButton.setTypeface(gothicAdobe);
+        }
         //フォントの変更
 
         showStartModal();
@@ -456,6 +472,24 @@ public class MainActivity extends AppCompatActivity implements
         //パネルONかOFFになってるかの確認
     }
 
+    private String loadAllFlags() {
+        String data = "";
+        if (lightsOutView != null) {
+            boolean[][] flags =  lightsOutView.getAllFlags();
+            for (int i = 0; i < flags.length; i++) {
+                for (int j = 0; j < flags.length; j++) {
+                    if (flags[i][j]) {
+                        data += "1";
+                    }else {
+                        data += "0";
+                    }
+                }
+            }
+        }
+
+        return data;
+    }
+
     private void showStartModal() {
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
@@ -471,6 +505,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 playGame();
+                data = loadAllFlags();
             }
         });
         //Play開始前の画面
@@ -526,6 +561,9 @@ public class MainActivity extends AppCompatActivity implements
                         long second = (nowTime - startedAt) / 1000 % 60;
                         long mili = (nowTime - startedAt) % 1000 / 10;
                         timerTextView.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
+                        if (minute == 3 &&second == 0 &&mili == 0) {
+                            FireBaseManager.pushObject("data", data, null);
+                        }
                     }
                 });
             }

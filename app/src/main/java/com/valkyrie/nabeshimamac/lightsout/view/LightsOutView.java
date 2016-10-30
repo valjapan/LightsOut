@@ -120,6 +120,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
         //リセットの内容
     }
 
+    public boolean[][] getAllFlags() {
+        return flag;
+    }
+
     public void check(int line, int row) {
         //プレイ時の色のチェック内容
         checkFlag(line, row);

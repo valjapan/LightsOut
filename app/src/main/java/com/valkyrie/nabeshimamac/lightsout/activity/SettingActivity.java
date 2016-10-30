@@ -2,6 +2,7 @@ package com.valkyrie.nabeshimamac.lightsout.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,5 +35,11 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         //toolBarの表示部分
+    }
+
+    public void goFeedBack(View v){
+        Uri uri = Uri.parse("market://details?id=com.valkyrie.nabeshimamac.lightsout");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }
