@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements
         //ツールバーの呼び出し
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
