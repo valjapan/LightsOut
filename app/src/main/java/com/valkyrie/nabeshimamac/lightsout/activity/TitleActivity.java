@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -154,6 +155,14 @@ public class TitleActivity extends AppCompatActivity implements
             });
             //Twitterの投稿文章
         }
+
+        editButtonImageView.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v){
+                Toast.makeText(getApplicationContext(), "長押し", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
 
     }
 
@@ -325,28 +334,27 @@ public class TitleActivity extends AppCompatActivity implements
                             }
                         })
                         .show();
-                return true;
+            }else {
+                new AlertDialog.Builder(this)
+                        .setTitle("End of application")
+                        .setMessage("Do you want to exit the application?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                                TitleActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //自動生成されたメソッド・スタブ
+                            }
+                        })
+                        .show();
             }
-        }else {
-            new AlertDialog.Builder(this)
-                    .setTitle("End of application")
-                    .setMessage("Do you want to exit the application?")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //自動生成されたメソッド・スタブ
-                            TitleActivity.this.finish();
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //自動生成されたメソッド・スタブ
-                        }
-                    })
-                    .show();
             return true;
         }
         return false;

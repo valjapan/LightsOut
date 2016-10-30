@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">LightsOut</string>
+    <!-- Menus -->
+    <string name="menu_reset">リセット</string>
+    <string name="menu_info">チュートリアル</string>
+    <string name="menu_save">保存する</string>
+    <string name="menu_delete">削除する</string>
+    <string name="menu_edit">編集する</string>
+    <string name="menu_back">戻る</string>
+    <!-- Tutorial -->
+    <string name="tutorial_title_1"><u>Step1</u></string>
+    <string name="tutorial_title_2"><u>Step2</u></string>
+    <string name="tutorial_title_3"><u>Step3</u></string>
+    <string name="tutorial_title_4"><u>Step4</u></string>
+    <!-- Make -->
+    <string name="make_menu_save">保存</string>
+    <string name="make_make_share">問題を共有</string>
+    <!-- Setting -->
+    <string name="setting_mute_title">効果音</string>
+    <string name="setting_mute_summary">ゲーム中の効果音のON/OFFを切り替えます。</string>
+    <string name="setting_color_title">テーマカラー</string>
+    <string name="setting_color_summary">パズルのテーマカラーを選択します。</string>
+
+    <!-- ゲームのボードサイズ -->
+    <string-array name="size_spinner">
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+</resources>
