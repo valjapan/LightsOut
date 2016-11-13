@@ -496,6 +496,8 @@ public class MainActivity extends AppCompatActivity implements
         clearLayout.setVisibility(View.INVISIBLE);
         startInfoAt = System.currentTimeMillis();
         setStartTimerInfo();
+        //CountDownAnimation countDownAnimation = new CountDownAnimation(textView, startCount);
+        //countDownAnimation.start();
 
 
         String colorChoose;
