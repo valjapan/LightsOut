@@ -89,7 +89,7 @@
                 android:height="60dp"
                 android:background="@drawable/button_design_pink"
                 android:onClick="goShare"
-                android:text="共有問題"
+                android:text="チャレンジモード"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
                 android:textSize="33dp" />

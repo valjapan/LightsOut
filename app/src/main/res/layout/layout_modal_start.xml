@@ -38,6 +38,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
         android:textSize="28dp" />
 
+
     <Button
         android:id="@+id/modalButton"
         android:layout_width="match_parent"

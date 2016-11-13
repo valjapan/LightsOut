@@ -15,6 +15,7 @@
     <!-- Make -->
     <string name="make_menu_save">Save</string>
     <string name="make_make_share">Share</string>
+    <string name="make_info_hint">Please enter a title</string>
     <!-- Setting -->
     <string name="setting_mute_title">Sound Effect</string>
     <string name="setting_mute_summary">Switch the ON / OFF of the sound effect in the game.</string>
@@ -29,5 +30,11 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+    <string name="create_mode">CreateMode</string>
+    <string name="feedback_google_play">Please give me the feedback.</string>
+    <string name="choose_pink">Pink</string>
+    <string name="choose_blue">Blue</string>
+    <string name="choose_green">Green</string>
 
 </resources>

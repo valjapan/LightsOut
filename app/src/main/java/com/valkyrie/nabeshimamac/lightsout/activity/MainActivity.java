@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
+import com.valkyrie.nabeshimamac.lightsout.model.ThemeColors;
 import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 import java.util.ArrayList;
@@ -72,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements
             totalTextView, timeResultTextView, countResultTextView, titleClearTextView;
     private Button modalButton, returnTitleButton, goMyRankButton;
     private RelativeLayout startLayout, clearLayout;
-    private long startedAt;
-    private Timer timer;
+    private long startedAt , startInfoAt;
+    private Timer timer , startTimerInfo;
     private Handler h = new Handler();
     private boolean isPlaying = false;
     private Random random = new Random();
@@ -471,7 +473,6 @@ public class MainActivity extends AppCompatActivity implements
         lightsOutView.updateFlags();
         //パネルONかOFFになってるかの確認
     }
-
     private String loadAllFlags() {
         String data = "";
         if (lightsOutView != null) {
@@ -493,12 +494,33 @@ public class MainActivity extends AppCompatActivity implements
     private void showStartModal() {
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
+        startInfoAt = System.currentTimeMillis();
+        setStartTimerInfo();
+
+
+        String colorChoose;
+        String chooseColor = PreferenceManager.getDefaultSharedPreferences(this).getString("color", "");
+        ThemeColors themeColors = ThemeColors.getThemeColor(chooseColor);
+        switch (themeColors) {
+            case PinkBlue:
+                colorChoose = getString(R.string.choose_pink);
+                break;
+            case YellowBlue:
+                colorChoose = getString(R.string.choose_blue);
+                break;
+            case OrangeGreen:
+                colorChoose = getString(R.string.choose_green);
+                break;
+            default:
+                colorChoose = "反対";
+        }
+
         if (locale.equals(Locale.JAPAN)){
             titleTextView.setText("さぁ始めよう！");
-            messageTextView.setText("全て反対のパネルにしよう。\nStartでゲーム開始です。");
+            messageTextView.setText("全て"+colorChoose+"のパネルにしよう。\nStartでゲーム開始です。");
         }else {
             titleTextView.setText("Let's Play!");
-            messageTextView.setText("Please to all opposite color.\nThe game is started with START.");
+            messageTextView.setText("All please in the "+colorChoose+".\nThe game is started with START.");
         }
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
@@ -575,6 +597,41 @@ public class MainActivity extends AppCompatActivity implements
         if (timer != null) {
             timer.cancel();
             timer = null;
+        }
+        //Timerを止める時の処理部分
+    }
+
+    private void setStartTimerInfo(){
+        if (startTimerInfo != null) {
+            startTimerInfo.cancel();
+            startTimerInfo = null;
+        }
+        startTimerInfo = new Timer();
+        startTimerInfo.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                final long nowTime = System.currentTimeMillis();
+                h.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        long second = (nowTime - startInfoAt) / 1000 % 60;
+                        long mili = (nowTime - startInfoAt) % 1000 / 10;
+                        //countDownTextView.setText(String.format("%2$02d:%3$02d",second, mili));
+                        if (second == 5 &&mili == 0) {
+                            stopTimerInfo();
+                            playGame();
+                        }
+                    }
+                });
+            }
+        }, 0, 10);
+
+        //countDownTimerの処理部分
+    }
+    private void stopTimerInfo() {
+        if (startTimerInfo != null) {
+            startTimerInfo.cancel();
+            startTimerInfo = null;
         }
         //Timerを止める時の処理部分
     }

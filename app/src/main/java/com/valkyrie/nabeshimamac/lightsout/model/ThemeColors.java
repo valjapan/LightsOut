@@ -50,4 +50,20 @@ public enum ThemeColors {
 
         //指定した色をThemeColorsで定義する
     }
+
+    public static ThemeColors getThemeColor(String color){
+        switch (color){
+            case "PinkBlue":
+                return ThemeColors.PinkBlue;
+            case "YellowBlue":
+                return ThemeColors.YellowBlue;
+            case "OrangeGreen":
+                return ThemeColors.OrangeGreen;
+            default:
+                return ThemeColors.PinkBlue;
+        }
+    }
+
+
+
 }

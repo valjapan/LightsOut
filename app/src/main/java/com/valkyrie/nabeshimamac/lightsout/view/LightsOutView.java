@@ -13,8 +13,11 @@ import android.widget.LinearLayout;
 
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
+import com.valkyrie.nabeshimamac.lightsout.manager.FireBaseManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.TapManager;
 import com.valkyrie.nabeshimamac.lightsout.model.ThemeColors;
+
+import static android.R.attr.data;
 
 /**
  * lightsOutView内のシステム
@@ -90,6 +93,9 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 listener.onButtonTapped(point.x, point.y, tapCount);
                 //動的にボタンを設置するからonClickが書かれない
                 //そこでjavaで一つずつ入れていく。
+            }
+            if (tapCount == 50){
+                FireBaseManager.pushObject("data", data, null);
             }
         }
     }

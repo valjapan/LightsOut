@@ -66,7 +66,7 @@ public class PreferencesManager {
             return ThemeColors.PinkBlue;
             // インストール時何も入らないから、デフォルト（何も入ってない状態）をピンクブルーに設定
         } else {
-            return ThemeColors.valueOf(color);
+            return ThemeColors.getThemeColor(color);
             // 他色を選択した時にこっちに入る
         }
     }

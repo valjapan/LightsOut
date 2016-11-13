@@ -33,7 +33,7 @@
         android:layout_below="@id/view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="よかったらフィードバックをお願いします！"
+        android:text="@string/feedback_google_play"
         android:background="#00000000"
         android:id="@+id/Feedback"
         android:layout_marginBottom="16dp"

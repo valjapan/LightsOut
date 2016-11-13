@@ -160,7 +160,7 @@ public class TitleActivity extends AppCompatActivity implements
         editButtonImageView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v){
-                Toast.makeText(getApplicationContext(), "クリエイトモード", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.create_mode), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

@@ -15,6 +15,7 @@
     <!-- Make -->
     <string name="make_menu_save">保存</string>
     <string name="make_make_share">問題を共有</string>
+    <string name="make_info_hint">タイトル名を入力</string>
     <!-- Setting -->
     <string name="setting_mute_title">効果音</string>
     <string name="setting_mute_summary">ゲーム中の効果音のON/OFFを切り替えます。</string>
@@ -31,5 +32,12 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+    <string name="create_mode">クリエイトモード</string>
+    <string name="feedback_google_play">よかったらフィードバックをお願いします！</string>
+    <string name="choose_pink">ピンク</string>
+    <string name="choose_blue">ブルー</string>
+    <string name="choose_green">グリーン</string>
+
 
 </resources>
