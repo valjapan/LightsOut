@@ -38,6 +38,7 @@ import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
 import com.valkyrie.nabeshimamac.lightsout.model.SharedQuestion;
 import com.valkyrie.nabeshimamac.lightsout.model.ThemeColors;
+import com.valkyrie.nabeshimamac.lightsout.view.CountDownAnimation;
 import com.valkyrie.nabeshimamac.lightsout.view.LightsOutView;
 
 import java.util.ArrayList;
@@ -70,12 +71,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private LightsOutView lightsOutView;
-    private TextView timerTextView, counterTextView , titleTextView, messageTextView,
+    private TextView timerTextView, counterTextView, titleTextView, messageTextView,
             totalTextView, timeResultTextView, countResultTextView, titleClearTextView;
     private Button modalButton, returnTitleButton, goMyRankButton;
     private RelativeLayout startLayout, clearLayout;
-    private long startedAt , startInfoAt;
-    private Timer timer , startTimerInfo;
+    private long startedAt, startInfoAt;
+    private Timer timer, startTimerInfo;
     private Handler h = new Handler();
     private boolean isPlaying = false;
     private Random random = new Random();
@@ -126,17 +127,20 @@ public class MainActivity extends AppCompatActivity implements
         clearLayout = (RelativeLayout) findViewById(R.id.clearLayout);
         //RelativeLayoutのIDの関連付け
 
+
         Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
         Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
         Typeface sign = Typeface.createFromAsset(getAssets(), "SignPainter.otf");
         Typeface cooperBlack = Typeface.createFromAsset(getAssets(), "CooperBlackStd.otf");
         //フォントの呼び出し
 
+
         lightsOutView.setOnLightsOutListener(this);
         counterTextView.setText(String.format("%1$02d", 0));
         timerTextView.setText("00:00:00");
         timerTextView.setTextColor(Color.BLACK);
         //timerの表示部分
+
 
         startLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -152,7 +156,8 @@ public class MainActivity extends AppCompatActivity implements
         });
         //startレイアウトとclearレイアウトの表示部分
 
-        if (locale.equals(Locale.JAPAN)){
+
+        if (locale.equals(Locale.JAPAN)) {
             timerTextView.setTypeface(gothicAdobe);
             counterTextView.setTypeface(gothicAdobe);
             totalTextView.setTypeface(gothicAdobe);
@@ -164,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements
             modalButton.setTypeface(gothicAdobe);
             returnTitleButton.setTypeface(gothicAdobe);
             goMyRankButton.setTypeface(gothicAdobe);
-        }else {
+        } else {
             timerTextView.setTypeface(gothicAdobe);
             counterTextView.setTypeface(gothicAdobe);
             totalTextView.setTypeface(gothicAdobe);
@@ -191,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements
             ranking = GameClientManager.Ranking.Original;
             final Question question = new Select().from(Question.class).where("id = ?", questionId).executeSingle();
             loadQuestion(question);
-        } else if(getIntent().hasExtra(KEY_SHARED_QUESTION)) {
+        } else if (getIntent().hasExtra(KEY_SHARED_QUESTION)) {
             final SharedQuestion sharedQuestion = (SharedQuestion) getIntent().getSerializableExtra(KEY_SHARED_QUESTION);
             ranking = GameClientManager.Ranking.Original;
             final Question question = sharedQuestion.toQuestion();
@@ -224,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements
         // 初期設定
         // 各種リスナー登録とGoogleAPIで利用するAPIやスコープの設定
 
+
         if (!PreferencesManager.getInstance(this).isTutorialEnd()) {
             Intent intent = new Intent(this, TutorialInformationActivity.class);
             startActivity(intent);
@@ -231,8 +237,9 @@ public class MainActivity extends AppCompatActivity implements
             // Tutorial画面に移動
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
-
         // SharedPreferencesからMuteかどうかの設定を読み込む
+
+
         lightsOutView.setSound(PreferencesManager.getInstance(this).isSound());
         lightsOutView.setColor(PreferencesManager.getInstance(this).getThemeColor());
     }
@@ -399,7 +406,7 @@ public class MainActivity extends AppCompatActivity implements
                                 //自動生成されたメソッド・スタブ
                                 finish();
                             }
-                        })
+                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                             @Override
@@ -409,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements
                         })
                         .show();
                 return true;
-            }else {
+            } else {
                 new AlertDialog.Builder(this)
                         .setTitle("Do not come back!!")
                         .setMessage("Is it OK?")
@@ -432,6 +439,7 @@ public class MainActivity extends AppCompatActivity implements
                 return true;
             }
         }
+
         return super.onKeyDown(keyCode, event);
     }
 
@@ -473,15 +481,16 @@ public class MainActivity extends AppCompatActivity implements
         lightsOutView.updateFlags();
         //パネルONかOFFになってるかの確認
     }
+
     private String loadAllFlags() {
         String data = "";
         if (lightsOutView != null) {
-            boolean[][] flags =  lightsOutView.getAllFlags();
+            boolean[][] flags = lightsOutView.getAllFlags();
             for (int i = 0; i < flags.length; i++) {
                 for (int j = 0; j < flags.length; j++) {
                     if (flags[i][j]) {
                         data += "1";
-                    }else {
+                    } else {
                         data += "0";
                     }
                 }
@@ -495,10 +504,17 @@ public class MainActivity extends AppCompatActivity implements
         startLayout.setVisibility(View.VISIBLE);
         clearLayout.setVisibility(View.INVISIBLE);
         startInfoAt = System.currentTimeMillis();
-        setStartTimerInfo();
-        //CountDownAnimation countDownAnimation = new CountDownAnimation(textView, startCount);
-        //countDownAnimation.start();
+        //timer使わなくてよくなる。
+        CountDownAnimation countDownAnimation = new CountDownAnimation((TextView) findViewById(R.id.count_down_text), 5);
+        countDownAnimation.start();
 
+        // カウントダウンが終わったあとここの処理が走る
+        countDownAnimation.setCountDownListener(new CountDownAnimation.CountDownListener() {
+                                                    @Override
+                                                    public void onCountDownEnd(CountDownAnimation animation) {
+                                                        playGame();
+                                                    }
+                                                });
 
         String colorChoose;
         String chooseColor = PreferenceManager.getDefaultSharedPreferences(this).getString("color", "");
@@ -517,13 +533,14 @@ public class MainActivity extends AppCompatActivity implements
                 colorChoose = "反対";
         }
 
-        if (locale.equals(Locale.JAPAN)){
+        if (locale.equals(Locale.JAPAN)) {
             titleTextView.setText("さぁ始めよう！");
-            messageTextView.setText("全て"+colorChoose+"のパネルにしよう。\nStartでゲーム開始です。");
-        }else {
+            messageTextView.setText("全て" + colorChoose + "のパネルにしよう。\nStartでゲーム開始です。");
+        } else {
             titleTextView.setText("Let's Play!");
-            messageTextView.setText("All please in the "+colorChoose+".\nThe game is started with START.");
+            messageTextView.setText("All please in the " + colorChoose + ".\nThe game is started with START.");
         }
+
         modalButton.setText("START");
         modalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -585,7 +602,7 @@ public class MainActivity extends AppCompatActivity implements
                         long second = (nowTime - startedAt) / 1000 % 60;
                         long mili = (nowTime - startedAt) % 1000 / 10;
                         timerTextView.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
-                        if (minute == 3 &&second == 0 &&mili == 0) {
+                        if (minute == 3 && second == 0 && mili == 0) {
                             FireBaseManager.pushObject("data", data, null);
                         }
                     }
@@ -603,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements
         //Timerを止める時の処理部分
     }
 
-    private void setStartTimerInfo(){
+    private void setStartTimerInfo() {
         if (startTimerInfo != null) {
             startTimerInfo.cancel();
             startTimerInfo = null;
@@ -619,7 +636,7 @@ public class MainActivity extends AppCompatActivity implements
                         long second = (nowTime - startInfoAt) / 1000 % 60;
                         long mili = (nowTime - startInfoAt) % 1000 / 10;
                         //countDownTextView.setText(String.format("%2$02d:%3$02d",second, mili));
-                        if (second == 5 &&mili == 0) {
+                        if (second == 5 && mili == 0) {
                             stopTimerInfo();
                             playGame();
                         }
@@ -627,9 +644,9 @@ public class MainActivity extends AppCompatActivity implements
                 });
             }
         }, 0, 10);
-
         //countDownTimerの処理部分
     }
+
     private void stopTimerInfo() {
         if (startTimerInfo != null) {
             startTimerInfo.cancel();
