@@ -237,11 +237,12 @@ public class MainActivity extends AppCompatActivity implements
             // Tutorial画面に移動
             GameClientManager.unlockMedal(apiClient, GameClientManager.Medal.FirstTutorial);
         }
-        // SharedPreferencesからMuteかどうかの設定を読み込む
 
 
         lightsOutView.setSound(PreferencesManager.getInstance(this).isSound());
         lightsOutView.setColor(PreferencesManager.getInstance(this).getThemeColor());
+        // SharedPreferencesからMuteかどうかの設定を読み込む
+
     }
 
     @Override
@@ -505,16 +506,17 @@ public class MainActivity extends AppCompatActivity implements
         clearLayout.setVisibility(View.INVISIBLE);
         startInfoAt = System.currentTimeMillis();
         //timer使わなくてよくなる。
-        CountDownAnimation countDownAnimation = new CountDownAnimation((TextView) findViewById(R.id.count_down_text), 5);
+        CountDownAnimation countDownAnimation = new CountDownAnimation((TextView)
+                findViewById(R.id.count_down_text), 5);
         countDownAnimation.start();
 
         // カウントダウンが終わったあとここの処理が走る
         countDownAnimation.setCountDownListener(new CountDownAnimation.CountDownListener() {
-                                                    @Override
-                                                    public void onCountDownEnd(CountDownAnimation animation) {
-                                                        playGame();
-                                                    }
-                                                });
+            @Override
+            public void onCountDownEnd(CountDownAnimation animation){
+                playGame();
+            }
+        });
 
         String colorChoose;
         String chooseColor = PreferenceManager.getDefaultSharedPreferences(this).getString("color", "");
