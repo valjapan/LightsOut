@@ -21,6 +21,8 @@
     <string name="setting_mute_summary">Switch the ON / OFF of the sound effect in the game.</string>
     <string name="setting_color_title">Theme Color</string>
     <string name="setting_color_summary">You can choose the puzzle of the theme color.</string>
+    <string name="setting_feedback_title">FeedBack</string>
+    <string name="setting_feedback_summary">Your feedback will be encouraging.</string>
 
     <!-- ゲームのボードサイズ -->
     <string-array name="size_spinner">
