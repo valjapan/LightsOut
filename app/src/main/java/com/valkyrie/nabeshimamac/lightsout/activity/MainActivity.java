@@ -32,7 +32,6 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.games.Player;
 import com.valkyrie.nabeshimamac.lightsout.MyApplication;
 import com.valkyrie.nabeshimamac.lightsout.R;
-import com.valkyrie.nabeshimamac.lightsout.manager.FireBaseManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.GameClientManager;
 import com.valkyrie.nabeshimamac.lightsout.manager.PreferencesManager;
 import com.valkyrie.nabeshimamac.lightsout.model.Question;
@@ -210,14 +209,14 @@ public class MainActivity extends AppCompatActivity implements
             } else if (mode == 1) {
                 lightsOutView.setBoardSize(5, 5);
                 // 中級
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
                     prePoints.add(new Point(random.nextInt(5), random.nextInt(5)));//TODO
                 }
                 ranking = GameClientManager.Ranking.Normal;
             } else if (mode == 2) {
                 lightsOutView.setBoardSize(6, 6);
                 // 上級
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 25; i++) {
                     prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
                 }
                 ranking = GameClientManager.Ranking.Hard;
@@ -476,6 +475,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void loadPrePoints() {
+        if (prePoints.isEmpty()) {
+            return;
+        }
         lightsOutView.resetGame(true);
         for (Point point : prePoints) {
             lightsOutView.check(point.x, point.y);
@@ -605,9 +607,6 @@ public class MainActivity extends AppCompatActivity implements
                         long second = (nowTime - startedAt) / 1000 % 60;
                         long mili = (nowTime - startedAt) % 1000 / 10;
                         timerTextView.setText(String.format("%1$02d:%2$02d:%3$02d", minute, second, mili));
-                        if (minute == 3 && second == 0 && mili == 0) {
-                            FireBaseManager.pushObject("data", data, null);
-                        }
                     }
                 });
             }
