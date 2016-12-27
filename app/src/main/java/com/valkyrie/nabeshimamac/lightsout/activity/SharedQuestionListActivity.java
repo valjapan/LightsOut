@@ -51,7 +51,7 @@ public class SharedQuestionListActivity extends AppCompatActivity {
         });
         getData();
 
-        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar3);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

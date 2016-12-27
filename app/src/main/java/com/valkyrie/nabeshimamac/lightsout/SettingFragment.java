@@ -12,7 +12,7 @@ import android.preference.PreferenceFragment;
 public class SettingFragment extends PreferenceFragment {
 
     public static Intent createIntent(Context context) {
-        return new Intent(context,SettingFragment.class);
+        return new Intent(context, SettingFragment.class);
     }
 
     @Override

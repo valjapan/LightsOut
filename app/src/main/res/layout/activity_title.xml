@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
-            android:splitMotionEvents="false">
+            android:splitMotionEvents="false"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/textView"
@@ -42,6 +42,7 @@
                 android:id="@+id/PlayEasy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:height="60dp"
                 android:background="@drawable/button_design_light_blue"
@@ -49,8 +50,7 @@
                 android:text="初 級"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#FFFFFF"
-                android:textSize="33dp"
-                android:layout_gravity="center_horizontal" />
+                android:textSize="33dp" />
 
             <Button
                 android:id="@+id/PlayNormal"
@@ -95,9 +95,9 @@
                 android:textSize="33dp" />
 
             <LinearLayout
+                android:id="@+id/OtherLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/OtherLayout"
                 android:splitMotionEvents="false">
 
                 <ImageView
@@ -171,12 +171,12 @@
         android:id="@+id/rankLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="#8000"
         android:padding="@dimen/activity_vertical_margin"
-        android:visibility="invisible"
         android:splitMotionEvents="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:visibility="invisible">
 
         <Button
             android:id="@+id/rankEasy"
@@ -184,6 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="175dp"
             android:height="60dp"
             android:background="@drawable/button_design_light_blue"
@@ -191,8 +192,7 @@
             android:text="初級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="32dp"
-            android:layout_centerHorizontal="true" />
+            android:textSize="32dp" />
 
         <Button
             android:id="@+id/rankNormal"
@@ -200,6 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/rankEasy"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:height="60dp"
             android:background="@drawable/button_design_light_green"
@@ -207,13 +208,15 @@
             android:text="中級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="32dp"
-            android:layout_centerHorizontal="true" />
+            android:textSize="32dp" />
 
         <Button
             android:id="@+id/rankHard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rankNormal"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:height="60dp"
             android:background="@drawable/button_design_orange"
@@ -221,16 +224,16 @@
             android:text="上級ランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="32dp"
-            android:layout_below="@+id/rankNormal"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true" />
+            android:textSize="32dp" />
 
 
         <Button
             android:id="@+id/rankOriginal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/rankHard"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:height="60dp"
             android:background="@drawable/button_design_purple"
@@ -238,25 +241,22 @@
             android:text="オリジナルランキング"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="27dp"
-            android:layout_below="@+id/rankHard"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true" />
+            android:textSize="27dp" />
 
         <Button
             android:id="@+id/returnTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
             android:height="60dp"
             android:background="@drawable/button_design_pink"
             android:onClick="goTitle"
             android:text="戻る"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
-            android:textSize="32dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="16dp" />
+            android:textSize="32dp" />
 
 
     </RelativeLayout>

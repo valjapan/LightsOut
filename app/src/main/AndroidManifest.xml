@@ -36,9 +36,10 @@
 
         <activity
             android:name=".activity.TutorialPlayActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".activity.SharedQuestionCallbackActivity"
+        <activity
+            android:name=".activity.SharedQuestionCallbackActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -68,10 +69,12 @@
             android:name="AA_MODELS"
             android:value="com.valkyrie.nabeshimamac.lightsout.model.Question" />
 
-        <activity android:name=".activity.SharedQuestionListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SettingActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.SharedQuestionListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

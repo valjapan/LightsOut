@@ -88,7 +88,7 @@ public class TutorialLightsOutView extends LightsOutView {
                         message += "右に" + -dy + "マス ";
                     }
                     message += "をタップしてね！";
-                }else {
+                } else {
                     if (dx > 0) {
                         message += dx + "trout above";
                     } else if (dx == 0) {

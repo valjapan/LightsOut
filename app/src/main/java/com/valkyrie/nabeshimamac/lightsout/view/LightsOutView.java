@@ -94,7 +94,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
                 //動的にボタンを設置するからonClickが書かれない
                 //そこでjavaで一つずつ入れていく。
             }
-            if (tapCount == 50){
+            if (tapCount == 50) {
                 FireBaseManager.pushObject("data", data, null);
             }
         }

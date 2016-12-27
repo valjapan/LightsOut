@@ -36,7 +36,7 @@ public class Question extends Model {
         super();
     }
 
-    public Question(String title, String board, int width, int height, Date createdAt ) {
+    public Question(String title, String board, int width, int height, Date createdAt) {
         super();
         this.title = title;
         this.board = board;

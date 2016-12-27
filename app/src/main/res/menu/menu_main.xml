@@ -12,5 +12,5 @@
         android:id="@+id/menu_info"
         android:icon="@drawable/ic_info_white_24dp"
         android:title="@string/menu_info"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 </menu>

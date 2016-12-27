@@ -29,7 +29,7 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
 
     private TextView title, contents, contents2;
     private TutorialLightsOutView tutorialLightsOut;
-    private Locale locale =Locale.getDefault();
+    private Locale locale = Locale.getDefault();
 
 
     @Override
@@ -59,10 +59,10 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
         tutorialLightsOut.setColor(PreferencesManager.getInstance(this).getThemeColor());
         tutorialLightsOut.setOnTutorialClearListener(this);
 
-        if (locale.equals(Locale.JAPAN)){
+        if (locale.equals(Locale.JAPAN)) {
             contents.setText("実際にやってみよう！！");
             contents2.setText("左上からスタートです");
-        }else {
+        } else {
             contents.setText("Let's actually doing!!");
             contents2.setText("The first is from the upper left.");
         }
@@ -75,7 +75,7 @@ public class TutorialPlayActivity extends AppCompatActivity implements TutorialL
             Toast.makeText(this, "チュートリアルクリア！", Toast.LENGTH_SHORT).show();
             PreferencesManager.getInstance(this).checkTutorialEnd();
             finish();
-        }else {
+        } else {
             Toast.makeText(this, "Tutorial Clear!!", Toast.LENGTH_SHORT).show();
             PreferencesManager.getInstance(this).checkTutorialEnd();
             finish();

@@ -26,7 +26,6 @@ import android.widget.TextView;
  * Defines a count down animation to be shown on a {@link TextView }.
  *
  * @author Ivan Ridao Freitas
- *
  */
 public class CountDownAnimation {
 
@@ -62,10 +61,8 @@ public class CountDownAnimation {
      * {@link AlphaAnimation } from 1 to 0.
      * </p>
      *
-     * @param textView
-     *            The view where the count down will be shown
-     * @param startCount
-     *            The starting count number
+     * @param textView   The view where the count down will be shown
+     * @param startCount The starting count number
      */
     public CountDownAnimation(TextView textView, int startCount) {
         this.mTextView = textView;
@@ -122,8 +119,7 @@ public class CountDownAnimation {
     /**
      * Sets a new starting count number for the count down animation.
      *
-     * @param startCount
-     *            The starting count number
+     * @param startCount The starting count number
      */
     public void setStartCount(int startCount) {
         this.mStartCount = startCount;
@@ -140,8 +136,7 @@ public class CountDownAnimation {
      * Binds a listener to this count down animation. The count down listener is
      * notified of events such as the end of the animation.
      *
-     * @param listener
-     *            The count down listener to be notified
+     * @param listener The count down listener to be notified
      */
     public void setCountDownListener(CountDownListener listener) {
         mListener = listener;
@@ -156,8 +151,7 @@ public class CountDownAnimation {
         /**
          * Notifies the end of the count down animation.
          *
-         * @param animation
-         *            The count down animation which reached its end.
+         * @param animation The count down animation which reached its end.
          */
         void onCountDownEnd(CountDownAnimation animation);
     }

@@ -6,13 +6,13 @@
         android:id="@+id/menu_save"
         android:icon="@drawable/ic_save_white_24px"
         android:title="@string/make_menu_save"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_share_white_24dp"
         android:title="@string/make_make_share"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
 
 
 </menu>

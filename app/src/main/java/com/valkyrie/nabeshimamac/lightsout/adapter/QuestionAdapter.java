@@ -11,9 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.valkyrie.nabeshimamac.lightsout.model.Question;
 import com.valkyrie.nabeshimamac.lightsout.R;
 import com.valkyrie.nabeshimamac.lightsout.activity.MakeActivity;
+import com.valkyrie.nabeshimamac.lightsout.model.Question;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -68,7 +68,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
         if (locale.equals(Locale.JAPAN)) {
             viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
                     " \n・空のマス : " + emptyCount);
-        }else {
+        } else {
             viewHolder.detailTextView.setText("・Size : " + item.width + "×" + item.height +
                     " \n・Empty Board : " + emptyCount);
         }
@@ -113,7 +113,7 @@ public class QuestionAdapter extends ArrayAdapter<Question> implements View.OnCl
                             dialogInterface.dismiss();
                         }
                     });
-                }else {
+                } else {
                     builder.setTitle("Do you really want to delete this?");
                     builder.setMessage("Save data does not return!!");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

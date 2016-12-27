@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements
                 lightsOutView.setBoardSize(5, 5);
                 // 中級
                 for (int i = 0; i < 8; i++) {
-                    prePoints.add(new Point(random.nextInt(5), random.nextInt(5)));
+                    prePoints.add(new Point(random.nextInt(5), random.nextInt(5)));//TODO
                 }
                 ranking = GameClientManager.Ranking.Normal;
             } else if (mode == 2) {

@@ -15,33 +15,33 @@
         app:titleTextColor="@android:color/white" />
 
     <fragment
+        android:id="@+id/fragment"
         android:name="com.valkyrie.nabeshimamac.lightsout.SettingFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/fragment" />
+        android:layout_below="@id/toolbar" />
 
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="1.25dp"
         android:layout_alignParentStart="true"
-        android:background="#E0E0E0"
-        android:layout_below="@+id/fragment" />
+        android:layout_below="@+id/fragment"
+        android:background="#E0E0E0" />
 
     <Button
-        android:layout_below="@id/view1"
+        android:id="@+id/Feedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/feedback_google_play"
-        android:background="#00000000"
-        android:id="@+id/Feedback"
+        android:layout_below="@id/view1"
         android:layout_marginBottom="16dp"
         android:height="60dp"
-        android:onClick="goFeedBack"
+        android:background="#00000000"
         android:gravity="left|center_horizontal"
+        android:onClick="goFeedBack"
         android:paddingLeft="25dp"
         android:paddingTop="20dp"
-        android:textSize="15dp"/>
+        android:text="@string/feedback_google_play"
+        android:textSize="15dp" />
 
 </RelativeLayout>

@@ -40,14 +40,15 @@ public class TitleActivity extends AppCompatActivity implements
 
     private TextView textView, versionTextView;
     private ImageView googlePlayImageView, editButtonImageView, shareTwitter;
-    private Button playEasy, playNormal, playHard , playShare , goEasyRank , goNormalRank,
-            goHardRank , goShareRank ,returmMode;
+    private Button playEasy, playNormal, playHard, playShare, goEasyRank, goNormalRank,
+            goHardRank, goShareRank, returmMode;
     private LinearLayout modeLayout, otherLayout;
     private RelativeLayout rankLayout;
 
     private GoogleApiClient apiClient;
     private boolean mIntentInProgress;
     private Locale locale = Locale.getDefault();
+
     public static Intent createIntent(Context context) {
         return new Intent(context, TitleActivity.class);
     }
@@ -108,7 +109,7 @@ public class TitleActivity extends AppCompatActivity implements
 
         versionTextView.setText("v" + BuildConfig.VERSION_NAME);
 
-        if (locale.equals(Locale.JAPAN)){
+        if (locale.equals(Locale.JAPAN)) {
             playEasy.setText("初級");
             playNormal.setText("中級");
             playHard.setText("上級");
@@ -132,7 +133,7 @@ public class TitleActivity extends AppCompatActivity implements
             });
             //Twitterの投稿文章
 
-        }else {
+        } else {
             playEasy.setText("Easy");
             playNormal.setText("Normal");
             playHard.setText("Hard");
@@ -157,9 +158,9 @@ public class TitleActivity extends AppCompatActivity implements
             //Twitterの投稿文章
         }
 
-        editButtonImageView.setOnLongClickListener(new View.OnLongClickListener(){
+        editButtonImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View v){
+            public boolean onLongClick(View v) {
                 Toast.makeText(getApplicationContext(), getString(R.string.create_mode), Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -250,14 +251,14 @@ public class TitleActivity extends AppCompatActivity implements
         startActivity(intent);
         //上級
     }
-    
-    public void goShare(View v){
+
+    public void goShare(View v) {
         final Intent intent = new Intent(this, SharedQuestionListActivity.class);
         startActivity(intent);
         //共有問題
     }
 
-    public void goSetting(View v){
+    public void goSetting(View v) {
         final Intent intent = SettingActivity.createIntent(this);
         startActivity(intent);
         //設定画面
@@ -293,7 +294,7 @@ public class TitleActivity extends AppCompatActivity implements
         //上級ランキング
     }
 
-    public void goOriginalRank(View v){
+    public void goOriginalRank(View v) {
         GameClientManager.intentRanking(this, apiClient, GameClientManager.Ranking.Original);
         //オリジナルランキング
     }
@@ -335,7 +336,7 @@ public class TitleActivity extends AppCompatActivity implements
                             }
                         })
                         .show();
-            }else {
+            } else {
                 new AlertDialog.Builder(this)
                         .setTitle("End of application")
                         .setMessage("Do you want to exit the application?")

@@ -187,7 +187,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                         })
                         .show();
                 return true;
-            }else {
+            } else {
                 new AlertDialog.Builder(this)
                         .setTitle("Caution")
                         .setMessage("It will disappear editing of puzzle!!")
@@ -259,7 +259,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
             final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
             ShareManager.shareTwitter(this, "シンプルパズルゲーム【LightsOut】で問題を共有しました！！" +
                     "\nURLをクリックして問題をとこう！！ \n#LightsOut \n" + questionUrl);
-        }else{
+        } else {
             final String questionUrl = ShareManager.createShareQuestionUrl(question.sharedKey);
             ShareManager.shareTwitter(this, "Shared question in LightsOut." +
                     "\nTrying to play down the URL. \n#LightsOut \n" + questionUrl);
@@ -289,13 +289,13 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         updateQuestion();
         SharedQuestion sharedQuestion = SharedQuestion.valueOf(question);
 
-        if (locale.equals(Locale.JAPAN)){
+        if (locale.equals(Locale.JAPAN)) {
             Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
             shareTitle.setTypeface(gothicApple);
             shareConrents.setTypeface(gothicApple);
             shareTwitterButton.setTypeface(gothicApple);
             shareBackButton.setTypeface(gothicApple);
-        }else {
+        } else {
             Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
             shareTitle.setTypeface(gothicAdobe);
             shareConrents.setTypeface(gothicAdobe);
@@ -304,12 +304,12 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         //フォントの設定
 
-        if (locale.equals(Locale.JAPAN)){
+        if (locale.equals(Locale.JAPAN)) {
             shareTitle.setText("シェアが完了しました！");
             shareConrents.setText("作った問題をSNSでシェアしよう！");
             shareTwitterButton.setText("Twitterでシェア");
 
-        }else {
+        } else {
             shareTitle.setText("Share was completed!!");
             shareConrents.setText("Trying to share the question created by the SNS!");
             shareTwitterButton.setText("Share on Twitter");
@@ -357,12 +357,12 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
                 emptyCount++;
             }
         }
-        if (locale.equals(Locale.JAPAN)){
+        if (locale.equals(Locale.JAPAN)) {
             detailText.setText("盤面のサイズ : " + lightsOutEachView.getBoardWidth() + "×"
                     + lightsOutEachView.getBoardHeight() + "  空のマス : " + emptyCount);
-        }else {
+        } else {
             detailText.setText("Size : " + lightsOutEachView.getBoardWidth() + "×"
-                + lightsOutEachView.getBoardHeight() + "  Empty Board : " + emptyCount);
+                    + lightsOutEachView.getBoardHeight() + "  Empty Board : " + emptyCount);
         }
     }
     //ShareからListViewに表示させる内容

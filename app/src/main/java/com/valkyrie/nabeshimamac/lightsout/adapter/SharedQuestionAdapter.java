@@ -54,7 +54,7 @@ public class SharedQuestionAdapter extends ArrayAdapter<SharedQuestion> {
         if (locale.equals(Locale.JAPAN)) {
             viewHolder.detailTextView.setText("・盤面のサイズ : " + item.width + "×" + item.height +
                     " \n・空のマス : " + emptyCount);
-        }else {
+        } else {
             viewHolder.detailTextView.setText("・Size : " + item.width + "×" + item.height +
                     " \n・Empty Board : " + emptyCount);
         }

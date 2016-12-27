@@ -39,12 +39,12 @@
                 android:id="@+id/newMake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:background="@drawable/button_design_light_blue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#FFFFFF"
                 android:onClick="make"
                 android:text="Create New"
-                android:layout_margin="16dp" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 

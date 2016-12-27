@@ -49,7 +49,7 @@ public class FireBaseManager {
         }
     }
 
-    public static Query  getObjects(String prefKey) {
+    public static Query getObjects(String prefKey) {
         return getInstance().getReference(prefKey).orderByKey();
     }
 }
