@@ -210,14 +210,14 @@ public class MainActivity extends AppCompatActivity implements
             } else if (mode == 1) {
                 lightsOutView.setBoardSize(5, 5);
                 // 中級
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < 10; i++) {
                     prePoints.add(new Point(random.nextInt(5), random.nextInt(5)));//TODO
                 }
                 ranking = GameClientManager.Ranking.Normal;
             } else if (mode == 2) {
                 lightsOutView.setBoardSize(6, 6);
                 // 上級
-                for (int i = 0; i < 15; i++) {
+                for (int i = 0; i < 20; i++) {
                     prePoints.add(new Point(random.nextInt(6), random.nextInt(6)));
                 }
                 ranking = GameClientManager.Ranking.Hard;
@@ -476,8 +476,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void loadPrePoints() {
+        lightsOutView.resetGame(true);
         for (Point point : prePoints) {
-            lightsOutView.checkFlag(point.x, point.y);
+            lightsOutView.check(point.x, point.y);
         }
         lightsOutView.updateFlags();
         //パネルONかOFFになってるかの確認

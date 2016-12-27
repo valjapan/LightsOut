@@ -112,6 +112,10 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
     }
 
     public void resetGame() {
+        resetGame(false);
+    }
+
+    public void resetGame(boolean isClear) {
         tapCount = 0;
         flag = new boolean[boardHeight][boardWidth];
 
@@ -119,7 +123,7 @@ public class LightsOutView extends LinearLayout implements View.OnClickListener 
             for (int j = 0; j < boardWidth; j++) {
                 btns[i][j].setBackground(drawableSecondaryOff);
                 //全てを青色に設置
-                flag[i][j] = false;
+                flag[i][j] = isClear;
                 //Boolean型で統一する
             }
         }
