@@ -406,7 +406,7 @@ public class MainActivity extends AppCompatActivity implements
                                 //自動生成されたメソッド・スタブ
                                 finish();
                             }
-                         })
+                        })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                             @Override
@@ -516,7 +516,7 @@ public class MainActivity extends AppCompatActivity implements
         // カウントダウンが終わったあとここの処理が走る
         countDownAnimation.setCountDownListener(new CountDownAnimation.CountDownListener() {
             @Override
-            public void onCountDownEnd(CountDownAnimation animation){
+            public void onCountDownEnd(CountDownAnimation animation) {
                 playGame();
             }
         });
