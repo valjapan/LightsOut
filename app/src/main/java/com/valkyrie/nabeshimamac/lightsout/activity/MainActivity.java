@@ -397,29 +397,8 @@ public class MainActivity extends AppCompatActivity implements
         if (keyCode == KeyEvent.KEYCODE_BACK && isPlaying) {
             if (locale.equals(Locale.JAPAN)) {
                 new AlertDialog.Builder(this)
-                        .setTitle("プレイ中の記録は戻りません！")
-                        .setMessage("よろしいですか？")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //自動生成されたメソッド・スタブ
-                                finish();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //自動生成されたメソッド・スタブ
-                            }
-                        })
-                        .show();
-                return true;
-            } else {
-                new AlertDialog.Builder(this)
-                        .setTitle("Do not come back!!")
-                        .setMessage("Is it OK?")
+                        .setTitle(R.string.main_back_title)
+                        .setMessage(R.string.main_back_summary)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                             @Override
@@ -537,12 +516,11 @@ public class MainActivity extends AppCompatActivity implements
             default:
                 colorChoose = "反対";
         }
+        titleTextView.setText(R.string.main_start_title);
 
         if (locale.equals(Locale.JAPAN)) {
-            titleTextView.setText("さぁ始めよう！");
             messageTextView.setText("全て" + colorChoose + "のパネルにしよう。\nStartでゲーム開始です。");
         } else {
-            titleTextView.setText("Let's Play!");
             messageTextView.setText("All please in the " + colorChoose + ".\nThe game is started with START.");
         }
 

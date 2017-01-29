@@ -49,7 +49,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private LightsOutView lightsOutEachView;
     private EditText editText;
-    private TextView detailText, shareTitle, shareConrents;
+    private TextView detailText, shareTitle, shareContents;
     private Spinner widthSpinner, heightSpinner;
     private RelativeLayout shareCompleteLayout;
     private Button shareTwitterButton, shareBackButton;
@@ -79,7 +79,7 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         //盤面の情報のテキスト
 
         shareTitle = (TextView) findViewById(R.id.totalShare);
-        shareConrents = (TextView) findViewById(R.id.countResult);
+        shareContents = (TextView) findViewById(R.id.countResult);
         shareTwitterButton = (Button) findViewById(R.id.shareTwitterButton);
         shareBackButton = (Button) findViewById(R.id.retryButton);
         widthSpinner = (Spinner) findViewById(R.id.spinnerWidth);
@@ -292,13 +292,13 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
         if (locale.equals(Locale.JAPAN)) {
             Typeface gothicApple = Typeface.createFromAsset(getAssets(), "AppleSDGothicNeo.ttc");
             shareTitle.setTypeface(gothicApple);
-            shareConrents.setTypeface(gothicApple);
+            shareContents.setTypeface(gothicApple);
             shareTwitterButton.setTypeface(gothicApple);
             shareBackButton.setTypeface(gothicApple);
         } else {
             Typeface gothicAdobe = Typeface.createFromAsset(getAssets(), "AdobeGothicStd-Bold.otf");
             shareTitle.setTypeface(gothicAdobe);
-            shareConrents.setTypeface(gothicAdobe);
+            shareContents.setTypeface(gothicAdobe);
             shareTwitterButton.setTypeface(gothicAdobe);
             shareBackButton.setTypeface(gothicAdobe);
         }
@@ -306,12 +306,12 @@ public class MakeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if (locale.equals(Locale.JAPAN)) {
             shareTitle.setText("シェアが完了しました！");
-            shareConrents.setText("作った問題をSNSでシェアしよう！");
+            shareContents.setText("作った問題をSNSでシェアしよう！");
             shareTwitterButton.setText("Twitterでシェア");
 
         } else {
             shareTitle.setText("Share was completed!!");
-            shareConrents.setText("Trying to share the question created by the SNS!");
+            shareContents.setText("Trying to share the question created by the SNS!");
             shareTwitterButton.setText("Share on Twitter");
         }
 
