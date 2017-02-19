@@ -29,6 +29,7 @@
     <string name="main_start_title">Let's Play!"</string>
 
 
+
     <!-- ゲームのボードサイズ -->
     <string-array name="size_spinner">
         <item>4</item>
